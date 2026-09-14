@@ -3,7 +3,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BarChart3, Bot, ChevronDown, ChevronRight, FolderKanban, Gauge, Globe2, Layers3, Map, PlaySquare, Route, Settings, ShieldCheck, Sparkles, Users } from 'lucide-react';
 
-const sections = [
+type NavItem = { href: string; label: string; icon: typeof Gauge; accent?: boolean };
+type NavSection = { label: string; items: NavItem[] };
+
+const sections: NavSection[] = [
   { label: 'PRODUCT', items: [
     { href:'/dashboard', label:'Overview', icon:Gauge },
     { href:'/projects', label:'Projects', icon:FolderKanban },
