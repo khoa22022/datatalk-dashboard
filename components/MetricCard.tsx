@@ -1,0 +1,2 @@
+import { ReactNode } from 'react';
+export function MetricCard({label,value,delta,icon,positive=true,sub}:{label:string,value:string,delta?:string,icon:ReactNode,positive?:boolean,sub?:string}){ return <div className="card metric-card"><div className="metric-head"><span>{label}</span><div className="metric-icon">{icon}</div></div><div className="metric-value">{value}</div>{delta && <div className={`metric-delta ${positive?'positive':'negative'}`}>{delta}</div>}{sub && <div className="metric-sub">{sub}</div>}</div> }
