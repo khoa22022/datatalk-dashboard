@@ -1,21 +1,21 @@
-# Datatalk Dashboard v1.2 — Tracking
+# Datatalk Dashboard v1.2.2
 
-Designer-first frontend for Datatalk UX Analytics.
+Designer-first Datatalk frontend.
 
-Auth:
-- Supabase email/password
-- Google OAuth
-- Protected dashboard session
-- Super Admin bootstrap handled by backend
-- Designer-first Add Project wizard
-- Website / Mobile App project setup
-- Tracking installation flow
-- Tracking connection verification
-- Real project creation through Datatalk API
+Includes:
+- Dashboard shell and navigation
+- Projects flow
+- Add Project UI
+- Tracking installation UI
+- Analytics / Heatmaps / Sessions / Funnels / AI empty states
+- Production Auth UI foundation
+- Temporary Trial Experience for UX/UI review
 
-Required Vercel environment variables:
-- NEXT_PUBLIC_API_URL
-- NEXT_PUBLIC_SUPABASE_URL
-- NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+Trial:
+- `/try`
+- Demo data only
+- Does not create real projects or write analytics data
+- Can be removed later by deleting `app/try` and the trial link in `app/login`
 
-Super Admin email is enforced server-side in the backend via SUPER_ADMIN_EMAIL.
+Production API:
+https://datatalk-api-h4a1.onrender.com
