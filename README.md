@@ -1,4 +1,4 @@
-# Datatalk Dashboard v1.2.2
+# Datatalk Dashboard v1.2.2 — Full Frontend + Trial
 
 Designer-first Datatalk frontend.
 
@@ -10,6 +10,7 @@ Includes:
 - Analytics / Heatmaps / Sessions / Funnels / AI empty states
 - Production Auth UI foundation
 - Temporary Trial Experience for UX/UI review
+- Recharts dependency for the existing dashboard chart components
 
 Trial:
 - `/try`
