@@ -1,22 +1,20 @@
-# Datatalk Dashboard v1.2.2 — Full Frontend + Trial
+# Datatalk Dashboard v1.3 — UX Review Demo
 
-Designer-first Datatalk frontend.
+Full frontend package for Datatalk with a populated Trial Experience for product review.
 
-Includes:
-- Dashboard shell and navigation
-- Projects flow
-- Add Project UI
+## Trial
+- `/try` Overview
+- `/try/projects` Projects
+- `/try/analytics` Analytics
+- `/try/heatmaps` Heatmaps
+- `/try/sessions` Sessions + replay mock
+- `/try/funnels` Funnel analysis
+- `/try/ai` AI Analyst
+
+All Trial data is local sample data. It does not create users, projects, or analytics records.
+
+## Production foundation
+- Existing authentication UI
+- Project creation UI
 - Tracking installation UI
-- Analytics / Heatmaps / Sessions / Funnels / AI empty states
-- Production Auth UI foundation
-- Temporary Trial Experience for UX/UI review
-- Recharts dependency for the existing dashboard chart components
-
-Trial:
-- `/try`
-- Demo data only
-- Does not create real projects or write analytics data
-- Can be removed later by deleting `app/try` and the trial link in `app/login`
-
-Production API:
-https://datatalk-api-h4a1.onrender.com
+- Production API integration foundation

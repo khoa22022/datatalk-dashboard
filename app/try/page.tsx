@@ -1,81 +1,15 @@
 'use client';
-
 import Link from 'next/link';
+import {Area,AreaChart,ResponsiveContainer,Tooltip,XAxis,YAxis,CartesianGrid} from 'recharts';
+import {ArrowUpRight,CalendarDays,ChevronDown,Sparkles,MousePointer2,Users,Clock3,Target,Globe2,Smartphone} from 'lucide-react';
+import {demoTraffic,demoInsights} from '@/lib/demo-data';
 
-const projects = [
-  {name:'Sweet Pea Website', type:'Website · Next.js', visitors:'12.4K', score:86},
-  {name:'Tan Khoa Portfolio', type:'Figma Site', visitors:'3.8K', score:91},
-];
-
-export default function TrialPage() {
-  return (
-    <main style={{minHeight:'100vh',background:'#f7f7fb',color:'#182230'}}>
-      <aside style={{position:'fixed',inset:'0 auto 0 0',width:248,background:'#17191f',color:'#fff',padding:24}}>
-        <div style={{fontSize:22,fontWeight:800,marginBottom:30}}>✦ datatalk</div>
-        <div style={{fontSize:12,color:'#aeb4c0',marginBottom:18}}>TRIAL MODE · DEMO DATA</div>
-        {['Overview','Projects','Analytics','Heatmaps','Sessions','Funnels','AI Analyst'].map((x,i)=>(
-          <div key={x} style={{padding:'10px 12px',borderRadius:9,background:i===1?'#696cff':'transparent',color:i===1?'#fff':'#b9bec8',marginBottom:4}}>
-            {x}
-          </div>
-        ))}
-      </aside>
-
-      <section style={{marginLeft:248,padding:'34px 40px'}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:28}}>
-          <div>
-            <div style={{fontSize:13,color:'#696cff',fontWeight:800,marginBottom:5}}>TRIAL EXPERIENCE</div>
-            <h1 style={{fontSize:30,margin:0}}>Good afternoon, Tan Khoa</h1>
-            <p style={{color:'#737b89'}}>Explore how Datatalk turns behavior data into UX decisions.</p>
-          </div>
-          <Link href="/projects/new" style={{padding:'11px 16px',borderRadius:10,background:'#696cff',color:'#fff',fontWeight:800}}>+ Add Project</Link>
-        </div>
-
-        <div style={{display:'grid',gridTemplateColumns:'repeat(4,minmax(0,1fr))',gap:16,marginBottom:20}}>
-          {[
-            ['Visitors','16.2K','+18.4%'],['Sessions','21.8K','+12.8%'],
-            ['Avg. session','2m 14s','+8.2%'],['UX Score','86 / 100','Healthy']
-          ].map(([a,b,c])=>(
-            <div key={a} style={{background:'#fff',border:'1px solid #e7e8ed',borderRadius:16,padding:20}}>
-              <div style={{color:'#737b89',fontSize:13}}>{a}</div>
-              <div style={{fontSize:26,fontWeight:800,margin:'8px 0'}}>{b}</div>
-              <div style={{fontSize:12,color:'#258a52'}}>{c}</div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{display:'grid',gridTemplateColumns:'1.35fr 1fr',gap:18}}>
-          <div style={{background:'#fff',border:'1px solid #e7e8ed',borderRadius:16,padding:22}}>
-            <h2 style={{marginTop:0}}>Projects</h2>
-            {projects.map(p=>(
-              <div key={p.name} style={{border:'1px solid #eceef2',borderRadius:12,padding:16,marginTop:12}}>
-                <div style={{display:'flex',justifyContent:'space-between'}}>
-                  <div><b>{p.name}</b><div style={{fontSize:13,color:'#737b89',marginTop:4}}>{p.type}</div></div>
-                  <span style={{fontSize:12,color:'#258a52'}}>Tracking Active</span>
-                </div>
-                <div style={{display:'flex',gap:36,marginTop:16}}>
-                  <div><small style={{color:'#737b89'}}>Visitors</small><div><b>{p.visitors}</b></div></div>
-                  <div><small style={{color:'#737b89'}}>UX Score</small><div><b>{p.score}</b></div></div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div style={{background:'#fff',border:'1px solid #e7e8ed',borderRadius:16,padding:22}}>
-            <h2 style={{marginTop:0}}>✦ AI UX Analyst</h2>
-            <p style={{color:'#737b89'}}>Demo insight based on sample behavior data.</p>
-            <div style={{background:'#fff7ed',border:'1px solid #fed7aa',borderRadius:12,padding:16}}>
-              <b>Mobile CTA friction detected</b>
-              <p style={{fontSize:14,color:'#6b7280'}}>Users repeatedly interact around the primary CTA but conversion remains low.</p>
-              <strong>Recommendation</strong>
-              <p style={{fontSize:14,color:'#6b7280'}}>Move the primary CTA closer to the user's visual focus.</p>
-            </div>
-          </div>
-        </div>
-
-        <div style={{marginTop:20,padding:14,borderRadius:12,background:'#eef0ff',color:'#4b4fbf',fontSize:13}}>
-          Trial mode only. This demo does not create real users or bypass production authentication.
-        </div>
-      </section>
-    </main>
-  );
-}
+const cards=[['Visitors','8,421','+18.4%',Users],['Sessions','10,380','+12.8%',MousePointer2],['Avg. session','02:14','+8.2%',Clock3],['Conversions','742','+16.6%',Target]] as const;
+export default function TrialOverview(){return <div>
+ <header className="page-head"><div><div className="eyebrow">TRIAL EXPERIENCE</div><h1>Understand your product.</h1><p>See what users do, why they struggle, and what to improve next.</p></div><div className="head-actions"><button className="range"><CalendarDays size={16}/> Last 7 days <ChevronDown size={15}/></button><Link href="/try/projects" className="primary-btn">View project <ArrowUpRight size={16}/></Link></div></header>
+ <section className="stat-grid">{cards.map(([label,value,delta,Icon])=><div className="stat-card" key={label}><div className="stat-top"><span>{label}</span><Icon size={17}/></div><strong>{value}</strong><div className="delta">{delta} <span>vs previous period</span></div></div>)}</section>
+ <section className="content-grid wide-first"><div className="panel chart-panel"><div className="panel-head"><div><h2>Product traffic</h2><p>Visitors and sessions over time</p></div><button className="mini-select">Visitors <ChevronDown size={14}/></button></div><div className="chart"><ResponsiveContainer width="100%" height={285}><AreaChart data={demoTraffic}><defs><linearGradient id="fillVisitors" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#696cff" stopOpacity={.28}/><stop offset="100%" stopColor="#696cff" stopOpacity={0}/></linearGradient></defs><CartesianGrid vertical={false} stroke="#eceef2"/><XAxis dataKey="day" tick={{fontSize:12}} axisLine={false} tickLine={false}/><YAxis tick={{fontSize:12}} axisLine={false} tickLine={false}/><Tooltip/><Area type="monotone" dataKey="visitors" stroke="#696cff" fill="url(#fillVisitors)" strokeWidth={2}/><Area type="monotone" dataKey="sessions" stroke="#a4a8ff" fill="none" strokeWidth={2}/></AreaChart></ResponsiveContainer></div></div>
+ <div className="panel"><div className="panel-head"><div><h2>AI UX pulse</h2><p>What needs attention first</p></div><Sparkles size={19}/></div>{demoInsights.slice(0,3).map(i=><div className="insight-row" key={i.title}><div className={`severity ${i.severity.toLowerCase()}`}>{i.severity}</div><div><b>{i.title}</b><p>{i.text}</p></div><span>{i.impact}</span></div>)}</div></section>
+ <section className="content-grid"><div className="panel"><div className="panel-head"><div><h2>Top pages</h2><p>Where users spend time</p></div><Link href="/try/analytics" className="text-link">View analytics</Link></div><div className="table"><div className="tr th"><span>Page</span><span>Views</span><span>Users</span><span>Exit</span></div>{[['/','8,240','4,920','28%'],['/products','5,620','3,610','34%'],['/about','2,180','1,690','41%'],['/contact','1,460','1,130','52%']].map(r=><div className="tr" key={r[0]}>{r.map((x,i)=><span key={i} className={i===0?'strong':''}>{x}</span>)}</div>)}</div></div>
+ <div className="panel"><div className="panel-head"><div><h2>Audience snapshot</h2><p>Who is using your product</p></div><Globe2 size={18}/></div><div className="audience"><div className="donut"><div><strong>62%</strong><span>Mobile</span></div></div><div className="audience-list"><div><span><i className="dot mobile"/>Mobile</span><b>62%</b></div><div><span><i className="dot desktop"/>Desktop</span><b>31%</b></div><div><span><i className="dot tablet"/>Tablet</span><b>7%</b></div></div></div></div></section>
+ </div>}
