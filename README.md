@@ -14,3 +14,6 @@ This version adds a coherent sample dataset across:
 - AI UX priorities with evidence chains
 
 Trial/demo only. It is intended for UI/UX review and does not represent real user measurements.
+
+
+Build fix: corrected JSX parsing in Feedback and Funnels pages.
