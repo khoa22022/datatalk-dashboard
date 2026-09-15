@@ -1,0 +1,7 @@
+'use client';
+import { useEffect, useState } from 'react';
+import { AppShell } from '../../../components/AppShell';
+import { supabase } from '../../../lib/supabase';
+const API=process.env.NEXT_PUBLIC_API_URL || 'https://datatalk-api-h4a1.onrender.com';
+type User={id:string;email:string;name?:string;role:string;status:string};
+export default function AdminUsers(){ const [users,setUsers]=useState<User[]>([]); const [allowed,setAllowed]=useState(true); useEffect(()=>{(async()=>{const s=await supabase?.auth.getSession();const t=s?.data.session?.access_token;if(!t){window.location.href='/login';return;}const r=await fetch(`${API}/api/admin/users`,{headers:{Authorization:`Bearer ${t}`}});if(r.status===403){setAllowed(false);return;}const d=await r.json();setUsers(Array.isArray(d)?d:[]);})();},[]); if(!allowed)return <AppShell title="User Management"><div className="card" style={{padding:32}}><h2>Super Admin access required</h2><p>This area is only available to the Datatalk system administrator.</p></div></AppShell>; return <AppShell title="User Management"><div className="page-intro"><div><span className="eyebrow">SYSTEM</span><h1>Users</h1><p>Manage Datatalk accounts and roles.</p></div></div><div className="card table-card"><div className="table-head"><span>User</span><span>Email</span><span>Role</span><span>Status</span></div>{users.map(u=><div className="session-row" key={u.id}><span>{u.name||'—'}</span><span>{u.email}</span><span className="score-badge">{u.role}</span><span>{u.status}</span></div>)}</div></AppShell> }
