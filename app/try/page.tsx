@@ -1,15 +1,20 @@
-'use client';
-import Link from 'next/link';
-import {Area,AreaChart,ResponsiveContainer,Tooltip,XAxis,YAxis,CartesianGrid} from 'recharts';
-import {ArrowUpRight,CalendarDays,ChevronDown,Sparkles,MousePointer2,Users,Clock3,Target,Globe2,Smartphone} from 'lucide-react';
-import {demoTraffic,demoInsights} from '@/lib/demo-data';
-
-const cards=[['Visitors','8,421','+18.4%',Users],['Sessions','10,380','+12.8%',MousePointer2],['Avg. session','02:14','+8.2%',Clock3],['Conversions','742','+16.6%',Target]] as const;
-export default function TrialOverview(){return <div>
- <header className="page-head"><div><div className="eyebrow">TRIAL EXPERIENCE</div><h1>Understand your product.</h1><p>See what users do, why they struggle, and what to improve next.</p></div><div className="head-actions"><button className="range"><CalendarDays size={16}/> Last 7 days <ChevronDown size={15}/></button><Link href="/try/projects" className="primary-btn">View project <ArrowUpRight size={16}/></Link></div></header>
- <section className="stat-grid">{cards.map(([label,value,delta,Icon])=><div className="stat-card" key={label}><div className="stat-top"><span>{label}</span><Icon size={17}/></div><strong>{value}</strong><div className="delta">{delta} <span>vs previous period</span></div></div>)}</section>
- <section className="content-grid wide-first"><div className="panel chart-panel"><div className="panel-head"><div><h2>Product traffic</h2><p>Visitors and sessions over time</p></div><button className="mini-select">Visitors <ChevronDown size={14}/></button></div><div className="chart"><ResponsiveContainer width="100%" height={285}><AreaChart data={demoTraffic}><defs><linearGradient id="fillVisitors" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#696cff" stopOpacity={.28}/><stop offset="100%" stopColor="#696cff" stopOpacity={0}/></linearGradient></defs><CartesianGrid vertical={false} stroke="#eceef2"/><XAxis dataKey="day" tick={{fontSize:12}} axisLine={false} tickLine={false}/><YAxis tick={{fontSize:12}} axisLine={false} tickLine={false}/><Tooltip/><Area type="monotone" dataKey="visitors" stroke="#696cff" fill="url(#fillVisitors)" strokeWidth={2}/><Area type="monotone" dataKey="sessions" stroke="#a4a8ff" fill="none" strokeWidth={2}/></AreaChart></ResponsiveContainer></div></div>
- <div className="panel"><div className="panel-head"><div><h2>AI UX pulse</h2><p>What needs attention first</p></div><Sparkles size={19}/></div>{demoInsights.slice(0,3).map(i=><div className="insight-row" key={i.title}><div className={`severity ${i.severity.toLowerCase()}`}>{i.severity}</div><div><b>{i.title}</b><p>{i.text}</p></div><span>{i.impact}</span></div>)}</div></section>
- <section className="content-grid"><div className="panel"><div className="panel-head"><div><h2>Top pages</h2><p>Where users spend time</p></div><Link href="/try/analytics" className="text-link">View analytics</Link></div><div className="table"><div className="tr th"><span>Page</span><span>Views</span><span>Users</span><span>Exit</span></div>{[['/','8,240','4,920','28%'],['/products','5,620','3,610','34%'],['/about','2,180','1,690','41%'],['/contact','1,460','1,130','52%']].map(r=><div className="tr" key={r[0]}>{r.map((x,i)=><span key={i} className={i===0?'strong':''}>{x}</span>)}</div>)}</div></div>
- <div className="panel"><div className="panel-head"><div><h2>Audience snapshot</h2><p>Who is using your product</p></div><Globe2 size={18}/></div><div className="audience"><div className="donut"><div><strong>62%</strong><span>Mobile</span></div></div><div className="audience-list"><div><span><i className="dot mobile"/>Mobile</span><b>62%</b></div><div><span><i className="dot desktop"/>Desktop</span><b>31%</b></div><div><span><i className="dot tablet"/>Tablet</span><b>7%</b></div></div></div></div></section>
- </div>}
+import Link from "next/link";
+export default function Overview(){return <><div className="row"><div><h1 className="title">Product experience overview</h1><p className="subtitle">Understand where users spend time, where they struggle, and what deserves UX attention first.</p></div><select className="select"><option>Last 30 days</option><option>Last 7 days</option></select></div>
+<div style={{height:20}}/>
+<div className="grid4">
+{[["UX Health","86 / 100","↑ 4.2%","up"],["Active users","12,482","↑ 18.4%","up"],["Active time","18h 42m","↑ 12.1%","up"],["Task success","72%","↓ 3.8%","down"]].map(x=><div className="card" key={x[0]}><div className="label">{x[0]}</div><div className="metric">{x[1]}</div><div className={"trend "+x[3]}>{x[2]}</div></div>)}</div>
+<div style={{height:16}}/>
+<div className="grid2">
+<div className="card"><h2>Where users spend their attention</h2><p className="muted">Active time by page. Longer time is not automatically good — compare with exits and task success.</p>
+<div style={{marginTop:18}} className="section-list">{[["Pricing","3m 12s",88],["Product detail","2m 18s",67],["Homepage","1m 42s",51],["Checkout","1m 31s",43],["Contact","54s",25]].map(x=><div className="section-item" key={x[0]}><b>{x[0]}</b><div className="bar"><i style={{width:x[2]+"%"}}/></div><b>{x[1]}</b></div>)}</div></div>
+<div className="card"><h2>UX priorities</h2><p className="muted">Issues ranked by impact × evidence × confidence.</p>
+<div className="priority" style={{marginTop:14}}><span className="badge high">HIGH</span><h3>Mobile checkout friction</h3><p className="muted mini">34% drop-off · 18% backtracking · 12% rage clicks</p><Link href="/try/ai" className="btn outline">Investigate</Link></div>
+<div className="priority medium" style={{marginTop:10}}><span className="badge medium">MEDIUM</span><h3>Pricing comparison hesitation</h3><p className="muted mini">1m 12s attention on comparison section.</p><Link href="/try/heatmaps" className="btn outline">View heatmap</Link></div></div>
+</div>
+<div style={{height:16}}/>
+<div className="grid3">
+<div className="card"><h2>Longest attention</h2><div className="metric">Pricing</div><div className="muted">3m 12s active · 41% exit</div></div>
+<div className="card"><h2>Most friction</h2><div className="metric">Payment</div><div className="muted">2.8× slower than median</div></div>
+<div className="card"><h2>Most engaged section</h2><div className="metric">Feature compare</div><div className="muted">72s active attention</div></div>
+</div>
+</>}
