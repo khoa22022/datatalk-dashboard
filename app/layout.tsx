@@ -1,8 +1,2 @@
-import './globals.css';
-import type { ReactNode } from 'react';
-
-export const metadata = { title: 'Datatalk', description: 'UX Analytics & AI Product Intelligence' };
-
-export default function RootLayout({ children }: { children: ReactNode }) {
-  return <html lang="en"><body>{children}</body></html>;
-}
+import "./globals.css"; import Link from "next/link";
+export default function RootLayout({children}:{children:React.ReactNode}){return <div className="shell"><aside className="side"><div className="brand">✦ datatalk</div><nav className="nav"><Link href="/dashboard">Overview</Link><Link href="/projects">Projects</Link><Link href="/analytics">Analytics</Link><Link href="/heatmaps">Heatmaps</Link><Link href="/sessions">Sessions</Link><Link href="/funnels">Funnels</Link><Link href="/ai">AI Analyst</Link></nav></aside><main className="main">{children}</main></div>}

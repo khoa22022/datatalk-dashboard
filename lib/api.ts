@@ -1,0 +1,2 @@
+const API=process.env.NEXT_PUBLIC_API_URL||"https://datatalk-api-h4a1.onrender.com";
+export async function api<T>(path:string,init?:RequestInit):Promise<T>{const r=await fetch(`${API}${path}`,{...init,headers:{"Content-Type":"application/json",...(init?.headers||{})},cache:"no-store"});if(!r.ok)throw new Error(await r.text()||`Request failed: ${r.status}`);return r.json()}export{API};
