@@ -1,19 +1,14 @@
-# Datatalk Dashboard v1.3 — UX Intelligence Demo
+# Datatalk Dashboard v1.3.1 — Figma Dashboard UI
 
-Designer-first UX analytics review build.
+UX Intelligence demo rebuilt using a Figma/Sneat-style dashboard component language:
+- card header + content patterns
+- chart cards with legends and contextual controls
+- donut KPI cards
+- stat cards
+- ranked list cards
+- data tables
+- timeline / evidence cards
+- Public Sans-like typography and compact spacing
+- real Recharts visualizations instead of text-only placeholders
 
-This version adds a coherent sample dataset across:
-- Overview / UX Health
-- Page and section attention
-- Active time vs dwell time
-- Heatmaps and interaction friction
-- Session replay signals
-- Task efficiency
-- Funnels and drop-off
-- CSAT / NPS / CES feedback
-- AI UX priorities with evidence chains
-
-Trial/demo only. It is intended for UI/UX review and does not represent real user measurements.
-
-
-Build fix: corrected JSX parsing in Feedback and Funnels pages.
+Trial/demo data is illustrative only.
