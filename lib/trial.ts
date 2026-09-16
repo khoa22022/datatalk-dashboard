@@ -17,18 +17,31 @@ export async function trialRequest<T>(path: string, options: RequestInit = {}): 
   const action = path.slice("/api/try/".length).split("?")[0];
   const url = isTrial && TRIAL_ACTIONS.has(action) ? path : `${TRIAL_API}${path}`;
 
-  const response = await fetch(url, {
-    ...options,
-    headers: { "Content-Type": "application/json", ...(options.headers || {}) },
-    cache: "no-store",
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20000);
+  try {
+    const response = await fetch(url, {
+      ...options,
+      headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+      cache: "no-store",
+      signal: controller.signal,
+    });
 
-  if (!response.ok) {
     const body = await response.text();
-    throw new Error(body || `Request failed: ${response.status}`);
-  }
+    if (!response.ok) {
+      throw new Error(body || `Request failed: ${response.status}`);
+    }
 
-  return response.json() as Promise<T>;
+    try { return JSON.parse(body) as T; }
+    catch { throw new Error("Backend returned an invalid JSON response"); }
+  } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error("Backend request timed out after 20 seconds. The Render free instance may be waking up.");
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 export async function sendTrialEvent(event: TrialEvent) {

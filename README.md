@@ -1,9 +1,13 @@
-# Datatalk Dashboard v1.3.2 — Poppins + EN/VI + Tracking Sandbox
+# Datatalk Dashboard v1.3.2 — Trial Sandbox Proxy Fix 2
 
-UX Intelligence trial dashboard with Poppins typography, English/Vietnamese switching, real charts, and a Tracking Sandbox connected to the live Datatalk backend.
+Trial UX Intelligence dashboard with Poppins, EN/VI, real charts and a live tracking sandbox.
 
-## Trial Tracking Sandbox
-Open `/try/sandbox` to send controlled page, section, interaction, task and feedback events through Render → Supabase without creating a customer tracking project manually.
+Sandbox fix:
+- The realistic scenario no longer depends on the backend `/api/try/seed` endpoint.
+- It sends the complete event sequence through the same `/api/try/event` proxy used by manual controls.
+- Feedback is sent after the event sequence.
+- Progress and errors are visible at the top of the sandbox.
+- Requests time out after 20 seconds with an actionable message.
+- Summary is refreshed from the live backend after the scenario completes.
 
-## Production UI
-The existing dashboard remains demo-data driven until the real project APIs are intentionally connected.
+Scenario: 16 tracking events + 1 CSAT feedback submission.
