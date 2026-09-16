@@ -1,14 +1,9 @@
-# Datatalk Dashboard v1.3.1 — Figma Dashboard UI
+# Datatalk Dashboard v1.3.2 — Poppins + EN/VI + Tracking Sandbox
 
-UX Intelligence demo rebuilt using a Figma/Sneat-style dashboard component language:
-- card header + content patterns
-- chart cards with legends and contextual controls
-- donut KPI cards
-- stat cards
-- ranked list cards
-- data tables
-- timeline / evidence cards
-- Public Sans-like typography and compact spacing
-- real Recharts visualizations instead of text-only placeholders
+UX Intelligence trial dashboard with Poppins typography, English/Vietnamese switching, real charts, and a Tracking Sandbox connected to the live Datatalk backend.
 
-Trial/demo data is illustrative only.
+## Trial Tracking Sandbox
+Open `/try/sandbox` to send controlled page, section, interaction, task and feedback events through Render → Supabase without creating a customer tracking project manually.
+
+## Production UI
+The existing dashboard remains demo-data driven until the real project APIs are intentionally connected.

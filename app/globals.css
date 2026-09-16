@@ -71,3 +71,9 @@ button,input,select{font:inherit}
 .ai-evidence{display:grid;gap:10px}.evidence{background:#f7f8fc;border:1px solid #e8eaf0;border-radius:6px;padding:12px}.evidence small{display:block;color:var(--muted);font-size:11px;text-transform:uppercase}.evidence b{display:block;margin-top:4px;font-size:14px}.evidence span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
 @media(max-width:1100px){.grid-main{grid-template-columns:1fr}.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr}.sidebar{width:220px}.content{margin-left:220px}}
 @media(max-width:760px){.sidebar{position:static;width:100%;height:auto}.content{margin-left:0}.topbar{padding:0 16px}.main{padding:16px}.grid4,.feedback-grid{grid-template-columns:1fr}.page-head{flex-direction:column}.section-row,.funnel-step{grid-template-columns:1fr}.mini-stat-row{grid-template-columns:1fr}}
+.lang-switch{display:flex;align-items:center;gap:5px;height:32px;padding:3px 7px;border:1px solid var(--divider);border-radius:6px;background:#fff;font-size:12px;font-weight:600;color:#8b939e}.lang-switch button{border:0;background:transparent;color:#8b939e;padding:4px 5px;border-radius:4px;cursor:pointer;font-weight:600}.lang-switch button.active{background:var(--primary-soft);color:var(--primary)}
+@font-face{font-family:Poppins;src:url('/fonts/Poppins-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Poppins;src:url('/fonts/Poppins-Medium.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:Poppins;src:url('/fonts/Poppins-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:Poppins;src:url('/fonts/Poppins-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+body{font-family:Poppins,Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}

@@ -1,6 +1,4 @@
-
 import "./globals.css";
-import Link from "next/link";
-import {LayoutDashboard, BarChart3, Flame, PlaySquare, ListChecks, MessageSquareText, GitBranch, Sparkles} from "lucide-react";
-const items=[["/try","Overview",LayoutDashboard],["/try/analytics","Analytics",BarChart3],["/try/heatmaps","Heatmaps",Flame],["/try/sessions","Sessions",PlaySquare],["/try/tasks","Tasks",ListChecks],["/try/feedback","Feedback",MessageSquareText],["/try/funnels","Funnels",GitBranch],["/try/ai","AI Analyst",Sparkles]];
-export default function RootLayout({children}:{children:React.ReactNode}){return <div className="shell"><aside className="sidebar"><div className="brand"><span>✦</span> datatalk</div><div className="trial">TRIAL · UX INTELLIGENCE DEMO</div><div className="nav-title">Analyze</div><nav className="nav">{items.map(([href,label,Icon])=><Link href={href as string} key={href as string}><Icon size={17}/>{label as string}</Link>)}</nav></aside><div className="content"><header className="topbar"><div className="breadcrumb">Workspace / Product Experience</div><div className="top-actions"><span className="breadcrumb">Demo dataset · Sep 1–30</span></div></header><main className="main">{children}</main></div></div>}
+import {I18nProvider} from "@/components/i18n";
+import LayoutShell from "@/components/LayoutShell";
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body><I18nProvider><LayoutShell>{children}</LayoutShell></I18nProvider></body></html>}
