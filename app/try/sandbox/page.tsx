@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CheckCircle2, CircleAlert, Database, Play, RotateCcw, Send, Trash2, Zap } from "lucide-react";
 import { useI18n } from "@/components/i18n";
-import { sendTrialEvent, trialRequest } from "@/lib/trial";
+import { sendTrialEvent, trialRequest, warmTrialBackend } from "@/lib/trial";
 
 type Summary = {
   event_count: number;
@@ -20,13 +20,21 @@ export default function TrackingSandbox(){
   const [summary,setSummary]=useState<Summary>(initialSummary);
   const [log,setLog]=useState<string[]>([]);
   const [busy,setBusy]=useState(false);
+  const [backendReady,setBackendReady]=useState(false);
+  const [backendStatus,setBackendStatus]=useState("Connecting to Datatalk backend…");
   const [sessionId,setSessionId]=useState(() => `trial_session_${Math.random().toString(36).slice(2,10)}`);
   const [visitorId]=useState(() => `trial_visitor_${Math.random().toString(36).slice(2,10)}`);
 
   const refresh=useCallback(async()=>{
     try{ const data=await trialRequest<Summary>("/api/try/summary"); setSummary(data); }catch(e){ setLog(x=>[`Summary error: ${e instanceof Error?e.message:"unknown"}`,...x].slice(0,20)); }
   },[]);
-  useEffect(()=>{refresh()},[refresh]);
+  useEffect(()=>{
+    let cancelled=false;
+    warmTrialBackend((message)=>{ if(!cancelled) setBackendStatus(message); })
+      .then(()=>{ if(!cancelled){ setBackendReady(true); setBackendStatus("Backend ready"); refresh(); } })
+      .catch((e)=>{ if(!cancelled){ setBackendReady(false); setBackendStatus(e instanceof Error?e.message:"Backend unavailable"); setLog(x=>[`✕ ${e instanceof Error?e.message:"Backend unavailable"}`,...x].slice(0,20)); } });
+    return ()=>{cancelled=true};
+  },[refresh]);
 
   const emit=async(event:string, page="/pricing", metadata:Record<string,unknown>={}, element?:string)=>{
     setBusy(true);
@@ -40,32 +48,14 @@ export default function TrackingSandbox(){
 
   const seed=async()=>{
     setBusy(true);
-    setLog(x=>["Creating realistic scenario…",...x].slice(0,20));
-    const scenario=[
-      ["session_start","/pricing",{device:"mobile",browser:"Chrome",country:"Vietnam"}],
-      ["page_view","/pricing",{}],
-      ["section_view","/pricing",{section:"pricing-comparison",visibility_ratio:0.8}],
-      ["section_heartbeat","/pricing",{section:"pricing-comparison",duration_ms:30000}],
-      ["scroll","/pricing",{depth:72,scroll_y:610}],
-      ["click","/pricing",{section:"pricing-comparison",x:520,y:360,viewport_width:390,viewport_height:844}],
-      ["rage_click","/pricing",{section:"pricing-comparison",x:526,y:372,viewport_width:390,viewport_height:844,clicks:4}],
-      ["dead_click","/pricing",{section:"pricing-comparison",x:530,y:380,viewport_width:390,viewport_height:844}],
-      ["page_heartbeat","/pricing",{duration_ms:45000}],
-      ["task_start","/checkout",{task:"checkout"}],
-      ["task_step","/checkout",{task:"checkout",step:"shipping",duration_ms:42000}],
-      ["task_error","/checkout",{task:"checkout",step:"payment",code:"invalid_card"}],
-      ["task_backtrack","/checkout",{task:"checkout",from:"payment",to:"shipping"}],
-      ["task_step","/checkout",{task:"checkout",step:"payment",duration_ms:88000}],
-      ["task_complete","/checkout",{task:"checkout",duration_ms:138000}],
-      ["session_end","/checkout",{duration_ms:260000}]
-    ] as const;
+    setLog(x=>["Connecting to backend…",...x].slice(0,20));
     try{
-      for(const [event,page,metadata] of scenario){
-        await sendTrialEvent({event,page,session_id:sessionId,visitor_id:visitorId,metadata,element:event.includes("click")?"BUTTON":undefined});
-        setLog(x=>[`✓ ${event}`,...x].slice(0,20));
-      }
-      await trialRequest("/api/try/feedback",{method:"POST",body:JSON.stringify({session_id:sessionId,page:"/pricing",survey_type:"CSAT",score:2,feedback:"I could not tell which plan was right for me."})});
-      setLog(x=>["✓ feedback · CSAT 2/5","✓ Scenario completed — 16 events + feedback",...x].slice(0,20));
+      await warmTrialBackend((message)=>setLog(x=>[message,...x].slice(0,20)));
+      setBackendReady(true);
+      setLog(x=>["Backend ready — creating realistic scenario…",...x].slice(0,20));
+      const seeded=await trialRequest<{success:boolean;seeded_events:number;heatmap_events:number;session_id:string}>("/api/try/seed",{method:"POST"});
+      await trialRequest("/api/try/feedback",{method:"POST",body:JSON.stringify({session_id:seeded.session_id,page:"/pricing",survey_type:"CSAT",score:2,feedback:"I could not tell which plan was right for me."})});
+      setLog(x=>[`✓ Scenario completed — ${seeded.seeded_events} events + ${seeded.heatmap_events} heatmap events + feedback`,...x].slice(0,20));
       await refresh();
     }catch(e){
       const message=e instanceof Error?e.message:"unknown";
@@ -81,7 +71,7 @@ export default function TrackingSandbox(){
 
   return <>
     {log[0]?.startsWith("✕") ? <div className="priority" style={{marginBottom:16}}><span className="pill high">SANDBOX ERROR</span><p style={{marginTop:8}}>{log[0]}</p></div> : log[0]?.startsWith("✓ Scenario") ? <div className="callout" style={{marginBottom:16,padding:14,background:"#edfae7",borderRadius:6}}><b>Scenario completed</b><p className="card-subtitle" style={{marginTop:4}}>Events were accepted by the live backend. The counters below were refreshed from Supabase.</p></div> : null}
-    <div className="page-head"><div><h1>{t("sandboxTitle")}</h1><p>{t("sandboxSubtitle")}</p></div><div className="toolbar"><span className="pill good"><CheckCircle2 size={13}/> {t("backendLive")}</span><button className="btn primary" onClick={seed} disabled={busy}><Zap size={15}/>{busy ? "Đang tạo scenario…" : t("seedScenario")}</button><button className="btn outline" onClick={reset} disabled={busy}><RotateCcw size={15}/>{t("resetSandbox")}</button></div></div>
+    <div className="page-head"><div><h1>{t("sandboxTitle")}</h1><p>{t("sandboxSubtitle")}</p></div><div className="toolbar"><span className={`pill ${backendReady ? "good" : "high"}`}><CheckCircle2 size={13}/> {backendReady ? t("backendLive") : backendStatus}</span><button className="btn primary" onClick={seed} disabled={busy || !backendReady}><Zap size={15}/>{busy ? "Đang tạo scenario…" : t("seedScenario")}</button><button className="btn outline" onClick={reset} disabled={busy}><RotateCcw size={15}/>{t("resetSandbox")}</button></div></div>
 
     <div className="card" style={{marginBottom:24}}><div className="card-header"><div><h2 className="card-title">{t("liveData")}</h2><p className="card-subtitle">{t("trialProject")} · {summary.event_count} events stored in the real backend.</p></div><Database size={20} color="#696cff"/></div><div className="grid grid4" style={{padding:"0 24px 24px"}}>{[[t("eventCount"),summary.event_count],[t("sessionCount"),summary.overview.sessions],[t("activeTimeSandbox"),`${active}s`],[t("sectionAttentionSandbox"),`${attention}s`]].map(x=><div className="card stat-card" style={{boxShadow:"none",border:"1px solid #eef0f4"}} key={x[0]}><div className="stat-label">{x[0]}</div><div className="stat-value">{x[1]}</div></div>)}</div></div>
 
