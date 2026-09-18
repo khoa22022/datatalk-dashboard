@@ -1,4 +1,4 @@
-# Datatalk Dashboard v1.3.4 — Trial Sandbox Proxy Fix 2
+# Datatalk Dashboard v1.3.6 — Trial Sandbox Proxy Fix 2
 
 Trial UX Intelligence dashboard with Poppins, EN/VI, real charts and a live tracking sandbox.
 
@@ -12,6 +12,6 @@ Sandbox fix:
 
 Scenario: 16 tracking events + 1 CSAT feedback submission.
 
-## v1.3.4 Trial Sandbox reliability
+## v1.3.6 Trial Sandbox reliability
 
 The Trial Sandbox warms the Render backend through `/health/ready` before enabling scenario actions. The realistic scenario uses one `/api/try/seed` request plus feedback instead of 16 sequential event requests, avoiding cold-start timeout cascades.
