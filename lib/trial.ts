@@ -1,4 +1,4 @@
-import { requestWithRetry } from './trial-transport.mjs';
+import { buildTrialHeaders, requestWithRetry } from './trial-transport.mjs';
 
 export const TRIAL_API = (process.env.NEXT_PUBLIC_API_URL || 'https://datatalk-api-h4a1.onrender.com').replace(/\/$/, '');
 
@@ -49,7 +49,7 @@ export async function trialRequest<T>(path: string, options: RequestInit = {}): 
   try {
     const response = await fetch(url, {
       ...options,
-      headers: { Accept: 'application/json', 'Content-Type': 'application/json', ...(options.headers || {}) },
+      headers: buildTrialHeaders(options),
       cache: 'no-store',
       signal: controller.signal,
     });

@@ -1,10 +1,12 @@
-declare module "./trial-transport.mjs" {
-  export function sendTrialRequest(
-    path: string,
-    options?: RequestInit
-  ): Promise<any>;
+export function requestWithRetry(
+  url: string,
+  options?: {
+    fetchImpl?: typeof fetch;
+    attempts?: number;
+    delayMs?: number;
+    timeoutMs?: number;
+    shouldRetry?: (error: unknown) => boolean;
+  }
+): Promise<Response>;
 
-  export function getTrialSummary(): Promise<any>;
-
-  export function resetTrialSandbox(): Promise<any>;
-}
+export function buildTrialHeaders(options?: RequestInit): Record<string, string>;
