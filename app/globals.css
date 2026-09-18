@@ -77,3 +77,64 @@ button,input,select{font:inherit}
 @font-face{font-family:Poppins;src:url('/fonts/Poppins-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap}
 @font-face{font-family:Poppins;src:url('/fonts/Poppins-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
 body{font-family:Poppins,Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}
+
+
+/* Datatalk v1.3.6 UI polish */
+:root{
+  --radius-lg:14px;
+  --surface-soft:#f8f9ff;
+}
+html,body{font-family:"Poppins",Inter,ui-sans-serif,system-ui,sans-serif}
+.nav a{
+  position:relative;
+  transition:all .18s ease;
+  border-radius:12px;
+}
+.nav a:hover{
+  transform:translateX(2px);
+}
+.nav a.active{
+  background:var(--primary-soft);
+  color:var(--primary);
+  box-shadow:none;
+  font-weight:600;
+}
+.nav a.active::before{
+  content:"";
+  position:absolute;
+  left:-16px;
+  top:20%;
+  width:3px;
+  height:60%;
+  border-radius:999px;
+  background:var(--primary);
+}
+.page-head{
+  align-items:center;
+}
+.primary-btn,.project-link{
+  transition:transform .16s ease,box-shadow .16s ease;
+}
+.primary-btn:hover,.project-link:hover{
+  transform:translateY(-1px);
+}
+.primary-btn:active,.project-link:active{
+  transform:scale(.97);
+}
+.project-card{
+  border-radius:16px;
+  padding:24px;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.project-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(34,48,62,.12);
+}
+.project-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:24px;
+}
+@media(max-width:900px){
+ .project-grid{grid-template-columns:1fr}
+}
