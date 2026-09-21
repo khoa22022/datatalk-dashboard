@@ -1,2 +1,18 @@
-'use client'; import {useEffect,useState} from 'react'; import {useParams} from 'next/navigation'; import {api,API} from '@/lib/api';
-export default function Connect(){const{id}=useParams<{id:string}>();const[p,setP]=useState<any>();const[err,setErr]=useState('');const[copied,setCopied]=useState(false);useEffect(()=>{api(`/api/projects/${id}`).then(setP).catch(e=>setErr(e.message))},[id]);if(err)return <div className="error">{err}</div>;if(!p)return <div className="card">Loading project...</div>;const code=`<script src="${API}/sdk/datatalk.js" data-project="${p.tracking_key}"></script>`;return <><div className="top"><div><h1 className="title">Connect {p.name}</h1><div className="muted">Install the tracker, then verify your connection.</div></div></div><div className="step"><span className="active">1 Project</span><span className="active">2 Install</span><span>3 Verify</span></div><div className="card"><h2>Tracking code</h2><p className="muted">Add this snippet to your website.</p><pre className="code">{code}</pre><button className="btn primary" onClick={()=>{navigator.clipboard.writeText(code);setCopied(true)}}>{copied?'Copied':'Copy tracking code'}</button><div style={{marginTop:20}}><b>Tracking key</b><div className="code" style={{marginTop:8}}>{p.tracking_key}</div></div><div className="success" style={{marginTop:20}}>Project created. The tracker is ready to install.</div></div></>}
+'use client';
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { api, API } from '@/lib/api';
+import type { Project } from '@/lib/account-types';
+import { useProjects } from '@/components/ProjectProvider';
+import { useV2Copy } from '@/components/v2/copy';
+export default function ConnectProject(){
+ const {id}=useParams<{id:string}>();const router=useRouter();const projectScope=useProjects();const {c,errorText}=useV2Copy();
+ const [project,setProject]=useState<Project|null>(null);const [error,setError]=useState('');const [busy,setBusy]=useState(false);const [copied,setCopied]=useState(false);const [last,setLast]=useState<{connected:boolean;last_event:{created_at:string}|null}|null>(null);
+ useEffect(()=>{let alive=true;api<Project>(`/api/projects/${id}`).then(p=>{if(alive)setProject(p)}).catch(e=>{if(alive)setError(errorText(e))});return()=>{alive=false}},[id]);
+ async function check(){if(busy)return;setBusy(true);setError('');try{setLast(await api(`/api/projects/${id}/connection`))}catch(e){setError(errorText(e))}finally{setBusy(false)}}
+ const snippet=project?`<script defer src="${API}/sdk/datatalk.js" data-project="${project.tracking_key}"></script>`:'';
+ async function copy(){try{await navigator.clipboard.writeText(snippet);setCopied(true)}catch{setError('Select the code below and copy it manually.')}}
+ return <><div className="page-head"><div><div className="eyebrow">03 / 03</div><h1>{c('setup')}</h1><p>{project?.name}</p></div></div>{error&&<div className="account-alert error" role="alert">{error}</div>}{!project?<p role="status">{c('working')}</p>:<section className="account-panel">{project.platform==='Mobile App'?<p className="account-alert">{c('mobilePending')}</p>:<><p>{c('webScript')}</p>{project.platform==='Figma Site'&&<p className="muted">For a published Figma Site with custom code support; not for an interactive design prototype.</p>}<pre className="account-code"><code>{snippet}</code></pre><button className="btn outline" onClick={()=>void copy()}>{c(copied?'copied':'copy')}</button></>}
+ <hr/><p>{c('trackingHint')}</p>{last&&<div role="status" className={`account-alert ${last.connected?'success':''}`}><strong>{c(last.connected?'trackingReceived':'trackingWaiting')}</strong>{last.last_event&&<p>{new Date(last.last_event.created_at).toLocaleString()}</p>}</div>}
+ <div className="account-actions"><button className="btn outline" onClick={()=>void check()} disabled={busy}>{c(busy?'working':'connection')}</button><button className="btn primary" onClick={()=>{projectScope.select(project.id);router.push('/dashboard')}}>{c('viewData')}</button></div></section>}</>;
+}

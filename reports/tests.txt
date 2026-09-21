@@ -1,0 +1,121 @@
+TAP version 13
+# PASS: trial requests only send JSON content-type when a body is present.
+# Subtest: test/trial-request-headers.test.mjs
+ok 1 - test/trial-request-headers.test.mjs
+  ---
+  duration_ms: 59.909086
+  type: 'test'
+  ...
+# GREEN TEST: sandbox warms the backend and uses one server-side scenario seed request.
+# Subtest: test/trial-scenario-source.test.mjs
+ok 2 - test/trial-scenario-source.test.mjs
+  ---
+  duration_ms: 96.35957
+  type: 'test'
+  ...
+# RED TEST BASELINE: scenario contract expectations are defined.
+# Subtest: test/trial-scenario.test.mjs
+ok 3 - test/trial-scenario.test.mjs
+  ---
+  duration_ms: 104.9681
+  type: 'test'
+  ...
+# Subtest: trial layout no longer renders a nested sidebar shell
+ok 4 - trial layout no longer renders a nested sidebar shell
+  ---
+  duration_ms: 0.946551
+  type: 'test'
+  ...
+# Subtest: global layout uses pathname-aware active navigation
+ok 5 - global layout uses pathname-aware active navigation
+  ---
+  duration_ms: 0.378964
+  type: 'test'
+  ...
+# Subtest: add project is a guided platform-first flow
+ok 6 - add project is a guided platform-first flow
+  ---
+  duration_ms: 1.15678
+  type: 'test'
+  ...
+# Subtest: i18n contains project and shell translations in English and Vietnamese
+ok 7 - i18n contains project and shell translations in English and Vietnamese
+  ---
+  duration_ms: 0.450401
+  type: 'test'
+  ...
+# Subtest: styles include active indicator and motion classes
+ok 8 - styles include active indicator and motion classes
+  ---
+  duration_ms: 0.200623
+  type: 'test'
+  ...
+# Subtest: auth redirect allowlist rejects external, encoded and protocol-relative destinations
+ok 9 - auth redirect allowlist rejects external, encoded and protocol-relative destinations
+  ---
+  duration_ms: 1.487169
+  type: 'test'
+  ...
+# Subtest: workspace and project preferences are namespaced by user and workspace
+ok 10 - workspace and project preferences are namespaced by user and workspace
+  ---
+  duration_ms: 0.23817
+  type: 'test'
+  ...
+# Subtest: UI roles mirror the server hierarchy
+ok 11 - UI roles mirror the server hierarchy
+  ---
+  duration_ms: 0.781452
+  type: 'test'
+  ...
+# Subtest: browser auth uses PKCE and callback exchanges in the browser rather than a stateless server client
+ok 12 - browser auth uses PKCE and callback exchanges in the browser rather than a stateless server client
+  ---
+  duration_ms: 0.620689
+  type: 'test'
+  ...
+# Subtest: live app is wrapped in the account gate and reset pages remain reachable
+ok 13 - live app is wrapped in the account gate and reset pages remain reachable
+  ---
+  duration_ms: 0.176126
+  type: 'test'
+  ...
+# Subtest: auth forms include real email sign-in, signup, Google and password reset handlers
+ok 14 - auth forms include real email sign-in, signup, Google and password reset handlers
+  ---
+  duration_ms: 0.264139
+  type: 'test'
+  ...
+# Subtest: API helper always attaches session bearer tokens to protected calls
+ok 15 - API helper always attaches session bearer tokens to protected calls
+  ---
+  duration_ms: 0.230379
+  type: 'test'
+  ...
+# Subtest: account pages do not use demo-data or nested AppShell
+ok 16 - account pages do not use demo-data or nested AppShell
+  ---
+  duration_ms: 0.360525
+  type: 'test'
+  ...
+# Subtest: permissions mutations have a confirmation step
+ok 17 - permissions mutations have a confirmation step
+  ---
+  duration_ms: 0.351132
+  type: 'test'
+  ...
+# Subtest: no API client exposes a service role environment variable
+ok 18 - no API client exposes a service role environment variable
+  ---
+  duration_ms: 0.373836
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 210.230481
