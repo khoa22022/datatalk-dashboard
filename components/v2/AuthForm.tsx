@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { Eye, EyeOff } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase, authConfigured } from '@/lib/supabase';
@@ -13,6 +14,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
   const { c, errorText } = useV2Copy(); const router = useRouter(); const auth = useAuth();
   const [name, setName] = useState(''); const [email, setEmail] = useState('');
   const [password, setPassword] = useState(''); const [confirm, setConfirm] = useState('');
+  const [showPassword, setShowPassword] = useState(false); const [showConfirm, setShowConfirm] = useState(false);
   const [busy, setBusy] = useState(false); const [error, setError] = useState(''); const [done, setDone] = useState(false);
   const [next, setNext] = useState('/dashboard');
   useEffect(() => { const params = new URLSearchParams(window.location.search); setNext(safeNext(params.get('next'))); if (params.has('error')) setError('CALLBACK_FAILED'); }, []);
@@ -63,8 +65,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
       <form onSubmit={submit} className="account-form">
         {mode === 'register' && <label>{c('name')}<input autoComplete="name" maxLength={100} required value={name} onChange={e => setName(e.target.value)}/></label>}
         {mode !== 'reset' && <label>{c('email')}<input type="email" autoComplete="email" maxLength={254} required value={email} onChange={e => setEmail(e.target.value)}/></label>}
-        {mode !== 'forgot' && <label>{c('password')}<input type="password" autoComplete={mode === 'login' ? 'current-password' : 'new-password'} required minLength={mode === 'login' ? 1 : 12} maxLength={256} value={password} onChange={e => setPassword(e.target.value)}/>{mode !== 'login' && <small>{c('passwordHint')}</small>}</label>}
-        {(mode === 'register' || mode === 'reset') && <label>{c('confirmPassword')}<input type="password" autoComplete="new-password" required minLength={12} maxLength={256} value={confirm} onChange={e => setConfirm(e.target.value)}/></label>}
+        {mode !== 'forgot' && <label>{c('password')}<div className="password-field"><input type={showPassword?'text':'password'} autoComplete={mode === 'login' ? 'current-password' : 'new-password'} required minLength={mode === 'login' ? 1 : 12} maxLength={256} value={password} onChange={e => setPassword(e.target.value)}/><button type="button" className="password-toggle" aria-label={showPassword?'Hide password':'Show password'} onClick={()=>setShowPassword(v=>!v)}>{showPassword?<EyeOff size={17}/>:<Eye size={17}/>}</button></div>{mode !== 'login' && <small>{c('passwordHint')}</small>}</label>}
+        {(mode === 'register' || mode === 'reset') && <label>{c('confirmPassword')}<div className="password-field"><input type={showConfirm?'text':'password'} autoComplete="new-password" required minLength={12} maxLength={256} value={confirm} onChange={e => setConfirm(e.target.value)}/><button type="button" className="password-toggle" aria-label={showConfirm?'Hide password':'Show password'} onClick={()=>setShowConfirm(v=>!v)}>{showConfirm?<EyeOff size={17}/>:<Eye size={17}/>}</button></div></label>}
         {mode === 'login' && <Link className="account-inline-link" href="/forgot-password">{c('forgot')}</Link>}
         <button className="btn primary account-submit" disabled={disabled} aria-busy={busy}>{busy ? c('working') : c(mode === 'login' ? 'signIn' : mode === 'register' ? 'create' : mode === 'forgot' ? 'sendReset' : 'savePassword')}</button>
       </form>

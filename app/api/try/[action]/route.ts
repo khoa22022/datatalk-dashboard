@@ -15,9 +15,12 @@ async function proxy(request: NextRequest, action: string) {
     return NextResponse.json({ error: "Unknown trial action" }, { status: 404 });
   }
 
+  const authorization = request.headers.get('authorization');
+  if (!authorization?.startsWith('Bearer ')) return NextResponse.json({ error: 'AUTH_REQUIRED' }, { status: 401 });
   const target = `${BACKEND_URL}/api/try/${action}`;
   const headers = new Headers();
   headers.set("Accept", "application/json");
+  headers.set("Authorization", authorization);
   const contentType = request.headers.get("content-type");
   if (contentType) headers.set("Content-Type", contentType);
 
@@ -46,7 +49,7 @@ async function proxy(request: NextRequest, action: string) {
     return NextResponse.json(
       {
         error: "Trial backend proxy failed",
-        detail: error instanceof Error ? error.message : "Unknown error",
+        detail: "The private trial service is unavailable.",
       },
       { status: 502 }
     );

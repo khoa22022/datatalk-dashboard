@@ -1,9 +1,11 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
-import { Bell, CalendarDays, ChevronDown, ChevronRight, CircleHelp, LogOut, Search, Settings2, UserCircle } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { CalendarDays, ChevronDown, ChevronRight, CircleHelp, LogOut, Search, Settings2 } from 'lucide-react';
 import Link from 'next/link';
-import { supabase } from '@/lib/supabase';
 import LanguageSwitcher from './LanguageSwitcher';
+import { useAuth } from './AuthProvider';
+import { useProjects } from './ProjectProvider';
+import { useV2Copy } from './v2/copy';
 
 function initials(name?: string | null, email?: string | null) {
   const value = (name || '').trim();
@@ -11,40 +13,41 @@ function initials(name?: string | null, email?: string | null) {
   return (email || 'U').trim().slice(0, 1).toUpperCase();
 }
 
-export function Topbar({title='Overview'}:{title?:string}){
-  const [user, setUser] = useState<{name?:string;email?:string}|null>(null);
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    let mounted = true;
-    (async () => { if (!supabase) return; const {data} = await supabase.auth.getUser(); if (mounted && data.user) setUser({name:data.user.user_metadata?.name || data.user.user_metadata?.full_name || undefined, email:data.user.email || undefined}); })();
-    const {data: listener} = supabase?.auth.onAuthStateChange((_event, session) => { if (mounted) setUser(session?.user ? {name:session.user.user_metadata?.name || session.user.user_metadata?.full_name || undefined, email:session.user.email || undefined} : null); }) || {data:{subscription:{unsubscribe(){}}}};
-    const onClick = (event: MouseEvent) => { if (menuRef.current && !menuRef.current.contains(event.target as Node)) setOpen(false); };
-    document.addEventListener('mousedown', onClick);
-    return () => { mounted=false; listener?.subscription?.unsubscribe(); document.removeEventListener('mousedown', onClick); };
-  }, []);
-  async function signOut(){ if (supabase) await supabase.auth.signOut(); window.location.href='/login'; }
-  const label = user?.name || user?.email || 'Account';
+export function Topbar({title='Overview',trialMode=false}:{title?:string;trialMode?:boolean}){
+  const auth=useAuth();
+  const projects=useProjects();
+  const {c}=useV2Copy();
+  const [open,setOpen]=useState(false);
+  const menuRef=useRef<HTMLDivElement>(null);
+  const user=auth.account?.user;
+  const label=user?.name || user?.email || c('myAccount');
+
+  async function signOut(){
+    await auth.signOut();
+    window.location.assign('/login');
+  }
+
   return <header className="topbar topbar-v2">
     <div className="topbar-context"><div className="breadcrumb-v2"><span>Workspace</span><ChevronRight size={13}/><strong>{title}</strong></div></div>
     <div className="top-actions">
       <button className="icon-button-v2" aria-label="Search"><Search size={17}/></button>
-      <div className="sync-chip"><CalendarDays size={14}/><span>Last 30 days</span></div><LanguageSwitcher/>
-      <div className="account-menu" ref={menuRef}>
+      {trialMode ? <div className="sync-chip"><CalendarDays size={14}/><span>{c('demoLabel')}</span></div> : projects.projects.length>0 ? <label className="account-project-select"><span className="sr-only">{c('projects')}</span><select value={projects.project?.id || ''} onChange={e=>projects.select(e.target.value)}>{projects.projects.map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</select></label> : null}
+      <LanguageSwitcher/>
+      {!trialMode&&<div className="account-menu" ref={menuRef} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setOpen(false)}}>
         <button className="account-trigger" onClick={()=>setOpen(v=>!v)} aria-expanded={open} aria-label="Open account menu">
           <span className="avatar avatar-v2">{initials(user?.name,user?.email)}</span>
-          <span className="account-trigger-copy"><strong>{label}</strong><small>{user?.email || 'Manage account'}</small></span>
+          <span className="account-trigger-copy"><strong>{label}</strong><small>{user?.email || ''}</small></span>
           <ChevronDown size={14}/>
         </button>
-        {open && <div className="account-dropdown">
+        {open&&<div className="account-dropdown">
           <div className="account-dropdown-head"><span className="avatar avatar-v2 avatar-lg">{initials(user?.name,user?.email)}</span><div><strong>{label}</strong><small>{user?.email || ''}</small></div></div>
           <div className="account-divider"/>
-          <Link href="/settings" onClick={()=>setOpen(false)}><Settings2 size={16}/>Quản lý tài khoản</Link>
-          <Link href="/settings" onClick={()=>setOpen(false)}><CircleHelp size={16}/>Trợ giúp</Link>
+          <Link href="/settings" onClick={()=>setOpen(false)}><Settings2 size={16}/>{c('settings')}</Link>
+          <Link href="/settings" onClick={()=>setOpen(false)}><CircleHelp size={16}/>Help</Link>
           <div className="account-divider"/>
-          <button className="account-danger" onClick={signOut}><LogOut size={16}/>Đăng xuất</button>
+          <button className="account-danger" onClick={()=>void signOut()}><LogOut size={16}/>{c('signOut')}</button>
         </div>}
-      </div>
+      </div>}
     </div>
-  </header>
+  </header>;
 }
