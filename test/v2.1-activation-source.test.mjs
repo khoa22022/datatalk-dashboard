@@ -23,3 +23,13 @@ test('account controls live in topbar and password fields have visibility toggle
   assert.match(auth,/password-toggle/);
   assert.match(auth,/EyeOff/);
 });
+
+test('language switcher is consolidated into the account menu',()=>{
+  const topbar=read('components/Topbar.tsx');
+  const styles=read('app/globals.css');
+  assert.doesNotMatch(topbar,/<LanguageSwitcher\s*\/>/);
+  assert.match(topbar,/account-language-row/);
+  assert.match(topbar,/setLang\('en'\)/);
+  assert.match(topbar,/setLang\('vi'\)/);
+  assert.match(styles,/\.account-language-switch/);
+});

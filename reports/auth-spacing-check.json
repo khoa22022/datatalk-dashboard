@@ -1,0 +1,6 @@
+{
+  "check": "auth spacing collision check",
+  "auth_divider_rules": 1,
+  "menu_divider_class": "account-menu-divider",
+  "status": "pass"
+}
