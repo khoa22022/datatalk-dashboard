@@ -1,4 +1,3 @@
-import { supabase } from './supabase';
 import { buildTrialHeaders, requestWithRetry } from './trial-transport.mjs';
 
 export const TRIAL_API = (process.env.NEXT_PUBLIC_API_URL || 'https://datatalk-api-h4a1.onrender.com').replace(/\/$/, '');
@@ -44,15 +43,13 @@ export async function warmTrialBackend(onStatus?: (message: string) => void) {
 }
 
 export async function trialRequest<T>(path: string, options: RequestInit = {}): Promise<T> {
-  const token = (await supabase?.auth.getSession())?.data.session?.access_token;
-  if (!token) throw new Error('Sign in as Super Admin to use the private tracking sandbox. The visual demo remains available.');
   const url = `${TRIAL_API}${path}`;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 45000);
   try {
     const response = await fetch(url, {
       ...options,
-      headers: buildTrialHeaders({...options, headers: {...options.headers, Authorization: `Bearer ${token}`}}),
+      headers: buildTrialHeaders(options),
       cache: 'no-store',
       signal: controller.signal,
     });

@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server';
-import { safeNext } from '@/lib/auth-utils.mjs';
-export const dynamic = 'force-dynamic';
-/** The browser holds the PKCE verifier. Pass only the auth code to our client callback page. */
+import { createClient } from '@supabase/supabase-js';
+
 export async function GET(request: Request) {
-  const source = new URL(request.url);
-  const target = new URL('/auth/complete', source.origin);
-  const code = source.searchParams.get('code');
-  if (code && code.length <= 4096 && !source.searchParams.has('error')) target.searchParams.set('code', code);
-  else target.searchParams.set('error', 'callback_failed');
-  target.searchParams.set('next', safeNext(source.searchParams.get('next')));
-  const response = NextResponse.redirect(target);
-  response.headers.set('Cache-Control', 'no-store');
-  response.headers.set('Referrer-Policy', 'no-referrer');
-  return response;
+  const url = new URL(request.url);
+  const code = url.searchParams.get('code');
+  const origin = url.origin;
+  if (!code) return NextResponse.redirect(`${origin}/login?error=oauth_callback_missing_code`);
+
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+  );
+  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  if (error) return NextResponse.redirect(`${origin}/login?error=${encodeURIComponent(error.message)}`);
+  return NextResponse.redirect(`${origin}/dashboard`);
 }
