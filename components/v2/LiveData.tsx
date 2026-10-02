@@ -23,10 +23,10 @@ export function useLiveResource<T>(endpoint: string) {
   }, [scope, revision]);
   return { data: result?.scope === scope ? result.data : null, error, loading, retry: () => setRevision(n => n + 1) };
 }
-export function LiveBoundary({ title, loading, error, retry, children }: { title: string; loading?: boolean; error?: unknown; retry?: () => void; children: React.ReactNode }) {
+export function LiveBoundary({ title, loading, error, retry, children, eyebrow, subtitle, actions, className }: { title: string; loading?: boolean; error?: unknown; retry?: () => void; children: React.ReactNode; eyebrow?: string; subtitle?: string; actions?: React.ReactNode; className?: string }) {
   const { project, projects, loading: projectLoading, error: projectError, refresh } = useProjects(); const { c, errorText } = useV2Copy();
   const failure = projectError || error;
-  return <><div className="page-head"><div><div className="eyebrow">{project?.name || c('liveData')}</div><h1>{title}</h1><p>{c('dataScope')}</p></div></div>
+  return <><div className={`page-head ${className || ''}`}><div><div className="eyebrow">{eyebrow || project?.name || c('liveData')}</div><h1>{title}</h1><p>{subtitle || c('dataScope')}</p></div>{actions}</div>
     {failure ? <div role="alert" className="account-alert error">{errorText(failure)}<button className="btn outline" onClick={projectError ? refresh : retry}>{c('retry')}</button></div>
       : projectLoading || loading ? <p className="account-panel" role="status">{c('working')}</p>
       : !projects.length ? <NoProjects/> : children}
