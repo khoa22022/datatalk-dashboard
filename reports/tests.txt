@@ -1,133 +1,425 @@
 TAP version 13
-# PASS: trial requests only send JSON content-type when a body is present.
-# Subtest: test/trial-request-headers.test.mjs
-ok 1 - test/trial-request-headers.test.mjs
+# CORS POLICY TEST: PASS
+# Subtest: test/cors-policy.test.mjs
+ok 1 - test/cors-policy.test.mjs
   ---
-  duration_ms: 38.886828
+  duration_ms: 101.684484
   type: 'test'
   ...
-# GREEN TEST: sandbox warms the backend and uses one server-side scenario seed request.
-# Subtest: test/trial-scenario-source.test.mjs
-ok 2 - test/trial-scenario-source.test.mjs
+# Subtest: firstRow tolerates zero, one, or duplicate rows without PostgREST singular mode
+ok 2 - firstRow tolerates zero, one, or duplicate rows without PostgREST singular mode
   ---
-  duration_ms: 38.209336
+  duration_ms: 1.141296
   type: 'test'
   ...
-# RED TEST BASELINE: scenario contract expectations are defined.
-# Subtest: test/trial-scenario.test.mjs
-ok 3 - test/trial-scenario.test.mjs
+# Subtest: requireFirstRow reports contextual missing-row errors
+ok 3 - requireFirstRow reports contextual missing-row errors
   ---
-  duration_ms: 28.37355
+  duration_ms: 0.39006
   type: 'test'
   ...
-# Subtest: trial layout no longer renders a nested sidebar shell
-ok 4 - trial layout no longer renders a nested sidebar shell
+# Subtest: firstRow propagates database errors
+ok 4 - firstRow propagates database errors
   ---
-  duration_ms: 0.930663
+  duration_ms: 0.121704
   type: 'test'
   ...
-# Subtest: global layout uses pathname-aware active navigation
-ok 5 - global layout uses pathname-aware active navigation
+# Subtest: trial tracking key is deterministic for idempotent bootstrap
+ok 5 - trial tracking key is deterministic for idempotent bootstrap
   ---
-  duration_ms: 0.228184
+  duration_ms: 0.194374
   type: 'test'
   ...
-# Subtest: add project is a guided platform-first flow
-ok 6 - add project is a guided platform-first flow
+# Subtest: trial bootstrap does not use PostgREST singular response mode
+ok 6 - trial bootstrap does not use PostgREST singular response mode
   ---
-  duration_ms: 0.921039
+  duration_ms: 1.792101
   type: 'test'
   ...
-# Subtest: i18n contains project and shell translations in English and Vietnamese
-ok 7 - i18n contains project and shell translations in English and Vietnamese
+# Subtest: trial feedback insert does not require a singular PostgREST response
+ok 7 - trial feedback insert does not require a singular PostgREST response
   ---
-  duration_ms: 0.506814
+  duration_ms: 0.164339
   type: 'test'
   ...
-# Subtest: styles include active indicator and motion classes
-ok 8 - styles include active indicator and motion classes
+# Subtest: trial event insert does not require a singular PostgREST response
+ok 8 - trial event insert does not require a singular PostgREST response
   ---
-  duration_ms: 0.226481
+  duration_ms: 0.176327
   type: 'test'
   ...
-# Subtest: auth redirect allowlist rejects external, encoded and protocol-relative destinations
-ok 9 - auth redirect allowlist rejects external, encoded and protocol-relative destinations
+# Subtest: normalizes a sandbox event with bounded metadata
+ok 9 - normalizes a sandbox event with bounded metadata
   ---
-  duration_ms: 2.136912
+  duration_ms: 0.666668
   type: 'test'
   ...
-# Subtest: workspace and project preferences are namespaced by user and workspace
-ok 10 - workspace and project preferences are namespaced by user and workspace
+# Subtest: aggregates trial events into dashboard-ready metrics
+ok 10 - aggregates trial events into dashboard-ready metrics
   ---
-  duration_ms: 0.282245
+  duration_ms: 0.79379
   type: 'test'
   ...
-# Subtest: UI roles mirror the server hierarchy
-ok 11 - UI roles mirror the server hierarchy
+# Subtest: builds a deterministic realistic trial scenario payload
+ok 11 - builds a deterministic realistic trial scenario payload
   ---
-  duration_ms: 0.916922
+  duration_ms: 1.970941
   type: 'test'
   ...
-# Subtest: browser auth uses PKCE and callback exchanges in the browser rather than a stateless server client
-ok 12 - browser auth uses PKCE and callback exchanges in the browser rather than a stateless server client
+# Subtest: bearer parsing rejects missing, malformed and oversized credentials
+ok 12 - bearer parsing rejects missing, malformed and oversized credentials
   ---
-  duration_ms: 0.703851
+  duration_ms: 1.172503
   type: 'test'
   ...
-# Subtest: live app is wrapped in the account gate and reset pages remain reachable
-ok 13 - live app is wrapped in the account gate and reset pages remain reachable
+# Subtest: email normalization is case insensitive but does not collapse aliases
+ok 13 - email normalization is case insensitive but does not collapse aliases
   ---
-  duration_ms: 0.235364
+  duration_ms: 0.578965
   type: 'test'
   ...
-# Subtest: auth forms include real email sign-in, signup, Google and password reset handlers
-ok 14 - auth forms include real email sign-in, signup, Google and password reset handlers
+# Subtest: IDs must be UUIDs, not arbitrary tenant selectors
+ok 14 - IDs must be UUIDs, not arbitrary tenant selectors
   ---
-  duration_ms: 0.274614
+  duration_ms: 0.301537
   type: 'test'
   ...
-# Subtest: API helper always attaches session bearer tokens to protected calls
-ok 15 - API helper always attaches session bearer tokens to protected calls
+# Subtest: project creation permission: OWNER
+ok 15 - project creation permission: OWNER
   ---
-  duration_ms: 0.35139
+  duration_ms: 0.183878
   type: 'test'
   ...
-# Subtest: account pages do not use demo-data or nested AppShell
-ok 16 - account pages do not use demo-data or nested AppShell
+# Subtest: project creation permission: ADMIN
+ok 16 - project creation permission: ADMIN
   ---
-  duration_ms: 0.504941
+  duration_ms: 0.107463
   type: 'test'
   ...
-# Subtest: permissions mutations have a confirmation step
-ok 17 - permissions mutations have a confirmation step
+# Subtest: project creation permission: EDITOR
+ok 17 - project creation permission: EDITOR
   ---
-  duration_ms: 0.476278
+  duration_ms: 0.098148
   type: 'test'
   ...
-# Subtest: no API client exposes a service role environment variable
-ok 18 - no API client exposes a service role environment variable
+# Subtest: project creation permission: VIEWER
+ok 18 - project creation permission: VIEWER
   ---
-  duration_ms: 0.513634
+  duration_ms: 0.077948
   type: 'test'
   ...
-# Subtest: connect flow narrows project before async handlers and uses stable projectId
-ok 19 - connect flow narrows project before async handlers and uses stable projectId
+# Subtest: project creation permission: USER
+ok 19 - project creation permission: USER
   ---
-  duration_ms: 1.20728
+  duration_ms: 0.072219
   type: 'test'
   ...
-# Subtest: account controls live in topbar and password fields have visibility toggles
-ok 20 - account controls live in topbar and password fields have visibility toggles
+# Subtest: project creation permission: SUPER_ADMIN
+ok 20 - project creation permission: SUPER_ADMIN
   ---
-  duration_ms: 0.422547
+  duration_ms: 0.299123
   type: 'test'
   ...
-1..20
-# tests 20
+# Subtest: project creation permission: null
+ok 21 - project creation permission: null
+  ---
+  duration_ms: 0.376119
+  type: 'test'
+  ...
+# Subtest: member authority OWNER over OWNER
+ok 22 - member authority OWNER over OWNER
+  ---
+  duration_ms: 0.23817
+  type: 'test'
+  ...
+# Subtest: member authority OWNER over ADMIN
+ok 23 - member authority OWNER over ADMIN
+  ---
+  duration_ms: 0.091048
+  type: 'test'
+  ...
+# Subtest: member authority OWNER over EDITOR
+ok 24 - member authority OWNER over EDITOR
+  ---
+  duration_ms: 0.117759
+  type: 'test'
+  ...
+# Subtest: member authority OWNER over VIEWER
+ok 25 - member authority OWNER over VIEWER
+  ---
+  duration_ms: 0.067281
+  type: 'test'
+  ...
+# Subtest: member authority ADMIN over OWNER
+ok 26 - member authority ADMIN over OWNER
+  ---
+  duration_ms: 0.061743
+  type: 'test'
+  ...
+# Subtest: member authority ADMIN over ADMIN
+ok 27 - member authority ADMIN over ADMIN
+  ---
+  duration_ms: 0.887332
+  type: 'test'
+  ...
+# Subtest: member authority ADMIN over EDITOR
+ok 28 - member authority ADMIN over EDITOR
+  ---
+  duration_ms: 0.07302
+  type: 'test'
+  ...
+# Subtest: member authority ADMIN over VIEWER
+ok 29 - member authority ADMIN over VIEWER
+  ---
+  duration_ms: 0.058589
+  type: 'test'
+  ...
+# Subtest: member authority EDITOR over OWNER
+ok 30 - member authority EDITOR over OWNER
+  ---
+  duration_ms: 0.120202
+  type: 'test'
+  ...
+# Subtest: member authority EDITOR over ADMIN
+ok 31 - member authority EDITOR over ADMIN
+  ---
+  duration_ms: 0.065489
+  type: 'test'
+  ...
+# Subtest: member authority EDITOR over EDITOR
+ok 32 - member authority EDITOR over EDITOR
+  ---
+  duration_ms: 0.055224
+  type: 'test'
+  ...
+# Subtest: member authority EDITOR over VIEWER
+ok 33 - member authority EDITOR over VIEWER
+  ---
+  duration_ms: 0.051688
+  type: 'test'
+  ...
+# Subtest: member authority VIEWER over OWNER
+ok 34 - member authority VIEWER over OWNER
+  ---
+  duration_ms: 0.050095
+  type: 'test'
+  ...
+# Subtest: member authority VIEWER over ADMIN
+ok 35 - member authority VIEWER over ADMIN
+  ---
+  duration_ms: 0.050437
+  type: 'test'
+  ...
+# Subtest: member authority VIEWER over EDITOR
+ok 36 - member authority VIEWER over EDITOR
+  ---
+  duration_ms: 0.049996
+  type: 'test'
+  ...
+# Subtest: member authority VIEWER over VIEWER
+ok 37 - member authority VIEWER over VIEWER
+  ---
+  duration_ms: 0.047342
+  type: 'test'
+  ...
+# Subtest: invitation privileges do not include owner or super admin
+ok 38 - invitation privileges do not include owner or super admin
+  ---
+  duration_ms: 0.15826
+  type: 'test'
+  ...
+# Subtest: system admin cannot suspend self or another super admin
+ok 39 - system admin cannot suspend self or another super admin
+  ---
+  duration_ms: 0.13218
+  type: 'test'
+  ...
+# Subtest: database failures are sanitized and known permission errors are preserved
+ok 40 - database failures are sanitized and known permission errors are preserved
+  ---
+  duration_ms: 0.621249
+  type: 'test'
+  ...
+# Subtest: no token fails before accessing database or Auth
+ok 41 - no token fails before accessing database or Auth
+  ---
+  duration_ms: 1.324554
+  type: 'test'
+  ...
+# Subtest: getUser verifies the actual token before any role is read
+ok 42 - getUser verifies the actual token before any role is read
+  ---
+  duration_ms: 0.291861
+  type: 'test'
+  ...
+# Subtest: invalid or expired token cannot use a cached profile
+ok 43 - invalid or expired token cannot use a cached profile
+  ---
+  duration_ms: 0.230459
+  type: 'test'
+  ...
+# Subtest: unverified email cannot bootstrap an account
+ok 44 - unverified email cannot bootstrap an account
+  ---
+  duration_ms: 0.19831
+  type: 'test'
+  ...
+# Subtest: anonymous Auth sessions cannot provision workspace accounts
+ok 45 - anonymous Auth sessions cannot provision workspace accounts
+  ---
+  duration_ms: 0.153893
+  type: 'test'
+  ...
+# Subtest: matching super-admin email and self-supplied metadata do not grant a platform role
+ok 46 - matching super-admin email and self-supplied metadata do not grant a platform role
+  ---
+  duration_ms: 0.200103
+  type: 'test'
+  ...
+# Subtest: suspended account is rejected on every request
+ok 47 - suspended account is rejected on every request
+  ---
+  duration_ms: 0.237129
+  type: 'test'
+  ...
+# Subtest: first login provisions by verified Auth ID only
+ok 48 - first login provisions by verified Auth ID only
+  ---
+  duration_ms: 0.660028
+  type: 'test'
+  ...
+# Subtest: legacy invited profile is activated via trusted bootstrap, not role metadata
+ok 49 - legacy invited profile is activated via trusted bootstrap, not role metadata
+  ---
+  duration_ms: 0.321777
+  type: 'test'
+  ...
+# Subtest: tenant B cannot read tenant A project by guessing its ID
+ok 50 - tenant B cannot read tenant A project by guessing its ID
+  ---
+  duration_ms: 0.484513
+  type: 'test'
+  ...
+# Subtest: super admin has no implicit analytics bypass
+ok 51 - super admin has no implicit analytics bypass
+  ---
+  duration_ms: 0.231149
+  type: 'test'
+  ...
+# Subtest: viewer membership permits reading only the authorized project
+ok 52 - viewer membership permits reading only the authorized project
+  ---
+  duration_ms: 0.152601
+  type: 'test'
+  ...
+# Subtest: removed membership immediately prevents next request
+ok 53 - removed membership immediately prevents next request
+  ---
+  duration_ms: 0.189467
+  type: 'test'
+  ...
+# Subtest: Fastify HTTP injection: unauthenticated, cross-workspace, admin and trial boundaries
+ok 54 - Fastify HTTP injection: unauthenticated, cross-workspace, admin and trial boundaries # SKIP Requires npm install; dependencies unavailable in the offline build environment
+  ---
+  duration_ms: 0.532566
+  type: 'test'
+  ...
+# Subtest: every V2 account/management route has server authentication
+ok 55 - every V2 account/management route has server authentication
+  ---
+  duration_ms: 1.054235
+  type: 'test'
+  ...
+# Subtest: project handler uses authenticated actor and explicit workspace, ignoring forged user and role fields
+ok 56 - project handler uses authenticated actor and explicit workspace, ignoring forged user and role fields
+  ---
+  duration_ms: 0.543312
+  type: 'test'
+  ...
+# Subtest: project creation rejects an absent workspace instead of using the first arbitrary membership
+ok 57 - project creation rejects an absent workspace instead of using the first arbitrary membership
+  ---
+  duration_ms: 0.49631
+  type: 'test'
+  ...
+# Subtest: invitation handler rejects an editor before writing anything
+ok 58 - invitation handler rejects an editor before writing anything
+  ---
+  duration_ms: 0.389689
+  type: 'test'
+  ...
+# Subtest: workspace admin cannot invite a peer administrator
+ok 59 - workspace admin cannot invite a peer administrator
+  ---
+  duration_ms: 0.308276
+  type: 'test'
+  ...
+# Subtest: invitation response does not claim an email was sent
+ok 60 - invitation response does not claim an email was sent
+  ---
+  duration_ms: 0.197058
+  type: 'test'
+  ...
+# Subtest: ordinary user cannot call the status-management endpoint
+ok 61 - ordinary user cannot call the status-management endpoint
+  ---
+  duration_ms: 0.246493
+  type: 'test'
+  ...
+# Subtest: V1 platform role escalation route is disabled even for a super admin
+ok 62 - V1 platform role escalation route is disabled even for a super admin
+  ---
+  duration_ms: 0.234304
+  type: 'test'
+  ...
+# Subtest: migration is transactional and closes table and RPC access to browser roles
+ok 63 - migration is transactional and closes table and RPC access to browser roles
+  ---
+  duration_ms: 7.00786
+  type: 'test'
+  ...
+# Subtest: bootstrap grants only after exact Auth ID, email and verification checks
+ok 64 - bootstrap grants only after exact Auth ID, email and verification checks
+  ---
+  duration_ms: 0.216858
+  type: 'test'
+  ...
+# Subtest: all V2 functions pin their search_path
+ok 65 - all V2 functions pin their search_path
+  ---
+  duration_ms: 0.140773
+  type: 'test'
+  ...
+# Subtest: role changes and invitation acceptance serialize on the workspace
+ok 66 - role changes and invitation acceptance serialize on the workspace
+  ---
+  duration_ms: 0.133071
+  type: 'test'
+  ...
+# Subtest: no request-time email privilege escalation remains
+ok 67 - no request-time email privilege escalation remains
+  ---
+  duration_ms: 0.195345
+  type: 'test'
+  ...
+# Subtest: public tracking-key validation does not disclose project data
+ok 68 - public tracking-key validation does not disclose project data
+  ---
+  duration_ms: 0.15877
+  type: 'test'
+  ...
+# Subtest: private sandbox is disabled by default and requires a super admin
+ok 69 - private sandbox is disabled by default and requires a super admin
+  ---
+  duration_ms: 0.134022
+  type: 'test'
+  ...
+1..69
+# tests 69
 # suites 0
-# pass 20
+# pass 68
 # fail 0
 # cancelled 0
-# skipped 0
+# skipped 1
 # todo 0
-# duration_ms 108.065375
+# duration_ms 293.535435

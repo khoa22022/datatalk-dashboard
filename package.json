@@ -1,28 +1,19 @@
 {
-  "name": "datatalk-dashboard",
+  "name": "datatalk-backend",
   "version": "2.2.0-rc.2",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "start": "node src/start.js",
     "test": "node --test",
-    "typecheck": "tsc --noEmit",
-    "check:syntax": "node scripts/check-syntax.cjs"
+    "test:cors": "node test/cors-policy.test.mjs"
   },
   "dependencies": {
-    "next": "16.3.5",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "recharts": "^2.15.4",
-    "lucide-react": "^0.468.0",
-    "@supabase/supabase-js": "^2.45.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.7.3",
-    "@types/node": "^22.10.7",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3"
+    "@fastify/cors": "^9.0.0",
+    "@fastify/rate-limit": "^9.0.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1"
   },
   "engines": {
     "node": ">=22 <23"

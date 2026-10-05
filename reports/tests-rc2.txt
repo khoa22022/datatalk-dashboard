@@ -1,0 +1,477 @@
+
+> datatalk-backend@2.2.0-rc.2 test
+> node --test
+
+TAP version 13
+# CORS POLICY TEST: PASS
+# Subtest: test/cors-policy.test.mjs
+ok 1 - test/cors-policy.test.mjs
+  ---
+  duration_ms: 35.669943
+  type: 'test'
+  ...
+# Subtest: generated browser SDK parses as JavaScript
+ok 2 - generated browser SDK parses as JavaScript
+  ---
+  duration_ms: 1.340986
+  type: 'test'
+  ...
+# Subtest: firstRow tolerates zero, one, or duplicate rows without PostgREST singular mode
+ok 3 - firstRow tolerates zero, one, or duplicate rows without PostgREST singular mode
+  ---
+  duration_ms: 1.114582
+  type: 'test'
+  ...
+# Subtest: requireFirstRow reports contextual missing-row errors
+ok 4 - requireFirstRow reports contextual missing-row errors
+  ---
+  duration_ms: 0.513597
+  type: 'test'
+  ...
+# Subtest: firstRow propagates database errors
+ok 5 - firstRow propagates database errors
+  ---
+  duration_ms: 0.128079
+  type: 'test'
+  ...
+# Subtest: trial tracking key is deterministic for idempotent bootstrap
+ok 6 - trial tracking key is deterministic for idempotent bootstrap
+  ---
+  duration_ms: 0.179124
+  type: 'test'
+  ...
+# Subtest: trial bootstrap does not use PostgREST singular response mode
+ok 7 - trial bootstrap does not use PostgREST singular response mode
+  ---
+  duration_ms: 0.637149
+  type: 'test'
+  ...
+# Subtest: trial feedback insert does not require a singular PostgREST response
+ok 8 - trial feedback insert does not require a singular PostgREST response
+  ---
+  duration_ms: 0.976929
+  type: 'test'
+  ...
+# Subtest: trial event insert does not require a singular PostgREST response
+ok 9 - trial event insert does not require a singular PostgREST response
+  ---
+  duration_ms: 0.120328
+  type: 'test'
+  ...
+# Subtest: normalizes a sandbox event with bounded metadata
+ok 10 - normalizes a sandbox event with bounded metadata
+  ---
+  duration_ms: 1.234379
+  type: 'test'
+  ...
+# Subtest: aggregates trial events into dashboard-ready metrics
+ok 11 - aggregates trial events into dashboard-ready metrics
+  ---
+  duration_ms: 0.762013
+  type: 'test'
+  ...
+# Subtest: builds a deterministic realistic trial scenario payload
+ok 12 - builds a deterministic realistic trial scenario payload
+  ---
+  duration_ms: 1.853552
+  type: 'test'
+  ...
+# Subtest: bearer parsing rejects missing, malformed and oversized credentials
+ok 13 - bearer parsing rejects missing, malformed and oversized credentials
+  ---
+  duration_ms: 1.16082
+  type: 'test'
+  ...
+# Subtest: email normalization is case insensitive but does not collapse aliases
+ok 14 - email normalization is case insensitive but does not collapse aliases
+  ---
+  duration_ms: 0.546415
+  type: 'test'
+  ...
+# Subtest: IDs must be UUIDs, not arbitrary tenant selectors
+ok 15 - IDs must be UUIDs, not arbitrary tenant selectors
+  ---
+  duration_ms: 0.233074
+  type: 'test'
+  ...
+# Subtest: project creation permission: OWNER
+ok 16 - project creation permission: OWNER
+  ---
+  duration_ms: 0.156721
+  type: 'test'
+  ...
+# Subtest: project creation permission: ADMIN
+ok 17 - project creation permission: ADMIN
+  ---
+  duration_ms: 0.074159
+  type: 'test'
+  ...
+# Subtest: project creation permission: EDITOR
+ok 18 - project creation permission: EDITOR
+  ---
+  duration_ms: 0.072467
+  type: 'test'
+  ...
+# Subtest: project creation permission: VIEWER
+ok 19 - project creation permission: VIEWER
+  ---
+  duration_ms: 0.055813
+  type: 'test'
+  ...
+# Subtest: project creation permission: USER
+ok 20 - project creation permission: USER
+  ---
+  duration_ms: 0.050825
+  type: 'test'
+  ...
+# Subtest: project creation permission: SUPER_ADMIN
+ok 21 - project creation permission: SUPER_ADMIN
+  ---
+  duration_ms: 0.186345
+  type: 'test'
+  ...
+# Subtest: project creation permission: null
+ok 22 - project creation permission: null
+  ---
+  duration_ms: 0.352089
+  type: 'test'
+  ...
+# Subtest: member authority OWNER over OWNER
+ok 23 - member authority OWNER over OWNER
+  ---
+  duration_ms: 0.235407
+  type: 'test'
+  ...
+# Subtest: member authority OWNER over ADMIN
+ok 24 - member authority OWNER over ADMIN
+  ---
+  duration_ms: 0.06804
+  type: 'test'
+  ...
+# Subtest: member authority OWNER over EDITOR
+ok 25 - member authority OWNER over EDITOR
+  ---
+  duration_ms: 0.089932
+  type: 'test'
+  ...
+# Subtest: member authority OWNER over VIEWER
+ok 26 - member authority OWNER over VIEWER
+  ---
+  duration_ms: 0.085135
+  type: 'test'
+  ...
+# Subtest: member authority ADMIN over OWNER
+ok 27 - member authority ADMIN over OWNER
+  ---
+  duration_ms: 0.106477
+  type: 'test'
+  ...
+# Subtest: member authority ADMIN over ADMIN
+ok 28 - member authority ADMIN over ADMIN
+  ---
+  duration_ms: 1.760805
+  type: 'test'
+  ...
+# Subtest: member authority ADMIN over EDITOR
+ok 29 - member authority ADMIN over EDITOR
+  ---
+  duration_ms: 0.066378
+  type: 'test'
+  ...
+# Subtest: member authority ADMIN over VIEWER
+ok 30 - member authority ADMIN over VIEWER
+  ---
+  duration_ms: 0.049213
+  type: 'test'
+  ...
+# Subtest: member authority EDITOR over OWNER
+ok 31 - member authority EDITOR over OWNER
+  ---
+  duration_ms: 0.102401
+  type: 'test'
+  ...
+# Subtest: member authority EDITOR over ADMIN
+ok 32 - member authority EDITOR over ADMIN
+  ---
+  duration_ms: 0.069643
+  type: 'test'
+  ...
+# Subtest: member authority EDITOR over EDITOR
+ok 33 - member authority EDITOR over EDITOR
+  ---
+  duration_ms: 0.075762
+  type: 'test'
+  ...
+# Subtest: member authority EDITOR over VIEWER
+ok 34 - member authority EDITOR over VIEWER
+  ---
+  duration_ms: 0.05432
+  type: 'test'
+  ...
+# Subtest: member authority VIEWER over OWNER
+ok 35 - member authority VIEWER over OWNER
+  ---
+  duration_ms: 0.032758
+  type: 'test'
+  ...
+# Subtest: member authority VIEWER over ADMIN
+ok 36 - member authority VIEWER over ADMIN
+  ---
+  duration_ms: 0.031036
+  type: 'test'
+  ...
+# Subtest: member authority VIEWER over EDITOR
+ok 37 - member authority VIEWER over EDITOR
+  ---
+  duration_ms: 0.030665
+  type: 'test'
+  ...
+# Subtest: member authority VIEWER over VIEWER
+ok 38 - member authority VIEWER over VIEWER
+  ---
+  duration_ms: 0.028612
+  type: 'test'
+  ...
+# Subtest: invitation privileges do not include owner or super admin
+ok 39 - invitation privileges do not include owner or super admin
+  ---
+  duration_ms: 0.098806
+  type: 'test'
+  ...
+# Subtest: system admin cannot suspend self or another super admin
+ok 40 - system admin cannot suspend self or another super admin
+  ---
+  duration_ms: 0.107859
+  type: 'test'
+  ...
+# Subtest: database failures are sanitized and known permission errors are preserved
+ok 41 - database failures are sanitized and known permission errors are preserved
+  ---
+  duration_ms: 0.615187
+  type: 'test'
+  ...
+# Subtest: no token fails before accessing database or Auth
+ok 42 - no token fails before accessing database or Auth
+  ---
+  duration_ms: 1.282861
+  type: 'test'
+  ...
+# Subtest: getUser verifies the actual token before any role is read
+ok 43 - getUser verifies the actual token before any role is read
+  ---
+  duration_ms: 0.348233
+  type: 'test'
+  ...
+# Subtest: invalid or expired token cannot use a cached profile
+ok 44 - invalid or expired token cannot use a cached profile
+  ---
+  duration_ms: 0.233004
+  type: 'test'
+  ...
+# Subtest: unverified email cannot bootstrap an account
+ok 45 - unverified email cannot bootstrap an account
+  ---
+  duration_ms: 0.159735
+  type: 'test'
+  ...
+# Subtest: anonymous Auth sessions cannot provision workspace accounts
+ok 46 - anonymous Auth sessions cannot provision workspace accounts
+  ---
+  duration_ms: 0.151062
+  type: 'test'
+  ...
+# Subtest: matching super-admin email and self-supplied metadata do not grant a platform role
+ok 47 - matching super-admin email and self-supplied metadata do not grant a platform role
+  ---
+  duration_ms: 0.231241
+  type: 'test'
+  ...
+# Subtest: suspended account is rejected on every request
+ok 48 - suspended account is rejected on every request
+  ---
+  duration_ms: 0.232743
+  type: 'test'
+  ...
+# Subtest: first login provisions by verified Auth ID only
+ok 49 - first login provisions by verified Auth ID only
+  ---
+  duration_ms: 0.632361
+  type: 'test'
+  ...
+# Subtest: legacy invited profile is activated via trusted bootstrap, not role metadata
+ok 50 - legacy invited profile is activated via trusted bootstrap, not role metadata
+  ---
+  duration_ms: 0.325559
+  type: 'test'
+  ...
+# Subtest: tenant B cannot read tenant A project by guessing its ID
+ok 51 - tenant B cannot read tenant A project by guessing its ID
+  ---
+  duration_ms: 0.473818
+  type: 'test'
+  ...
+# Subtest: super admin has no implicit analytics bypass
+ok 52 - super admin has no implicit analytics bypass
+  ---
+  duration_ms: 0.240594
+  type: 'test'
+  ...
+# Subtest: viewer membership permits reading only the authorized project
+ok 53 - viewer membership permits reading only the authorized project
+  ---
+  duration_ms: 0.133056
+  type: 'test'
+  ...
+# Subtest: removed membership immediately prevents next request
+ok 54 - removed membership immediately prevents next request
+  ---
+  duration_ms: 0.18976
+  type: 'test'
+  ...
+# Subtest: Fastify HTTP injection: unauthenticated, cross-workspace, admin and trial boundaries
+ok 55 - Fastify HTTP injection: unauthenticated, cross-workspace, admin and trial boundaries # SKIP Requires npm install; dependencies unavailable in the offline build environment
+  ---
+  duration_ms: 1.009027
+  type: 'test'
+  ...
+# Subtest: every V2 account/management route has server authentication
+ok 56 - every V2 account/management route has server authentication
+  ---
+  duration_ms: 1.122915
+  type: 'test'
+  ...
+# Subtest: project handler uses authenticated actor and explicit workspace, ignoring forged user and role fields
+ok 57 - project handler uses authenticated actor and explicit workspace, ignoring forged user and role fields
+  ---
+  duration_ms: 0.498805
+  type: 'test'
+  ...
+# Subtest: project creation rejects an absent workspace instead of using the first arbitrary membership
+ok 58 - project creation rejects an absent workspace instead of using the first arbitrary membership
+  ---
+  duration_ms: 0.465806
+  type: 'test'
+  ...
+# Subtest: invitation handler rejects an editor before writing anything
+ok 59 - invitation handler rejects an editor before writing anything
+  ---
+  duration_ms: 0.363135
+  type: 'test'
+  ...
+# Subtest: workspace admin cannot invite a peer administrator
+ok 60 - workspace admin cannot invite a peer administrator
+  ---
+  duration_ms: 1.456887
+  type: 'test'
+  ...
+# Subtest: invitation response does not claim an email was sent
+ok 61 - invitation response does not claim an email was sent
+  ---
+  duration_ms: 0.18941
+  type: 'test'
+  ...
+# Subtest: ordinary user cannot call the status-management endpoint
+ok 62 - ordinary user cannot call the status-management endpoint
+  ---
+  duration_ms: 0.254886
+  type: 'test'
+  ...
+# Subtest: V1 platform role escalation route is disabled even for a super admin
+ok 63 - V1 platform role escalation route is disabled even for a super admin
+  ---
+  duration_ms: 0.279702
+  type: 'test'
+  ...
+# Subtest: migration is transactional and closes table and RPC access to browser roles
+ok 64 - migration is transactional and closes table and RPC access to browser roles
+  ---
+  duration_ms: 0.901388
+  type: 'test'
+  ...
+# Subtest: bootstrap grants only after exact Auth ID, email and verification checks
+ok 65 - bootstrap grants only after exact Auth ID, email and verification checks
+  ---
+  duration_ms: 0.209479
+  type: 'test'
+  ...
+# Subtest: all V2 functions pin their search_path
+ok 66 - all V2 functions pin their search_path
+  ---
+  duration_ms: 0.189519
+  type: 'test'
+  ...
+# Subtest: role changes and invitation acceptance serialize on the workspace
+ok 67 - role changes and invitation acceptance serialize on the workspace
+  ---
+  duration_ms: 0.145545
+  type: 'test'
+  ...
+# Subtest: no request-time email privilege escalation remains
+ok 68 - no request-time email privilege escalation remains
+  ---
+  duration_ms: 0.164242
+  type: 'test'
+  ...
+# Subtest: public tracking-key validation does not disclose project data
+ok 69 - public tracking-key validation does not disclose project data
+  ---
+  duration_ms: 0.147247
+  type: 'test'
+  ...
+# Subtest: private sandbox is disabled by default and requires a super admin
+ok 70 - private sandbox is disabled by default and requires a super admin
+  ---
+  duration_ms: 0.130953
+  type: 'test'
+  ...
+# Subtest: real dashboard aggregates observed events and uses unique-issue UX health
+ok 71 - real dashboard aggregates observed events and uses unique-issue UX health
+  ---
+  duration_ms: 0.714874
+  type: 'test'
+  ...
+# Subtest: UX health starts at 100 after tracking and subtracts unique issues only
+ok 72 - UX health starts at 100 after tracking and subtracts unique issues only
+  ---
+  duration_ms: 0.808472
+  type: 'test'
+  ...
+# Subtest: page analytics separates routes and task analytics returns real completion rates
+ok 73 - page analytics separates routes and task analytics returns real completion rates
+  ---
+  duration_ms: 1.639246
+  type: 'test'
+  ...
+# Subtest: V2.2 migration upgrades existing funnels table instead of assuming a new database
+ok 74 - V2.2 migration upgrades existing funnels table instead of assuming a new database
+  ---
+  duration_ms: 0.357207
+  type: 'test'
+  ...
+# Subtest: page identity rejects path-shaped page names and keeps a meaningful title
+ok 75 - page identity rejects path-shaped page names and keeps a meaningful title
+  ---
+  duration_ms: 0.762844
+  type: 'test'
+  ...
+# Subtest: session journey exposes page names and page count
+ok 76 - session journey exposes page names and page count
+  ---
+  duration_ms: 1.326304
+  type: 'test'
+  ...
+# Subtest: generated SDK captures document coordinates and page naming metadata
+ok 77 - generated SDK captures document coordinates and page naming metadata
+  ---
+  duration_ms: 0.40028
+  type: 'test'
+  ...
+1..77
+# tests 77
+# suites 0
+# pass 76
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 330.413049

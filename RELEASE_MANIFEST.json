@@ -1,541 +1,289 @@
 {
-  "name": "datatalk-dashboard",
-  "application_version": "2.0.0-rc.1",
-  "packaging_revision": "full.1",
-  "phase": "GD01 - accounts and permissions",
-  "date": "2026-09-19",
+  "name": "datatalk-backend",
+  "application_version": "2.2.0-rc.2",
+  "phase": "V2.2 RC2 context tracking",
+  "date": "2026-10-05",
   "distribution": "full application source, not a patch",
-  "source_archives_sha256": {
-    "datatalk-backend-main(1).zip": "6544f0a28fd9610cbc96b6b9e598ec7cb8944ab554da794cddaa0822c9252f8c",
-    "datatalk-dashboard-main.zip": "50218b3995676e4fe8599d8f07c2f7183f7292050c06cb1017b84bcf8f3959f0",
-    "DataTalk-V2.0.0-rc.1-Upgrade.zip": "e19e8cdf67213a22753aa897148d478ed15db9685e16ffa28ad5a1ed0070885b"
-  },
-  "omitted_non_source_files": [
-    "public/fonts/Poppins-Bold.ttf",
-    "public/fonts/Poppins-Medium.ttf",
-    "public/fonts/Poppins-Regular.ttf",
-    "public/fonts/Poppins-SemiBold.ttf",
-    "tsconfig.tsbuildinfo"
-  ],
-  "runtime_packaging_changes": [
-    "app/globals.css"
-  ],
-  "file_count_excluding_manifest": 85,
+  "file_count_excluding_manifest": 55,
   "files": [
     {
-      "path": ".env.example",
-      "size": 283,
-      "sha256": "ec9fb159b7c1b4dd85d3a62e1fd365c5619752b1cc4a2d8d72403442c2ab43f7",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
       "path": ".gitignore",
-      "size": 161,
-      "sha256": "17381d22a8b8bd398fd387cbd9baef384db1f7540f407f61ce781b918530036e",
-      "origin": "packaging_revision"
+      "size": 150,
+      "sha256": "6e849c22f7327df81191f0e1603ec96abd28df63a1b99d172f9a14cc365bc6f6"
     },
     {
       "path": ".nvmrc",
       "size": 3,
-      "sha256": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56",
-      "origin": "packaging_revision"
+      "sha256": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56"
     },
     {
       "path": "PACKAGING_REPORT.md",
       "size": 3468,
-      "sha256": "ce384eebfaf6b947b998daa62d3c82cd9251f7eb145cce871759a58e0525880c",
-      "origin": "packaging_revision"
+      "sha256": "ce384eebfaf6b947b998daa62d3c82cd9251f7eb145cce871759a58e0525880c"
+    },
+    {
+      "path": "RC2_CONTEXT_TRACKING.md",
+      "size": 933,
+      "sha256": "2add5bd52ff955015b3a207765e170b0b1513e6ae35ef5fe9e91ac58602cc0b1"
     },
     {
       "path": "README.md",
-      "size": 2074,
-      "sha256": "7d5d75911a31c7072bd36bc4fa74b9604c9d49624fa8de271686cb1183324654",
-      "origin": "packaging_revision"
+      "size": 414,
+      "sha256": "ac7379ce90556d484bac8265fa0d33724742d15dbfbbcd08b7706885dce77c1a"
+    },
+    {
+      "path": "README_DEPLOY_V1.3.5_FINAL.md",
+      "size": 212,
+      "sha256": "5944d06a165a04d5eab4efa87cf9a5aaf781ba3e2bbc26d2bcb5519ecde8199a"
+    },
+    {
+      "path": "README_FIX.md",
+      "size": 651,
+      "sha256": "8955b0689978317f7bf3045d5b70517dbf01c10c3583e66d6e001997046c3750"
     },
     {
       "path": "RELEASE_NOTES.md",
-      "size": 2311,
-      "sha256": "a6e204bdd0fd39c968c65655f814ca641a28216db07927450d7566dba4d5bcdb",
-      "origin": "packaging_revision"
+      "size": 422,
+      "sha256": "0a45497bd8e1d20af5a34bdbfd4a5d0eadb70fcd412bc4e1e9fe697748b3acc9"
     },
     {
       "path": "UPLOAD_GITHUB.md",
       "size": 7541,
-      "sha256": "da1eb82dc79662b962898b6ae84dda582a2c291e2463f89da799aa23b6f7ad67",
-      "origin": "packaging_revision"
+      "sha256": "da1eb82dc79662b962898b6ae84dda582a2c291e2463f89da799aa23b6f7ad67"
+    },
+    {
+      "path": "V2.1_DASHBOARD_RC3.md",
+      "size": 563,
+      "sha256": "773b73c4f6497e402735e8ee083cf47dee50051e79d2c88b162ecd62002e734e"
+    },
+    {
+      "path": "V2.1_RELEASE.md",
+      "size": 81,
+      "sha256": "e265c8526f86dda271d080c18fe56c87faa83562b97e3ff73bd58899bc75ce4c"
+    },
+    {
+      "path": "V2.1_SDK_HOTFIX.md",
+      "size": 262,
+      "sha256": "bb88db31b59d2c77174810e3677ac1a0ae6b36cecfef4b2d1efb288853540ad0"
     },
     {
       "path": "V2_DEPLOY.md",
       "size": 18870,
-      "sha256": "bdd03ae0da907f251dd4436d9070b406d1defab218f1775ef4001e2ad25214da",
-      "origin": "packaging_revision"
+      "sha256": "bdd03ae0da907f251dd4436d9070b406d1defab218f1775ef4001e2ad25214da"
     },
     {
-      "path": "app/admin/users/page.tsx",
-      "size": 4773,
-      "sha256": "8c982ede0a3ddd27ca22a9ff0c53950700d40e13b7d1eebf72a036ac7fe4c941",
-      "origin": "unchanged_from_merged_v2"
+      "path": "database/migrations/README_RUN_MIGRATION.md",
+      "size": 272,
+      "sha256": "18e543af62058ba824174705eb9aac814b3334efdc635884a10d2a425d1de406"
     },
     {
-      "path": "app/ai/page.tsx",
-      "size": 974,
-      "sha256": "db1b1a039ef3629320b6cf7ce56dec0c1091fcbd5fd38d93a73b3738cd3e1478",
-      "origin": "unchanged_from_merged_v2"
+      "path": "database/migrations/database/migrations/001_v1.3.5_schema_reconciliation.sql",
+      "size": 2271,
+      "sha256": "e7e124399dac79a45e19f5c899159c48500e944fa5467d6175230572b09ac662"
     },
     {
-      "path": "app/analytics/page.tsx",
-      "size": 826,
-      "sha256": "efa11a5aca1212582d4cf7237a009616e0f1e0f4b8055d00cf8effbbd642243d",
-      "origin": "unchanged_from_merged_v2"
+      "path": "database/migrations/database/verify_v1.3.5.sql",
+      "size": 270,
+      "sha256": "21948ecd311c7b50fcf569a0474a94e4e8abb9da79529853327bab690480d16b"
     },
     {
-      "path": "app/api/try/[action]/route.ts",
-      "size": 2139,
-      "sha256": "d4094d9db91ff076ef86c17b20f44c091b5a85cf967feacdf48377cf835f9460",
-      "origin": "unchanged_from_merged_v2"
+      "path": "database/schema.sql",
+      "size": 4639,
+      "sha256": "added1505e7873fb26354a5f89a5af4b4ec928a43bdf594be5107e5709ecc300"
     },
     {
-      "path": "app/auth/callback/route.ts",
-      "size": 853,
-      "sha256": "b8cc1a64154171fa6df72c16966bec0eb05bcc975fe30ec5b0293800888a27fa",
-      "origin": "unchanged_from_merged_v2"
+      "path": "database/v2/000_preflight_READ_ONLY.sql",
+      "size": 2197,
+      "sha256": "638972538a3f4397343ef183b4c0ab158918f995db70cf7221542196916093a0"
     },
     {
-      "path": "app/auth/complete/page.tsx",
-      "size": 1721,
-      "sha256": "aa4ea6f71ac2a551db36a5f64c68021e4f94b22a7b1770a3e31f7012a3d08aa0",
-      "origin": "unchanged_from_merged_v2"
+      "path": "database/v2/001_accounts_and_permissions.sql",
+      "size": 17317,
+      "sha256": "49477ed9154ef0705bca79ac6121b75fed27c910c40f8c9025195af0e58c4a43"
     },
     {
-      "path": "app/dashboard/page.tsx",
-      "size": 1057,
-      "sha256": "1f101fd6cdfc166e96bbb1e64455cee8521691b2a9168761efdf25fbb65286d2",
-      "origin": "unchanged_from_merged_v2"
+      "path": "database/v2/002_bootstrap_super_admin.sql",
+      "size": 1453,
+      "sha256": "2e2ea1a2571c2c9f141d923eeb5edd7295d91ee417524ebf06b47a6d407a2b69"
     },
     {
-      "path": "app/feedback/page.tsx",
-      "size": 785,
-      "sha256": "4a6de9f264066cd2c02f68468ef3fc84c6053a49ee4216e35a9ed4e039345a6d",
-      "origin": "unchanged_from_merged_v2"
+      "path": "database/v2/003_verify_READ_ONLY.sql",
+      "size": 1142,
+      "sha256": "6abe2e87115326efbbdfd0568ece5b5c1c1df4c2aba2a8e6fbebf539c5a00726"
     },
     {
-      "path": "app/forgot-password/page.tsx",
-      "size": 136,
-      "sha256": "3edf168e4080303169e20b62d359d000d861a1fa56d69ba0fa9cf6a87278d16b",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/funnels/page.tsx",
-      "size": 426,
-      "sha256": "68f7cd40143ea6773712718956aadc714975ce97fb1690f6fa8ba3b28c3e5a96",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/globals.css",
-      "size": 32061,
-      "sha256": "9ab9f620a6fdb1f2c9154df150dd141602d889eac6480dee8879ffcb7fca05e6",
-      "origin": "packaging_revision"
-    },
-    {
-      "path": "app/heatmaps/page.tsx",
-      "size": 1060,
-      "sha256": "39e206e12cc1d4f03094cceb788dbe98ac1967b6562e1de867b27781ea857681",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/layout.tsx",
-      "size": 509,
-      "sha256": "40445d63b17b143fe51871616a885302215f9bec850acf25e24df74afb072357",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/login/page.tsx",
-      "size": 126,
-      "sha256": "27766db9c4abc46febe26718c24da96299945be8688d2035b4abb4b04a263d2c",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/page.tsx",
-      "size": 103,
-      "sha256": "a4f78a52ae176a15c79c2c1970bcca02eb460f4aca5f0c21f9ad4f11bdffaa2c",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/projects/[id]/connect/page.tsx",
-      "size": 2678,
-      "sha256": "b8a3393c1ff0301a1eae4a10f0fd455bb8dfa7334390c4d078e6c85fe38c6a26",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/projects/[id]/page.tsx",
-      "size": 207,
-      "sha256": "fa529f0c6909aed6269c98f2c4890d861305f3372b4aada80459a29ebb3aa169",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/projects/new/page.tsx",
-      "size": 5591,
-      "sha256": "ddd6105fe4d134317f00fd10e822a9d479a55473de0ef1d9ccbdf95d7b1b7dd5",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/projects/page.tsx",
-      "size": 1638,
-      "sha256": "17ba25f3343b3c7ee2c03b6c1a5b4fe24f07f050e068ff5a62965469989c91eb",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/register/page.tsx",
-      "size": 132,
-      "sha256": "03f07c54828db92ca655b4730dd373493fe5a5a7ade47068ae19ef5c3a88be47",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/reset-password/page.tsx",
-      "size": 134,
-      "sha256": "1b640ca8cc7b22fedcbd152395812724c88e1093121bf032f7922835ef8e773a",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/sessions/page.tsx",
-      "size": 861,
-      "sha256": "1a1ddd3f258ecf41a9cd3e0b34b840f95f23c52aa80bc1126689b42b7193ce6e",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/settings/members/page.tsx",
-      "size": 7180,
-      "sha256": "c3ae092b4c62a7375cacc3ff2ac9e9dc77eb0aa2018437492967c32f8af189f8",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/settings/page.tsx",
-      "size": 1174,
-      "sha256": "523e780ac9db0f217bd52246625916c0f80bf6da3c0af5729fca6581bcc01446",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/tasks/page.tsx",
-      "size": 753,
-      "sha256": "bdf05fd53aa5019cf911cd2fb3f61cd77b4ba19cc009cc64914226451aa48134",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/try/ai/page.tsx",
-      "size": 1975,
-      "sha256": "bd081c386f589e65097dc4a5464caa6b4b57ac966918cd2728028aca1059446d",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/try/analytics/page.tsx",
-      "size": 2883,
-      "sha256": "9bd1f8a7f5d245b3b6d338148e2fa6d62dd148159fc74a8aab00567bcb7dac97",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/try/feedback/page.tsx",
-      "size": 2023,
-      "sha256": "4c77c3217c65b35219c60c4d46fcd01152b028b41f5d56187cfecafbe110640d",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/try/funnels/page.tsx",
-      "size": 1769,
-      "sha256": "f9203e97b7c7fd5adf3a9e82a7862245719a7a25e8a4cf73fb544b40e0dee77c",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/try/heatmaps/page.tsx",
-      "size": 2759,
-      "sha256": "6d1002e015cdb4031bc060db6d21143254348b5e1a4520e1435ad275500dd2f9",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/try/layout.tsx",
-      "size": 104,
-      "sha256": "2a5aa82073c3ce7e808483623b3ad3009c41fdedf5b6bc45d4f3557b55990e19",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/try/page.tsx",
-      "size": 2440,
-      "sha256": "1e977fa11c82b5120c835f5e75e6b94acf3e36945fb4382ff447efeafbdfdb1d",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/try/projects/page.tsx",
-      "size": 2123,
-      "sha256": "9a05f9411b9f15d20d89ba24e2418cd41df9b2619a87f39a2769dab79ffb870d",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/try/sandbox/page.tsx",
-      "size": 12168,
-      "sha256": "96a8bb228fd6c0949c7598f03a1a7092c2c4f5ea26b341f8a500f5bae477ad5b",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/try/sessions/page.tsx",
-      "size": 2129,
-      "sha256": "b3c7f7d0509c59c97e20863f63c075bcc1a43eb942c74803d5c05de20740c079",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "app/try/tasks/page.tsx",
-      "size": 2288,
-      "sha256": "44a6bd28155d42790defd5fade8d3cb321880aefdabd36db4e852e4c27efc6d6",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/AIInsight.tsx",
-      "size": 897,
-      "sha256": "f500f70cfb836a468276d9c8cf6b986e5858586203597004f6a3fa80c3301864",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/AppShell.tsx",
-      "size": 359,
-      "sha256": "ea3c3b6f50a8abe8abd7c34c7b8454853038ec507ccb8802c29cf3be069eb52b",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/AuthProvider.tsx",
-      "size": 4419,
-      "sha256": "ef6d738caa5910921af3200efc6829b55a2b548c68347cb77a072cde8863de1d",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/DashboardCharts.tsx",
-      "size": 6697,
-      "sha256": "c31e1dd3343e8dbe43b0b744de7e1174a4480ee348eaa5bc6277eb95c2a815ff",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/LanguageSwitcher.tsx",
-      "size": 375,
-      "sha256": "6cddf379ad19e3e31cd07a1556b4e42713092cbf914a149251e40ca11087e98a",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/LayoutShell.tsx",
-      "size": 6701,
-      "sha256": "85d8ae9ee74014cb108073eadc02af540801b920ac658d36ea2650d3ec64ce55",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/MetricCard.tsx",
-      "size": 521,
-      "sha256": "43b8c8344cb00da8a2d88c8fc4dc5b92c44b33fa233bdf3aff0c3bcadb10abfd",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/ProjectCard.tsx",
-      "size": 1110,
-      "sha256": "96121dede455fd37aff587e6576a7179420de81f5bcf8712a96f0d2a8769cccf",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/ProjectProvider.tsx",
-      "size": 2615,
-      "sha256": "c45964f7dd62b75af20b9ec00699a6cd90ff6e0a60fe1db38e9d05aa3635885d",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/Sidebar.tsx",
-      "size": 2445,
-      "sha256": "a504e70377ba45f1ef67b4d4c428f8564f66cd5ba8d8270fbc042d40529702fc",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/Topbar.tsx",
-      "size": 732,
-      "sha256": "802f8dcb06e75f961145280a9a7bd69e7f21242e02b912c69975ff4385a18e2c",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/TrafficChart.tsx",
-      "size": 1350,
-      "sha256": "d8c3d770c3760a5b4d3a75e07813004fc9d1a3a907fa524bfc2dd3a763f75d8b",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/i18n.tsx",
-      "size": 22157,
-      "sha256": "70afc8fc84afa5856b9327edad5ae7b44b0cbbb6dfe370b3dd5af79af434a493",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/v2/AuthForm.tsx",
-      "size": 6202,
-      "sha256": "f805c3968c06ce932e45051c376169de72c57e9a8be803006bb15373e894f7fd",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/v2/AuthFrame.tsx",
-      "size": 664,
-      "sha256": "cc24978811b1b0d5563fb07fc80a7a13d1d6e141e33a5d681c4b9aa564ee51a3",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/v2/AuthGate.tsx",
-      "size": 1548,
-      "sha256": "2432143caad296f05ac2c9db79bec72a9755b7475dfc39945976fc4e0019a4ee",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/v2/ConfirmDialog.tsx",
-      "size": 961,
-      "sha256": "8b6267bbfa2b483494a054d718d4723b5df9900e5c7678d6665cb4a1293c8dde",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/v2/LiveData.tsx",
-      "size": 3243,
-      "sha256": "c113388a01ebe81d9c3bb9a65094aedb4a65f855947985d76fdf35d9615fc78a",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "components/v2/copy.ts",
-      "size": 17373,
-      "sha256": "54ac4f8de3d1662e5f794c2035ddc905f5316f21aaaac82c6e1304f0c6e40e01",
-      "origin": "unchanged_from_merged_v2"
+      "path": "database/v2/004_security_STAGING_ROLLBACK.sql",
+      "size": 6107,
+      "sha256": "80745a413a583b8b8573835d7c4853a6619e9aaddaf894b3ac988e4f1aac1a2d"
     },
     {
       "path": "docs/MVP_HISTORY.md",
-      "size": 1530,
-      "sha256": "a81fd627359021ddf4aea7832ca16d31dfaa5e28ad40488daf46739743a93fb5",
-      "origin": "packaging_revision"
-    },
-    {
-      "path": "lib/account-types.ts",
-      "size": 839,
-      "sha256": "e736a2a79ea074d69667b2cd9ed907e4c88ef457de7256f1a1cd4cc51b6101dc",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "lib/api.ts",
-      "size": 2078,
-      "sha256": "9f48761a7fa2781336a6ab1f567a2e43d7da3562613ac3833450396c98747995",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "lib/auth-utils.d.ts",
-      "size": 402,
-      "sha256": "41568612748d2d0f65c0d9c3c013e76433551f54c91facebbe6d3ebddeb1c252",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "lib/auth-utils.mjs",
-      "size": 918,
-      "sha256": "7c7f92b739ad9e7b1aacbb319f188187ca62b5dda0003d11a0680a54f5a4818d",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "lib/demo-data.ts",
-      "size": 2614,
-      "sha256": "4b3c3eb35cd797265dd1a40a09fcf2cbb46c5a4a7115c6ea318869f2cd3e1a35",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "lib/supabase.ts",
-      "size": 645,
-      "sha256": "04d9468689ed4a8226d45ebed38a41051e05e82ac6f3300aab6bc63df8ab3c8c",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "lib/trial-transport.d.ts",
-      "size": 318,
-      "sha256": "72f979eadd099ee9ebc6e6f427731fea0f6abcf1aabb3386f60e15f3e120a07d",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "lib/trial-transport.mjs",
-      "size": 1057,
-      "sha256": "a07fe4bdc5368582cbd7165eb5f3dbfd83ba92996e25ecd455585496507d8cd8",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "lib/trial.ts",
-      "size": 2730,
-      "sha256": "5e314abea4afd76d699fbbc86608cde7fd7849c4d3838e74b0b015a2d3b0eb01",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "next-env.d.ts",
-      "size": 81,
-      "sha256": "879741880b6ab48da99dcc06dcc674d381c9826137b0496bf7bb368f302de9fc",
-      "origin": "unchanged_from_merged_v2"
-    },
-    {
-      "path": "next.config.mjs",
-      "size": 429,
-      "sha256": "a3deaf0464c2260ada13c77bf6d02e8d60ef110086f23c488af8467fab710f27",
-      "origin": "unchanged_from_merged_v2"
+      "size": 2842,
+      "sha256": "667e2f30005c5f97a0fa579762ebeb61608024982a123deb43f9511eff7133d1"
     },
     {
       "path": "package.json",
-      "size": 680,
-      "sha256": "2d4a186f147e360490af7761972401a8227743349604121c836babdf3b303776",
-      "origin": "unchanged_from_merged_v2"
+      "size": 456,
+      "sha256": "95849b39c18f19a10fb581a3de10630d2a669b9903a029a8e5efec1612b91b44"
     },
     {
-      "path": "reports/syntax.json",
-      "size": 136,
-      "sha256": "066cbab74fc628e7f8691a307221b3b044652a3e13ceb6158de4ef600cec6062",
-      "origin": "packaging_revision"
+      "path": "render.yaml",
+      "size": 235,
+      "sha256": "c57689f4226b57656784769047c0743bd075adec6c212adc3517f7f616925e63"
+    },
+    {
+      "path": "reports/tests-rc2.txt",
+      "size": 13951,
+      "sha256": "9239fde169acf879ea577681e5f4c6f43c47a41050ec5e3f9c7ed35ffb8f086d"
     },
     {
       "path": "reports/tests.txt",
-      "size": 3694,
-      "sha256": "1c841212b588ed20e9450446c2bebd40b98ebd47d0718e7462846218b3c2eb09",
-      "origin": "packaging_revision"
+      "size": 12247,
+      "sha256": "f8d2c25cd40ea377f62bd4560c33b15dbe3c0bc4e0483fb4ba446a373656401f"
     },
     {
-      "path": "scripts/check-syntax.cjs",
-      "size": 1776,
-      "sha256": "b5c42813c89292a149e586170513dc4daef65099d043cebd88d310c4a914ee6d",
-      "origin": "unchanged_from_merged_v2"
+      "path": "scripts/security-smoke.mjs",
+      "size": 1408,
+      "sha256": "69bee49202cf038878ebc89add2b6d67241e91d741588730c452c2162fba840d"
     },
     {
-      "path": "test/trial-request-headers.test.mjs",
-      "size": 862,
-      "sha256": "8d0b00314288f2561f7b5d0d0a37b1a028bc4818e5b19f8e4e4645776b56eb38",
-      "origin": "unchanged_from_merged_v2"
+      "path": "sdk/README.md",
+      "size": 903,
+      "sha256": "2b6ecdd3ae05280e7941049d6eddf21dbcad3b2d92401baa8778e2a3c3b27282"
     },
     {
-      "path": "test/trial-scenario-source.test.mjs",
-      "size": 428,
-      "sha256": "23239937ddd15666cef7450ecdf7d6846d6588c057450ac282ec9b9be645f8da",
-      "origin": "unchanged_from_merged_v2"
+      "path": "sdk/flutter/README.md",
+      "size": 147,
+      "sha256": "53124d0a84b1c2181c331ed43fa219363764fb34081b493da0df5ed97f2221f4"
     },
     {
-      "path": "test/trial-scenario.test.mjs",
-      "size": 639,
-      "sha256": "9f6a8abf86f11081dee6dd0cbcaa69feef99b73745afe071e8282139a805129c",
-      "origin": "unchanged_from_merged_v2"
+      "path": "sdk/mobile-react-native/README.md",
+      "size": 152,
+      "sha256": "3c3f28aeb910cbdb397923658434f2bc92827e848aea529ace6f0ee05c4248ed"
     },
     {
-      "path": "test/ui-redesign-source.test.mjs",
-      "size": 1591,
-      "sha256": "7103568bb720a1e0dd2861dc30a7d7f3e1b90f2d5560eb3334092509c8b764e2",
-      "origin": "unchanged_from_merged_v2"
+      "path": "sdk/web/datatalk.js",
+      "size": 6535,
+      "sha256": "31526fac83115f25b7a1e59a79c002273374c6ec0c16f8e994dba0b99f450fc3"
     },
     {
-      "path": "test/v2-auth-utils.test.mjs",
-      "size": 3510,
-      "sha256": "658ffea9d27ac52843caefc9245f17a6e2db3c1d95af23ec24111f162128d49d",
-      "origin": "unchanged_from_merged_v2"
+      "path": "src/cors-policy.js",
+      "size": 408,
+      "sha256": "786d2fd7a08c95f6f53ef13257d09d71093607c2fa14ced4c3d907434e9ce6cb"
     },
     {
-      "path": "tsconfig.json",
-      "size": 708,
-      "sha256": "1d095fff1273a462c93dcfe4e8e79e755a33111b698770fb24e390f05841d0a3",
-      "origin": "unchanged_from_merged_v2"
+      "path": "src/server.js",
+      "size": 52200,
+      "sha256": "c734038438b6dd66a5586e390ebd06c1e32349fcd466d970b9406474b656a604"
+    },
+    {
+      "path": "src/start.js",
+      "size": 391,
+      "sha256": "5c972a0045f7660df1de591a245d5d4112169306a209a0b690520ec90333db7c"
+    },
+    {
+      "path": "src/trial-bootstrap.js",
+      "size": 480,
+      "sha256": "e5236bede0dbb74ba351ceb2d43a422d721d2d344bf1b03a83ecd3185de36bfe"
+    },
+    {
+      "path": "src/trial.js",
+      "size": 7921,
+      "sha256": "5dfbf3d79052df927f58d72f9f1c1ad949a1aceb8c01a853acd59bb583885d73"
+    },
+    {
+      "path": "src/v2/access.js",
+      "size": 3185,
+      "sha256": "275317c61cfb39dddf8dae923eca3abe1465d0dab406a78b03a5b2fa9e3685da"
+    },
+    {
+      "path": "src/v2/analytics-v22.js",
+      "size": 12379,
+      "sha256": "705276172de3beeddfb0a7f1709757c2f38748305e58bef1323a7fc66da7da2d"
+    },
+    {
+      "path": "src/v2/auth.js",
+      "size": 2406,
+      "sha256": "7ec199fbf03589ef7e5095919b477f4c33c71a1b19058f304fc15342e2938126"
+    },
+    {
+      "path": "src/v2/routes.js",
+      "size": 9386,
+      "sha256": "211550c4da9ab43fa71945258a3d3d1263db513df62e3d79253c5a575d993519"
+    },
+    {
+      "path": "src/v2/sdk-v22.js",
+      "size": 13749,
+      "sha256": "750e2e69c7a3f622c39bf09ae59c8f935c6360706124641c1ccf49b2ca9f9e6d"
+    },
+    {
+      "path": "test/cors-policy.test.mjs",
+      "size": 440,
+      "sha256": "3af090bdff9b3d537085b622975ac67e24528758cc8df5576e2b6be87a37c026"
+    },
+    {
+      "path": "test/sdk-generated-syntax.test.mjs",
+      "size": 340,
+      "sha256": "40650a5d6bda4708f4b052cb88cb241212e7ea1780d4f61ba31f1451843c049b"
+    },
+    {
+      "path": "test/trial-bootstrap.test.mjs",
+      "size": 1016,
+      "sha256": "64d7c6c28b6ab60093a8585d5c3c67e514e8b967a3a27d8d064f77f0c3787733"
+    },
+    {
+      "path": "test/trial-server-contract.test.mjs",
+      "size": 1372,
+      "sha256": "aa04638aad91b980fefec9fa484200db68dd25db7c232cf814e3178735533687"
+    },
+    {
+      "path": "test/trial.test.js",
+      "size": 2193,
+      "sha256": "256bbceeba77c06f830eb220be605d7eeaa7be1a3e3c3295fb1b2bbe24ea0c8c"
+    },
+    {
+      "path": "test/v2-access.test.mjs",
+      "size": 3263,
+      "sha256": "eb03c59cd9f27ca32846f92fba829d8b6ac6c32863dc4c3f14a6f3cfdadd9e5c"
+    },
+    {
+      "path": "test/v2-auth.test.mjs",
+      "size": 4531,
+      "sha256": "7148e67a1a99517115a0cd014e2f52576aa4516f3efb4b626f498c224cdfa92c"
+    },
+    {
+      "path": "test/v2-fastify.test.mjs",
+      "size": 1523,
+      "sha256": "5817783404c52895cfb9cbfc0458f514a4631b8bad27fd1c0cf93074bc339b45"
+    },
+    {
+      "path": "test/v2-routes.test.mjs",
+      "size": 3715,
+      "sha256": "b540184aff1681178643aac5fd0d72e77b9d42121e6e52485baa870a9d629dbd"
+    },
+    {
+      "path": "test/v2-schema-contract.test.mjs",
+      "size": 2428,
+      "sha256": "9024548ab7a1f07409b7cfe0489e185ad31745bf3dfd8395e25938056b6b3448"
+    },
+    {
+      "path": "test/v2.1-dashboard-route.test.mjs",
+      "size": 722,
+      "sha256": "1a9a07ea77ce86638ee405d50d9c4aede03f0f18969a207bdf9b293d855c3d9f"
+    },
+    {
+      "path": "test/v2.2-product-analytics.test.mjs",
+      "size": 1908,
+      "sha256": "1a6b41455f2256b09e5d5df4588751709e467c75b479e0e3a704cdbdaefd05ee"
+    },
+    {
+      "path": "test/v2.2-rc2-context.test.mjs",
+      "size": 1334,
+      "sha256": "835fae0d35fb7ed92b35f80fc130bae08883fd5618af1f58ff19f393ab110ad5"
     }
   ],
   "limitations": [
-    "No full dependency installation or Next production build in this environment.",
-    "No live SQL/Auth/browser validation or production deployment.",
-    "No font binaries are distributed; CSS uses local/system fallback."
+    "No live production deployment was performed by this package step.",
+    "No font binaries are distributed."
   ]
 }

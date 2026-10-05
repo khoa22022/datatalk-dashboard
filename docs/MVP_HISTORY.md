@@ -14,21 +14,54 @@ This release has NOT been deployed to your services. Full dependency installatio
 
 <details><summary>Archived V1 notes (historical reference only)</summary>
 
-# Datatalk Dashboard v1.4.0 — UI Redesign
+# Datatalk Backend v1.3.5 — Real UX Tracking + Trial Sandbox
 
-Frontend release focused on a cleaner Product Analytics / UX Intelligence experience.
+Production tracking backend for Datatalk.
 
-## What changed
-- Single responsive application shell (removed nested Trial shell)
-- Path-aware sidebar active state with motion feedback
-- Clean project context header and EN/VI language switcher
-- Refined KPI cards and chart presentation
-- Fixed Device Mix donut/legend overlap
-- Redesigned Projects cards
-- New platform-first Add Project setup flow for non-technical users
-- EN/VI copy for the new project/setup experience
-- Preserves Trial Sandbox, tracking proxy, existing API contract, Poppins fonts and analytics pages
+## v1.3.5
+- Page and section attention events
+- Active time / dwell time aggregation
+- Click, rage-click, dead-click heatmap persistence
+- Task events through `events.metadata` (no tasks/task_steps tables required)
+- Feedback persistence
+- Dashboard aggregation APIs
+- Internal Trial Tracking Sandbox: `/api/try/*`
 
-Backend contract remains compatible with Datatalk Backend v1.3.5.
+### Trial sandbox
+The sandbox uses a dedicated `Datatalk Trial Sandbox` project inside the configured super-admin workspace. It is created automatically on first sandbox use and is intended only for product review/testing. It does not require Supabase Auth.
+
+Endpoints:
+- `GET /api/try/bootstrap`
+- `POST /api/try/event`
+- `POST /api/try/seed`
+- `POST /api/try/reset`
+- `POST /api/try/feedback`
+- `GET /api/try/summary`
+
+## Existing production APIs
+Existing Auth, Workspace, Project, Tracking Key, Analytics, Sessions, Tasks, Heatmaps and Feedback APIs remain protected as before.
+
+## Environment
+Required existing variables:
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_KEY`
+- `SUPER_ADMIN_EMAIL`
+- `CORS_ORIGINS`
+- `PORT` (Render supplies this)
+
+## v1.3.4 Trial reliability
+
+- `/health/ready` is a lightweight readiness endpoint for cold-start checks.
+- Trial project initialization is single-flight to avoid duplicate workspace/project creation.
+- Trial scenario seeding is performed as one database batch after the backend is warmed.
+- The scenario creates 16 events, 3 heatmap events, and one session.
+
+## v1.3.5 Trial bootstrap hardening
+
+- Removes PostgREST singular-response mode from the Trial Sandbox bootstrap, event insert, and feedback insert paths.
+- Tolerates duplicate legacy trial workspace/project rows by selecting the oldest matching row deterministically.
+- Uses the fixed tracking key `dt_trial_internal_sandbox` for idempotent project creation across concurrent server instances.
+- Repairs the super-admin workspace membership on every bootstrap.
+- Does not require a database cleanup or migration.
 
 </details>
