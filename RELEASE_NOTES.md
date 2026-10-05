@@ -1,9 +1,8 @@
-# DataTalk V2.2 Backend RC2
+# DataTalk V2.2 Frontend RC3
 
-- Improved page identity metadata in the web SDK.
-- Added document-space heatmap coordinates and element bounds.
-- Added page catalogs to dashboard/analytics/heatmap/session APIs.
-- Added device availability to heatmap/session APIs.
-- Added readable session page names/page counts and first/last meaningful actions.
-- Added UX-health comparison delta.
-- No new database migration beyond V2.2.
+- Consistent quick-filter labels and selected states.
+- UX Health now shows real score and a premium segmented gauge.
+- Vietnamese analytics copy cleaned up for the updated analytics screens.
+- Readable page names with path context across dashboard and analytics.
+- Heatmap now requires page/device context, supports device-specific layouts, and shows interaction point details.
+- Session explorer now explains missing metadata and labels actions/pages more clearly.
