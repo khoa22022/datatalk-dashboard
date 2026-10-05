@@ -1,133 +1,215 @@
+
+> datatalk-dashboard@2.2.0-rc.3 test
+> node --test
+
 TAP version 13
 # PASS: trial requests only send JSON content-type when a body is present.
 # Subtest: test/trial-request-headers.test.mjs
 ok 1 - test/trial-request-headers.test.mjs
   ---
-  duration_ms: 38.886828
+  duration_ms: 33.150598
   type: 'test'
   ...
 # GREEN TEST: sandbox warms the backend and uses one server-side scenario seed request.
 # Subtest: test/trial-scenario-source.test.mjs
 ok 2 - test/trial-scenario-source.test.mjs
   ---
-  duration_ms: 38.209336
+  duration_ms: 27.600096
   type: 'test'
   ...
 # RED TEST BASELINE: scenario contract expectations are defined.
 # Subtest: test/trial-scenario.test.mjs
 ok 3 - test/trial-scenario.test.mjs
   ---
-  duration_ms: 28.37355
+  duration_ms: 34.513684
   type: 'test'
   ...
 # Subtest: trial layout no longer renders a nested sidebar shell
 ok 4 - trial layout no longer renders a nested sidebar shell
   ---
-  duration_ms: 0.930663
+  duration_ms: 1.179857
   type: 'test'
   ...
 # Subtest: global layout uses pathname-aware active navigation
 ok 5 - global layout uses pathname-aware active navigation
   ---
-  duration_ms: 0.228184
+  duration_ms: 0.223389
   type: 'test'
   ...
 # Subtest: add project is a guided platform-first flow
 ok 6 - add project is a guided platform-first flow
   ---
-  duration_ms: 0.921039
+  duration_ms: 0.840236
   type: 'test'
   ...
 # Subtest: i18n contains project and shell translations in English and Vietnamese
 ok 7 - i18n contains project and shell translations in English and Vietnamese
   ---
-  duration_ms: 0.506814
+  duration_ms: 0.554967
   type: 'test'
   ...
 # Subtest: styles include active indicator and motion classes
 ok 8 - styles include active indicator and motion classes
   ---
-  duration_ms: 0.226481
+  duration_ms: 0.226634
   type: 'test'
   ...
 # Subtest: auth redirect allowlist rejects external, encoded and protocol-relative destinations
 ok 9 - auth redirect allowlist rejects external, encoded and protocol-relative destinations
   ---
-  duration_ms: 2.136912
+  duration_ms: 1.434602
   type: 'test'
   ...
 # Subtest: workspace and project preferences are namespaced by user and workspace
 ok 10 - workspace and project preferences are namespaced by user and workspace
   ---
-  duration_ms: 0.282245
+  duration_ms: 0.181958
   type: 'test'
   ...
 # Subtest: UI roles mirror the server hierarchy
 ok 11 - UI roles mirror the server hierarchy
   ---
-  duration_ms: 0.916922
+  duration_ms: 0.585882
   type: 'test'
   ...
 # Subtest: browser auth uses PKCE and callback exchanges in the browser rather than a stateless server client
 ok 12 - browser auth uses PKCE and callback exchanges in the browser rather than a stateless server client
   ---
-  duration_ms: 0.703851
+  duration_ms: 0.463052
   type: 'test'
   ...
 # Subtest: live app is wrapped in the account gate and reset pages remain reachable
 ok 13 - live app is wrapped in the account gate and reset pages remain reachable
   ---
-  duration_ms: 0.235364
+  duration_ms: 0.165493
   type: 'test'
   ...
 # Subtest: auth forms include real email sign-in, signup, Google and password reset handlers
 ok 14 - auth forms include real email sign-in, signup, Google and password reset handlers
   ---
-  duration_ms: 0.274614
+  duration_ms: 0.221316
   type: 'test'
   ...
 # Subtest: API helper always attaches session bearer tokens to protected calls
 ok 15 - API helper always attaches session bearer tokens to protected calls
   ---
-  duration_ms: 0.35139
+  duration_ms: 0.21755
   type: 'test'
   ...
 # Subtest: account pages do not use demo-data or nested AppShell
 ok 16 - account pages do not use demo-data or nested AppShell
   ---
-  duration_ms: 0.504941
+  duration_ms: 0.443273
   type: 'test'
   ...
 # Subtest: permissions mutations have a confirmation step
 ok 17 - permissions mutations have a confirmation step
   ---
-  duration_ms: 0.476278
+  duration_ms: 0.336726
   type: 'test'
   ...
 # Subtest: no API client exposes a service role environment variable
 ok 18 - no API client exposes a service role environment variable
   ---
-  duration_ms: 0.513634
+  duration_ms: 0.62457
   type: 'test'
   ...
 # Subtest: connect flow narrows project before async handlers and uses stable projectId
 ok 19 - connect flow narrows project before async handlers and uses stable projectId
   ---
-  duration_ms: 1.20728
+  duration_ms: 1.241929
   type: 'test'
   ...
 # Subtest: account controls live in topbar and password fields have visibility toggles
 ok 20 - account controls live in topbar and password fields have visibility toggles
   ---
-  duration_ms: 0.422547
+  duration_ms: 0.841018
   type: 'test'
   ...
-1..20
-# tests 20
+# Subtest: language switcher is consolidated into the account menu
+ok 21 - language switcher is consolidated into the account menu
+  ---
+  duration_ms: 0.307323
+  type: 'test'
+  ...
+# Subtest: project connection onboarding follows global EN/VI language state
+ok 22 - project connection onboarding follows global EN/VI language state
+  ---
+  duration_ms: 0.671729
+  type: 'test'
+  ...
+# Subtest: all three onboarding install paths have localized copy
+ok 23 - all three onboarding install paths have localized copy
+  ---
+  duration_ms: 0.178954
+  type: 'test'
+  ...
+# Subtest: real dashboard uses live dashboard resource and not demo data
+ok 24 - real dashboard uses live dashboard resource and not demo data
+  ---
+  duration_ms: 0.793058
+  type: 'test'
+  ...
+# Subtest: unsupported metrics render as double dash instead of fabricated values
+ok 25 - unsupported metrics render as double dash instead of fabricated values
+  ---
+  duration_ms: 0.175098
+  type: 'test'
+  ...
+# Subtest: analytics filter supports dd/mm/yyyy, comparison, page search and device filtering
+ok 26 - analytics filter supports dd/mm/yyyy, comparison, page search and device filtering
+  ---
+  duration_ms: 0.823703
+  type: 'test'
+  ...
+# Subtest: priority analytics screens use live resources
+ok 27 - priority analytics screens use live resources
+  ---
+  duration_ms: 1.253735
+  type: 'test'
+  ...
+# Subtest: feedback builder exposes real survey types and funnel is no-code first
+ok 28 - feedback builder exposes real survey types and funnel is no-code first
+  ---
+  duration_ms: 0.198052
+  type: 'test'
+  ...
+# Subtest: quick filter typography and today active state are implemented
+ok 29 - quick filter typography and today active state are implemented
+  ---
+  duration_ms: 1.736677
+  type: 'test'
+  ...
+# Subtest: UX health uses real score and premium segmented gauge
+ok 30 - UX health uses real score and premium segmented gauge
+  ---
+  duration_ms: 0.205934
+  type: 'test'
+  ...
+# Subtest: analytics uses readable page identity and complete Vietnamese labels
+ok 31 - analytics uses readable page identity and complete Vietnamese labels
+  ---
+  duration_ms: 0.220715
+  type: 'test'
+  ...
+# Subtest: heatmap requires page and device context and exposes point inspection
+ok 32 - heatmap requires page and device context and exposes point inspection
+  ---
+  duration_ms: 0.174998
+  type: 'test'
+  ...
+# Subtest: sessions replace anonymous dashes with readable missing-data copy
+ok 33 - sessions replace anonymous dashes with readable missing-data copy
+  ---
+  duration_ms: 0.212192
+  type: 'test'
+  ...
+1..33
+# tests 33
 # suites 0
-# pass 20
+# pass 33
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 108.065375
+# duration_ms 193.196649
