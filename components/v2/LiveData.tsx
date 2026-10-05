@@ -10,14 +10,14 @@ export function NoProjects() {
   const { workspace } = useAuth(); const { c } = useV2Copy();
   return <section className="empty-state-v2 card"><h2>{c('noProjects')}</h2><p>{c(mayCreate(workspace?.role) ? 'noProjectSub' : 'readOnly')}</p>{mayCreate(workspace?.role) && <Link href="/projects/new" className="btn primary">{c('addProject')}</Link>}</section>;
 }
-export function useLiveResource<T>(endpoint: string) {
+export function useLiveResource<T>(endpoint: string, query = '') {
   const { account, workspace } = useAuth(); const { project } = useProjects();
-  const scope = `${account?.user.id}:${workspace?.id}:${project?.id}:${endpoint}`;
+  const scope = `${account?.user.id}:${workspace?.id}:${project?.id}:${endpoint}:${query}`;
   const [result, setResult] = useState<{ scope: string; data: T } | null>(null); const [error, setError] = useState<unknown>(null); const [loading, setLoading] = useState(false); const [revision, setRevision] = useState(0);
   useEffect(() => {
     if (!account || !workspace || !project) return;
     let alive = true; const controller = new AbortController(); setLoading(true); setError(null);
-    api<T>(`/api/projects/${project.id}/${endpoint}`, { signal: controller.signal }).then(data => { if (alive) setResult({ scope, data }); })
+    api<T>(`/api/projects/${project.id}/${endpoint}${query ? (query.startsWith('?') ? query : `?${query}`) : ''}`, { signal: controller.signal }).then(data => { if (alive) setResult({ scope, data }); })
       .catch(e => { if (alive) setError(e); }).finally(() => { if (alive) setLoading(false); });
     return () => { alive = false; controller.abort(); };
   }, [scope, revision]);

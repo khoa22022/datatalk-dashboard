@@ -177,14 +177,14 @@ export default function RealOverviewDashboard({ data }: { data: RealDashboardDat
         <div className="card-header">
           <div>
             <h2 className="card-title">{t('uxHealth')}</h2>
-            <p className="card-subtitle">{vi ? 'Chỉ hiển thị khi engine UX Health có đủ dữ liệu và công thức chính thức.' : 'Shown only when the UX Health engine has enough data and a defined model.'}</p>
+            <p className="card-subtitle">{vi ? 'Bắt đầu từ 100 và trừ 1 điểm cho mỗi vấn đề UX/UI khác nhau.' : 'Starts at 100 and subtracts 1 point for each unique UX/UI issue.'}</p>
           </div>
         </div>
         <div className="donut-wrap">
           <ResponsiveContainer width="220" height="190">
             <PieChart><Pie data={[{ value: 100 }]} innerRadius={62} outerRadius={82} startAngle={90} endAngle={-270} dataKey="value" stroke="none"><Cell fill="#eef0f5" /></Pie></PieChart>
           </ResponsiveContainer>
-          <div className="donut-center"><div className="donut-value">--</div><div className="donut-label">{t('uxScore')}</div></div>
+          <div className="donut-center"><div className="donut-value">{data.overview.uxHealthScore == null ? '--' : data.overview.uxHealthScore}</div><div className="donut-label">{t('uxScore')}</div></div>
         </div>
         <div style={{ padding: '0 24px 18px' }}><div className="stat-meta neutral">-- {t('previousPeriod')}</div></div>
         <div className="mini-stat-row">
