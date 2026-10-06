@@ -9,7 +9,7 @@ test('quick filter typography and today active state are implemented',()=>{
 });
 test('UX health uses real score and compact segmented gauge',()=>{
  const s=read('components/RealOverviewDashboard.tsx');
- assert.match(s,/healthScore=hasEvents/); assert.match(s,/UXHealthCard/); assert.match(s,/ux-segment-gauge/); assert.match(s,/Rage \/ dead clicks/);
+ assert.match(s,/healthScore=hasEvents/); assert.match(s,/UXHealthCard/); assert.match(s,/ux-arc-gauge/); assert.match(s,/Rage \/ dead clicks/);
 });
 test('analytics uses readable page identity and complete Vietnamese labels',()=>{
  const s=read('app/analytics/page.tsx');

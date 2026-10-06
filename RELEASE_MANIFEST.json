@@ -1,16 +1,11 @@
 {
   "name": "datatalk-dashboard",
-  "application_version": "2.2.0-rc.3",
-  "phase": "V2.2 RC3 UX polish",
-  "date": "2026-10-05",
+  "application_version": "2.2.0-rc.5",
+  "phase": "V2.2 RC5 UI refinement",
+  "date": "2026-10-06",
   "distribution": "full application source, not a patch",
-  "file_count_excluding_manifest": 104,
+  "file_count_excluding_manifest": 107,
   "files": [
-    {
-      "path": ".env.example",
-      "size": 283,
-      "sha256": "ec9fb159b7c1b4dd85d3a62e1fd365c5619752b1cc4a2d8d72403442c2ab43f7"
-    },
     {
       "path": ".gitignore",
       "size": 161,
@@ -45,6 +40,11 @@
       "path": "RC5_I18N_NOTES.md",
       "size": 447,
       "sha256": "1e018ff8cd36eb1f876099aa882c8866f2e8501ec3bf88bcfbeacf078803e70d"
+    },
+    {
+      "path": "RC5_UI_REFINEMENT.md",
+      "size": 843,
+      "sha256": "32af3a677846f89bd4a79b13725c2d44063b4d2fc21ce53a726ee48aee481c94"
     },
     {
       "path": "RC6_REAL_ANALYTICS.md",
@@ -88,8 +88,8 @@
     },
     {
       "path": "app/analytics/page.tsx",
-      "size": 5468,
-      "sha256": "a037f41875adfb7b32f05baee80778deb9d248150cbf30f681645b947bf5e265"
+      "size": 6078,
+      "sha256": "e21c54a5462d8ddafa52ce7af17b596f410add5ec02ecd9012d3a06c11bf349a"
     },
     {
       "path": "app/api/try/[action]/route.ts",
@@ -113,8 +113,8 @@
     },
     {
       "path": "app/feedback/page.tsx",
-      "size": 7665,
-      "sha256": "8178d03aae4ae4edb398f3fe9a629cf6d046ce277373b077e15f1fc22e9c7de3"
+      "size": 11294,
+      "sha256": "c104e5deef87e79cbf955115a62f6991636e66f0f1e7bcb8f6af52d5635ab384"
     },
     {
       "path": "app/forgot-password/page.tsx",
@@ -128,13 +128,13 @@
     },
     {
       "path": "app/globals.css",
-      "size": 58034,
-      "sha256": "d6fc16f2b17d44b2a608f30fca8b3e955a49420073834dd969893a5eacc0b4a1"
+      "size": 66156,
+      "sha256": "b5f443ad931852288642f07de39564095411e63071dd22208385471b457c2189"
     },
     {
       "path": "app/heatmaps/page.tsx",
-      "size": 12041,
-      "sha256": "b934a7627f9cb6464c038f31786447b426419fb7e40e4592933e3ffc205e833f"
+      "size": 13594,
+      "sha256": "e3f5ee70dc4009d892e2a1c5b65fc9e76aa52e626a13622335faf04c1537ee93"
     },
     {
       "path": "app/layout.tsx",
@@ -183,8 +183,8 @@
     },
     {
       "path": "app/sessions/page.tsx",
-      "size": 7027,
-      "sha256": "431cf80c2a17fc1c8541805cc6dc7c1d9ac4dc637e4083dc0dfcd9b0288a95f4"
+      "size": 7113,
+      "sha256": "6834af665520ef58752fe85fa16fe82ed10fb459165977284194bd1a2079dfec"
     },
     {
       "path": "app/settings/members/page.tsx",
@@ -308,8 +308,8 @@
     },
     {
       "path": "components/RealOverviewDashboard.tsx",
-      "size": 17038,
-      "sha256": "4a63dcb1c855d066266769deafde7ae4d494e117a8c79ca5b250da31c2b26858"
+      "size": 19139,
+      "sha256": "caa2890c344391865a15bb9582791c52b886b04f9015d42f5c29f9ed068af92e"
     },
     {
       "path": "components/Sidebar.tsx",
@@ -429,7 +429,7 @@
     {
       "path": "package.json",
       "size": 680,
-      "sha256": "3338fd8f157c7effeac98af7e8db35bd66175bea40b6a048a272cdce69d38f56"
+      "sha256": "403019f1c78a74f4aa7ffffdab369b62b69f4c560b7c7cb4543eaffd57015cd1"
     },
     {
       "path": "reports/auth-spacing-check.json",
@@ -445,6 +445,11 @@
       "path": "reports/filterfix-tests.txt",
       "size": 5776,
       "sha256": "1a78b64aca50e1e6b09911e703fe4fd2f5df4fcfc3393593203616b721724736"
+    },
+    {
+      "path": "reports/rc5-verification.txt",
+      "size": 256,
+      "sha256": "9db48d00dcaceab52e11e7eab4cfb8f63b87f36142e51be6b11a0b85be16541d"
     },
     {
       "path": "reports/syntax-rc3.json",
@@ -508,8 +513,8 @@
     },
     {
       "path": "test/v2.1-real-dashboard-source.test.mjs",
-      "size": 815,
-      "sha256": "19d25229b316b1416aca330b9e007f38352935e56e9c0b6c7dbb52df11eac421"
+      "size": 803,
+      "sha256": "b3949d74543086ab604b67619a4ab526004392b0f9996db7d3cd7ae9a573edee"
     },
     {
       "path": "test/v2.2-backlog-source.test.mjs",
@@ -518,17 +523,23 @@
     },
     {
       "path": "test/v2.2-rc3-polish-source.test.mjs",
-      "size": 1625,
-      "sha256": "b892ad1b7523a1fa7e796b75fe34b3ab772e4c983657fa87dd09110e9b740209"
+      "size": 1551,
+      "sha256": "c68f82a514084e3075b7a277b033198cf3f391ae75dd21107a39d91b380faf09"
+    },
+    {
+      "path": "test/v2.2-rc4-backlog-source.test.mjs",
+      "size": 1640,
+      "sha256": "74fb3d74b1f20470da1fc2d4936593224c19b4c9f2a73b174e7ff4b82c8ec914"
+    },
+    {
+      "path": "test/v2.2-rc5-ui-refinement-source.test.mjs",
+      "size": 2033,
+      "sha256": "c88857d0c43114b8d8d64208a398af56f228dc79788e9d6008544fae2a48b286"
     },
     {
       "path": "tsconfig.json",
       "size": 708,
       "sha256": "1d095fff1273a462c93dcfe4e8e79e755a33111b698770fb24e390f05841d0a3"
     }
-  ],
-  "limitations": [
-    "No live production deployment was performed by this package step.",
-    "No font binaries are distributed."
   ]
 }

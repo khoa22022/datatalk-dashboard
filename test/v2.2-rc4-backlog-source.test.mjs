@@ -5,7 +5,7 @@ const read=(p)=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
 
 test('UX health gauge is compact and task empty state is explicit',()=>{
  const s=read('components/RealOverviewDashboard.tsx'); const css=read('app/globals.css');
- assert.match(s,/Array\.from\(\{length:24\}/); assert.match(s,/Chưa cấu hình tác vụ/); assert.match(css,/\.ux-segment-gauge\{width:160px;height:160px/);
+ assert.match(s,/Array\.from\(\{length:25\}/); assert.match(s,/Chưa cấu hình tác vụ/); assert.match(css,/\.ux-arc-gauge/);
 });
 
 test('heatmap uses a single top-level device filter and defaults to desktop when available',()=>{

@@ -13,5 +13,5 @@ test('real dashboard uses live dashboard resource and not demo data', () => {
 test('unsupported metrics render as double dash instead of fabricated values', () => {
   assert.match(component, /uxHealthScore/);
   assert.match(component, /No task start\/completion data yet/);
-  assert.match(component, /Observed signals from real events, not an AI score/);
+  assert.match(component, /Highest-priority issues from real data/);
 });
