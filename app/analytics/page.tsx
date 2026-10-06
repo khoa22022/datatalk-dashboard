@@ -13,18 +13,18 @@ export default function Analytics(){
  const {lang,t}=useI18n(); const vi=lang==='vi'; const [filter,setFilter]=useState(baseFilter);
  const query=useMemo(()=>{const q=new URLSearchParams();const from=toIsoDate(filter.from),to=toIsoDate(filter.to);if(from)q.set('from',from);if(to)q.set('to',to);q.set('compare',filter.compare);if(filter.page)q.set('page',filter.page);if(filter.device)q.set('device',filter.device);return q.toString()},[filter]);
  const resource=useLiveResource<Data>('analytics-v2',query); const data=resource.data;
- const cmp=(key:string,lowerBetter=false)=>{const v=data?.comparison?.[key];if(v==null)return vi?'Chưa có dữ liệu kỳ trước':'No previous-period data';const a=v>0?'↑':v<0?'↓':'→';const good=lowerBetter?v<0:v>0;return `${a} ${Math.abs(v)}% ${vi?'so với kỳ trước':'vs previous period'}${v===0?'':good?' ✓':''}`};
+ const cmp=(key:string)=>{const v=data?.comparison?.[key];if(v==null)return{text:vi?'Chưa có dữ liệu kỳ trước':'No previous-period data',cls:'neutral'};const a=v>0?'↑':v<0?'↓':'→';return{text:`${a} ${Math.abs(v)}% ${vi?'so với kỳ trước':'vs previous period'}`,cls:v>0?'up':v<0?'down':'neutral'}};
  const cards=[
-  [vi?'Người dùng hoạt động':'Active users',data?.overview.visitors,cmp('visitors')],
-  [vi?'Lượt xem trang':'Page views',data?.overview.pageViews,cmp('pageViews')],
-  [vi?'Thời gian chú ý TB':'Avg. attention',data?.overview.avgAttentionMs==null?'--':duration(data.overview.avgAttentionMs),cmp('avgAttentionMs')],
-  [vi?'Thời gian ở lại TB':'Avg. dwell time',data?.overview.avgDwellMs==null?'--':duration(data.overview.avgDwellMs),cmp('avgDwellMs')],
-  [vi?'Tỷ lệ thoát':'Bounce rate',data?.overview.bounceRate==null?'--':`${data.overview.bounceRate}%`,cmp('bounceRate',true)]
+  {label:vi?'Người dùng hoạt động':'Active users',value:data?.overview.visitors,meta:cmp('visitors')},
+  {label:vi?'Lượt xem trang':'Page views',value:data?.overview.pageViews,meta:cmp('pageViews')},
+  {label:vi?'Thời gian chú ý TB':'Avg. attention',value:data?.overview.avgAttentionMs==null?'--':duration(data.overview.avgAttentionMs),meta:cmp('avgAttentionMs')},
+  {label:vi?'Thời gian ở lại TB':'Avg. dwell time',value:data?.overview.avgDwellMs==null?'--':duration(data.overview.avgDwellMs),meta:cmp('avgDwellMs')},
+  {label:vi?'Tỷ lệ thoát':'Bounce rate',value:data?.overview.bounceRate==null?'--':`${data.overview.bounceRate}%`,meta:cmp('bounceRate')}
  ];
  const chartPages=(data?.pages||[]).slice(0,8).map(p=>({...p,label:pageDisplayName(p,lang)}));
  return <LiveBoundary title={t('analytics')} {...resource} subtitle={vi?'Lưu lượng, mức chú ý và hiệu quả theo dữ liệu thật của từng trang.':'Real traffic, attention and efficiency by page.'}>
    <AnalyticsFilters value={filter} onChange={setFilter} pages={data?.pageCatalog||data?.pages||[]}/>
-   <div className="analytics-kpi-grid">{cards.map(([label,value,meta])=><div className="card analytics-kpi" key={String(label)}><span>{label}</span><strong>{value??'--'}</strong><small className="analytics-kpi-delta">{meta}</small></div>)}</div>
+   <div className="analytics-kpi-grid">{cards.map(({label,value,meta})=><div className="card analytics-kpi" key={label}><span>{label}</span><strong>{value??'--'}</strong><small className={`analytics-kpi-delta ${meta.cls}`}>{meta.text}</small></div>)}</div>
    <div className="grid grid2 analytics-main-grid">
     <section className="card chart-card"><div className="card-header"><div><h2>{vi?'Người dùng hoạt động & mức chú ý':'Active users & attention'}</h2><p>{vi?'Theo ngày trong khoảng thời gian đã chọn.':'Daily values for the selected period.'}</p></div></div><div className="chart-wrap"><ResponsiveContainer width="100%" height="100%"><LineChart data={data?.trend||[]}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="date"/><YAxis/><Tooltip/><Line type="monotone" dataKey="visitors" name={vi?'Người dùng':'Users'} stroke="#696cff" strokeWidth={2}/><Line type="monotone" dataKey="activeTimeMs" name={vi?'Thời gian hoạt động (ms)':'Active time (ms)'} stroke="#03c3ec" strokeWidth={2}/></LineChart></ResponsiveContainer></div></section>
     <section className="card chart-card"><div className="card-header"><div><h2>{vi?'Phân bổ mức chú ý theo trang':'Attention distribution by page'}</h2><p>{vi?'Xếp hạng theo thời gian hoạt động thực tế.':'Ranked by real active time.'}</p></div></div><div className="chart-wrap"><ResponsiveContainer width="100%" height="100%"><BarChart data={chartPages} layout="vertical"><CartesianGrid horizontal={false}/><XAxis type="number" hide/><YAxis type="category" dataKey="label" width={130}/><Tooltip formatter={(v)=>[duration(Number(v)),vi?'Thời gian hoạt động':'Active time']}/><Bar dataKey="activeTimeMs" fill="#696cff" radius={[0,6,6,0]}/></BarChart></ResponsiveContainer></div></section>
