@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const read=(p)=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
 
-test('UX health follows compact reference structure with arc score and three supporting metrics',()=>{
+test('UX health follows compact reference structure with arc score and supporting metrics',()=>{
  const s=read('components/RealOverviewDashboard.tsx'); const css=read('app/globals.css');
  assert.match(s,/ux-arc-gauge/); assert.match(s,/Kỳ trước/); assert.match(s,/Sự kiện cản trở hành vi/); assert.match(s,/Click liên tục \/ Không phản hồi/);
  assert.match(css,/\.ux-health-visual/); assert.match(css,/\.ux-health-reference \.ux-health-metrics/);

@@ -1,8 +1,7 @@
-# DataTalk V2.2 Frontend RC3
+# DataTalk V2.2 Frontend RC6 — UX Health V3
 
-- Consistent quick-filter labels and selected states.
-- UX Health now shows real score and a premium segmented gauge.
-- Vietnamese analytics copy cleaned up for the updated analytics screens.
-- Readable page names with path context across dashboard and analytics.
-- Heatmap now requires page/device context, supports device-specific layouts, and shows interaction point details.
-- Session explorer now explains missing metadata and labels actions/pages more clearly.
+- UX Health supporting row reduced from three metrics to two: friction events and rage/dead clicks.
+- Task completion is explicitly surfaced in the Dashboard Task Efficiency card instead of the UX Health supporting row.
+- UX Health gauge colors now follow score semantics: Excellent = green, Good = teal, Needs improvement = amber, Poor/Critical = red.
+- UX Health bottom metrics use a balanced two-column layout and responsive single-column fallback on small screens.
+- No backend API or database migration change is required for RC6.

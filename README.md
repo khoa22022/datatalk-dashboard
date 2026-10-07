@@ -1,12 +1,7 @@
-# DataTalk Frontend V2.2 RC3
+# DataTalk Frontend V2.2 RC6
 
-Full Next.js frontend source for the current `release/v2-gd01` development line.
+Production frontend source for branch `release/v2-gd01`.
 
-Highlights: real analytics UI, EN/VI, quick filters, readable page identity, page/device heatmaps, clearer sessions, and premium UX Health visualization.
+RC6 focuses on UX Health V3 UI refinement while preserving the RC5 priority list, semantic KPI comparison, heatmap hover inspector, sessions, surveys, funnels, auth and project flows.
 
-## Commands
-- `npm install`
-- `npm test`
-- `npm run build`
-
-Use existing Vercel environment variables. No server secret belongs in this frontend repository.
+See `RC6_UX_HEALTH_V3.md` and `reports/rc6-verification.txt` for release-specific details.

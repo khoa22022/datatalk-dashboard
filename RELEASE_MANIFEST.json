@@ -1,10 +1,10 @@
 {
   "name": "datatalk-dashboard",
-  "application_version": "2.2.0-rc.5",
-  "phase": "V2.2 RC5 UI refinement",
+  "application_version": "2.2.0-rc.6",
+  "phase": "V2.2 RC6 UX Health V3",
   "date": "2026-10-06",
   "distribution": "full application source, not a patch",
-  "file_count_excluding_manifest": 107,
+  "file_count_excluding_manifest": 112,
   "files": [
     {
       "path": ".gitignore",
@@ -52,14 +52,19 @@
       "sha256": "04f8a7ece26e1d94d45e208a2fed343e5128c0bb704b4ad31b5cd0ad716c74d7"
     },
     {
+      "path": "RC6_UX_HEALTH_V3.md",
+      "size": 680,
+      "sha256": "b24f46e6c1538affb2ec5daa8bb09eb28e554431de4259a23bfb753da0053a0c"
+    },
+    {
       "path": "README.md",
-      "size": 424,
-      "sha256": "3c70a9f584c1ced3faeda7df191f29f3d9fe8a007da948fb808d0ce1437089d4"
+      "size": 364,
+      "sha256": "ba6caec2bc1d0d3dc8cfc8d658394e2bf053200152780cdc0b54b59bfa7f27a0"
     },
     {
       "path": "RELEASE_NOTES.md",
-      "size": 497,
-      "sha256": "83e026d7398915806a33e9ea6e1525738c9c913805deb8812edf2a7bd21337fb"
+      "size": 583,
+      "sha256": "b9f2801f12deec42b08c461757e86ca22d5302a95efd47b63ede9b3550491d3f"
     },
     {
       "path": "UPLOAD_GITHUB.md",
@@ -128,8 +133,8 @@
     },
     {
       "path": "app/globals.css",
-      "size": 66156,
-      "sha256": "b5f443ad931852288642f07de39564095411e63071dd22208385471b457c2189"
+      "size": 66982,
+      "sha256": "aaf57b5841a0fc22ccd60b0e0c559ce2b276dea6af02039e9ed6b653f10d3d4e"
     },
     {
       "path": "app/heatmaps/page.tsx",
@@ -308,8 +313,8 @@
     },
     {
       "path": "components/RealOverviewDashboard.tsx",
-      "size": 19139,
-      "sha256": "caa2890c344391865a15bb9582791c52b886b04f9015d42f5c29f9ed068af92e"
+      "size": 19176,
+      "sha256": "aa0650ece982a50a95b01d9568ba44d6d79f05483bf5936d3d699d87c1e35d22"
     },
     {
       "path": "components/Sidebar.tsx",
@@ -429,7 +434,7 @@
     {
       "path": "package.json",
       "size": 680,
-      "sha256": "403019f1c78a74f4aa7ffffdab369b62b69f4c560b7c7cb4543eaffd57015cd1"
+      "sha256": "7cfb80e22e5647fc59deb3f7d52d2e3dde6db92300324927dc361cc9293ae7d7"
     },
     {
       "path": "reports/auth-spacing-check.json",
@@ -452,7 +457,17 @@
       "sha256": "9db48d00dcaceab52e11e7eab4cfb8f63b87f36142e51be6b11a0b85be16541d"
     },
     {
+      "path": "reports/rc6-verification.txt",
+      "size": 446,
+      "sha256": "330ff4d4d41a1c66690aeb4b1c134e6c99615da35c376bec2bb0866c519dad5a"
+    },
+    {
       "path": "reports/syntax-rc3.json",
+      "size": 136,
+      "sha256": "0b24ca0799ad58383c9f9eb82c5976331b20717dcaa0295915bc057574392b81"
+    },
+    {
+      "path": "reports/syntax-rc6.json",
       "size": 136,
       "sha256": "0b24ca0799ad58383c9f9eb82c5976331b20717dcaa0295915bc057574392b81"
     },
@@ -465,6 +480,11 @@
       "path": "reports/tests-rc3.txt",
       "size": 6769,
       "sha256": "a6c2bc1a7c6bca69aa4aef50fa598354aab67f38d67ddf989cb2ffdfb471c64e"
+    },
+    {
+      "path": "reports/tests-rc6.txt",
+      "size": 9346,
+      "sha256": "aee48773ee4f6aa3907620ab834054610aeb3b65645beee4f1edc770fb7e26ea"
     },
     {
       "path": "reports/tests.txt",
@@ -528,13 +548,18 @@
     },
     {
       "path": "test/v2.2-rc4-backlog-source.test.mjs",
-      "size": 1640,
-      "sha256": "74fb3d74b1f20470da1fc2d4936593224c19b4c9f2a73b174e7ff4b82c8ec914"
+      "size": 1740,
+      "sha256": "c9048de835a8ba6210687d28488d166baabdfd14e1f427c35a52317bcec34c6d"
     },
     {
       "path": "test/v2.2-rc5-ui-refinement-source.test.mjs",
-      "size": 2033,
-      "sha256": "c88857d0c43114b8d8d64208a398af56f228dc79788e9d6008544fae2a48b286"
+      "size": 2027,
+      "sha256": "2d6fc65022888cc591e1b99876ff70c64da6343f55232e44d74b5960149fc4fd"
+    },
+    {
+      "path": "test/v2.2-rc6-ux-health-v3-source.test.mjs",
+      "size": 1576,
+      "sha256": "f49ac1972b41432d0fe5accc1ab71d53b3ef603356c542a163f2fb91e2ca5a56"
     },
     {
       "path": "tsconfig.json",

@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const read=(p)=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
 
-test('UX health gauge is compact and task empty state is explicit',()=>{
- const s=read('components/RealOverviewDashboard.tsx'); const css=read('app/globals.css');
- assert.match(s,/Array\.from\(\{length:25\}/); assert.match(s,/Chưa cấu hình tác vụ/); assert.match(css,/\.ux-arc-gauge/);
+test('UX health gauge is compact and task completion is surfaced in Task Efficiency',()=>{
+ const s=read('components/RealOverviewDashboard.tsx'); const css=read('app/globals.css'); const tasks=read('app/tasks/page.tsx');
+ assert.match(s,/Array\.from\(\{length:25\}/); assert.match(s,/Tỷ lệ hoàn thành/); assert.match(css,/\.ux-arc-gauge/); assert.match(tasks,/Chưa có task tracking/);
 });
 
 test('heatmap uses a single top-level device filter and defaults to desktop when available',()=>{
