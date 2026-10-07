@@ -1,10 +1,10 @@
 {
   "name": "datatalk-dashboard",
-  "application_version": "2.2.0-rc.6",
-  "phase": "V2.2 RC6 UX Health V3",
-  "date": "2026-10-06",
+  "application_version": "2.2.0-rc.7",
+  "phase": "V2.2 RC7 UI Refinement",
+  "date": "2026-10-07",
   "distribution": "full application source, not a patch",
-  "file_count_excluding_manifest": 112,
+  "file_count_excluding_manifest": 115,
   "files": [
     {
       "path": ".gitignore",
@@ -57,14 +57,19 @@
       "sha256": "b24f46e6c1538affb2ec5daa8bb09eb28e554431de4259a23bfb753da0053a0c"
     },
     {
+      "path": "RC7_UI_REFINEMENT.md",
+      "size": 664,
+      "sha256": "380906383113ff7cf3a137ff749568e4c6038c8e67213bcc916b3f5ae361a066"
+    },
+    {
       "path": "README.md",
-      "size": 364,
-      "sha256": "ba6caec2bc1d0d3dc8cfc8d658394e2bf053200152780cdc0b54b59bfa7f27a0"
+      "size": 398,
+      "sha256": "c910595d52869fc1b4f92828d577c5f2b58e05fa695ddd81a5c75a26902d9cea"
     },
     {
       "path": "RELEASE_NOTES.md",
-      "size": 583,
-      "sha256": "b9f2801f12deec42b08c461757e86ca22d5302a95efd47b63ede9b3550491d3f"
+      "size": 421,
+      "sha256": "f65c7f3323ec2c506e454cb28261c851c60c9cb1a547b6b09dd8f39dd78ae9a2"
     },
     {
       "path": "UPLOAD_GITHUB.md",
@@ -133,8 +138,8 @@
     },
     {
       "path": "app/globals.css",
-      "size": 66982,
-      "sha256": "aaf57b5841a0fc22ccd60b0e0c559ce2b276dea6af02039e9ed6b653f10d3d4e"
+      "size": 67979,
+      "sha256": "c7d74031a32b2f08eac867c82047323cc948af128b6c1926051f3c5177fa05bc"
     },
     {
       "path": "app/heatmaps/page.tsx",
@@ -188,8 +193,8 @@
     },
     {
       "path": "app/sessions/page.tsx",
-      "size": 7113,
-      "sha256": "6834af665520ef58752fe85fa16fe82ed10fb459165977284194bd1a2079dfec"
+      "size": 7273,
+      "sha256": "d185459e903f3058783028b38f55d0d3f9230cc1f8112887c4bc3334048b4b6a"
     },
     {
       "path": "app/settings/members/page.tsx",
@@ -434,7 +439,7 @@
     {
       "path": "package.json",
       "size": 680,
-      "sha256": "7cfb80e22e5647fc59deb3f7d52d2e3dde6db92300324927dc361cc9293ae7d7"
+      "sha256": "52849c80bd39fafd9c63cfb1a88fc043a899eb4e48d78d02bcb46a1c305ac766"
     },
     {
       "path": "reports/auth-spacing-check.json",
@@ -462,6 +467,11 @@
       "sha256": "330ff4d4d41a1c66690aeb4b1c134e6c99615da35c376bec2bb0866c519dad5a"
     },
     {
+      "path": "reports/rc7-verification.txt",
+      "size": 489,
+      "sha256": "1ddde82853c5648597073f10d121026a5b71076e111c4bfa272be72c6364c05e"
+    },
+    {
       "path": "reports/syntax-rc3.json",
       "size": 136,
       "sha256": "0b24ca0799ad58383c9f9eb82c5976331b20717dcaa0295915bc057574392b81"
@@ -483,8 +493,8 @@
     },
     {
       "path": "reports/tests-rc6.txt",
-      "size": 9346,
-      "sha256": "aee48773ee4f6aa3907620ab834054610aeb3b65645beee4f1edc770fb7e26ea"
+      "size": 9357,
+      "sha256": "a9f034ce491b037b5dbad6c45cabc21570bc74ee65e2d97fbe33009517ee1ea8"
     },
     {
       "path": "reports/tests.txt",
@@ -560,6 +570,11 @@
       "path": "test/v2.2-rc6-ux-health-v3-source.test.mjs",
       "size": 1576,
       "sha256": "f49ac1972b41432d0fe5accc1ab71d53b3ef603356c542a163f2fb91e2ca5a56"
+    },
+    {
+      "path": "test/v2.2-rc7-ui-refinement-source.test.mjs",
+      "size": 932,
+      "sha256": "957290497e410d8c126c45e4c438948dcb6bed14ba67a85833bc068123d1db8f"
     },
     {
       "path": "tsconfig.json",

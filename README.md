@@ -1,7 +1,7 @@
-# DataTalk Frontend V2.2 RC6
+# DataTalk Frontend V2.2 RC7
 
 Production frontend source for branch `release/v2-gd01`.
 
-RC6 focuses on UX Health V3 UI refinement while preserving the RC5 priority list, semantic KPI comparison, heatmap hover inspector, sessions, surveys, funnels, auth and project flows.
+RC7 refines UX Health gauge alignment and the Session list information hierarchy while preserving RC6 UX Health semantics, RC5 priority list, KPI comparison, heatmap tooltip, surveys, funnels, auth and project flows.
 
-See `RC6_UX_HEALTH_V3.md` and `reports/rc6-verification.txt` for release-specific details.
+See `RC7_UI_REFINEMENT.md` and `reports/rc7-verification.txt` for release-specific details.

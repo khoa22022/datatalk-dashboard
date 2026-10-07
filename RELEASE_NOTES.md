@@ -1,7 +1,7 @@
-# DataTalk V2.2 Frontend RC6 — UX Health V3
+# DataTalk V2.2 Frontend RC7 — Session Hierarchy + Gauge Alignment
 
-- UX Health supporting row reduced from three metrics to two: friction events and rage/dead clicks.
-- Task completion is explicitly surfaced in the Dashboard Task Efficiency card instead of the UX Health supporting row.
-- UX Health gauge colors now follow score semantics: Excellent = green, Good = teal, Needs improvement = amber, Poor/Critical = red.
-- UX Health bottom metrics use a balanced two-column layout and responsive single-column fallback on small screens.
-- No backend API or database migration change is required for RC6.
+- UX Health score is vertically centered inside the segmented gauge.
+- Session list now prioritizes Device + Location on the first row.
+- Session start time is smaller muted metadata beneath the title row.
+- Existing journey, duration, page-count, and event-count data are preserved.
+- No backend API or database migration change is required for RC7.
