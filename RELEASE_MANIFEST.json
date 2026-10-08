@@ -1,10 +1,10 @@
 {
   "name": "datatalk-dashboard",
-  "application_version": "2.2.0-rc.7",
-  "phase": "V2.2 RC7 UI Refinement",
-  "date": "2026-10-07",
+  "application_version": "2.2.0-rc.8",
+  "phase": "V2.2 RC8 Alignment Fix",
+  "date": "2026-10-08",
   "distribution": "full application source, not a patch",
-  "file_count_excluding_manifest": 115,
+  "file_count_excluding_manifest": 120,
   "files": [
     {
       "path": ".gitignore",
@@ -23,8 +23,8 @@
     },
     {
       "path": "PACKAGING_REPORT.md",
-      "size": 3468,
-      "sha256": "ce384eebfaf6b947b998daa62d3c82cd9251f7eb145cce871759a58e0525880c"
+      "size": 964,
+      "sha256": "148a7f31b8c57300a192b3a658f63f763e119c8208cf0095e60e78b55ee6a5b8"
     },
     {
       "path": "RC3_UX_POLISH.md",
@@ -62,14 +62,19 @@
       "sha256": "380906383113ff7cf3a137ff749568e4c6038c8e67213bcc916b3f5ae361a066"
     },
     {
+      "path": "RC8_ALIGNMENT_FIX.md",
+      "size": 747,
+      "sha256": "d146e92e453bc70d8da0f54be7a045f60e7bc066a39bc39e4a0587969ffd815e"
+    },
+    {
       "path": "README.md",
-      "size": 398,
-      "sha256": "c910595d52869fc1b4f92828d577c5f2b58e05fa695ddd81a5c75a26902d9cea"
+      "size": 407,
+      "sha256": "e4ed0b14c1fe6bf7c1f8f993d53d7da8f837b7b35d39f3d62a976c433f1161ed"
     },
     {
       "path": "RELEASE_NOTES.md",
-      "size": 421,
-      "sha256": "f65c7f3323ec2c506e454cb28261c851c60c9cb1a547b6b09dd8f39dd78ae9a2"
+      "size": 607,
+      "sha256": "854253affc755a6cc4015df18500828b72ccceb303023d5e922e92d1dcd9b27b"
     },
     {
       "path": "UPLOAD_GITHUB.md",
@@ -138,8 +143,8 @@
     },
     {
       "path": "app/globals.css",
-      "size": 67979,
-      "sha256": "c7d74031a32b2f08eac867c82047323cc948af128b6c1926051f3c5177fa05bc"
+      "size": 68186,
+      "sha256": "370e285f4e867cad650d1b1fb134c8d59c59578ff9af2a2e6be4aa87f7575c3b"
     },
     {
       "path": "app/heatmaps/page.tsx",
@@ -193,8 +198,8 @@
     },
     {
       "path": "app/sessions/page.tsx",
-      "size": 7273,
-      "sha256": "d185459e903f3058783028b38f55d0d3f9230cc1f8112887c4bc3334048b4b6a"
+      "size": 7330,
+      "sha256": "ca45b25204bdaaf2787d7ba99e7a6ce72767cd4e271ffa5b84fd3a76a5ddeab6"
     },
     {
       "path": "app/settings/members/page.tsx",
@@ -439,7 +444,7 @@
     {
       "path": "package.json",
       "size": 680,
-      "sha256": "52849c80bd39fafd9c63cfb1a88fc043a899eb4e48d78d02bcb46a1c305ac766"
+      "sha256": "331fc58cf5ea363be55f58df01e64dbf96a78ba58cca325bb2fecb63c929af95"
     },
     {
       "path": "reports/auth-spacing-check.json",
@@ -472,12 +477,22 @@
       "sha256": "1ddde82853c5648597073f10d121026a5b71076e111c4bfa272be72c6364c05e"
     },
     {
+      "path": "reports/rc8-verification.txt",
+      "size": 587,
+      "sha256": "4a17cd32c16a8414519436766ac4ba7c9c7c7aa99dfbf03b296405d6322653d1"
+    },
+    {
       "path": "reports/syntax-rc3.json",
       "size": 136,
       "sha256": "0b24ca0799ad58383c9f9eb82c5976331b20717dcaa0295915bc057574392b81"
     },
     {
       "path": "reports/syntax-rc6.json",
+      "size": 136,
+      "sha256": "0b24ca0799ad58383c9f9eb82c5976331b20717dcaa0295915bc057574392b81"
+    },
+    {
+      "path": "reports/syntax-rc8.json",
       "size": 136,
       "sha256": "0b24ca0799ad58383c9f9eb82c5976331b20717dcaa0295915bc057574392b81"
     },
@@ -495,6 +510,11 @@
       "path": "reports/tests-rc6.txt",
       "size": 9357,
       "sha256": "a9f034ce491b037b5dbad6c45cabc21570bc74ee65e2d97fbe33009517ee1ea8"
+    },
+    {
+      "path": "reports/tests-rc8.txt",
+      "size": 10079,
+      "sha256": "b9c60f4f27739899dbee85cf5f0f99d2795c9c0fa1ac740a775152c413a84901"
     },
     {
       "path": "reports/tests.txt",
@@ -573,8 +593,13 @@
     },
     {
       "path": "test/v2.2-rc7-ui-refinement-source.test.mjs",
-      "size": 932,
-      "sha256": "957290497e410d8c126c45e4c438948dcb6bed14ba67a85833bc068123d1db8f"
+      "size": 933,
+      "sha256": "1126ca45e95fdd26a76102bc72d97d4cbecb6ffe3aa5008ddc97acfb4eddf0a0"
+    },
+    {
+      "path": "test/v2.2-rc8-alignment-source.test.mjs",
+      "size": 828,
+      "sha256": "f63ecef6326e0ffabd4c3d6feed259139df8698d8bb9aae08ee0be4cc5326a38"
     },
     {
       "path": "tsconfig.json",

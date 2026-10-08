@@ -1,7 +1,7 @@
-# DataTalk Frontend V2.2 RC7
+# DataTalk Frontend V2.2 RC8
 
 Production frontend source for branch `release/v2-gd01`.
 
-RC7 refines UX Health gauge alignment and the Session list information hierarchy while preserving RC6 UX Health semantics, RC5 priority list, KPI comparison, heatmap tooltip, surveys, funnels, auth and project flows.
+RC8 fixes two alignment issues from RC7 without changing product logic: the UX Health score/label is centered within the segmented gauge arc, and Session Journey connectors are centered exactly through their timeline markers.
 
-See `RC7_UI_REFINEMENT.md` and `reports/rc7-verification.txt` for release-specific details.
+See `RC8_ALIGNMENT_FIX.md` and `reports/rc8-verification.txt` for release-specific details.

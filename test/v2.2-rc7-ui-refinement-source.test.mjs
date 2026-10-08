@@ -5,7 +5,7 @@ const read=(p)=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
 
 test('UX Health score is lowered into the visual center of the arc',()=>{
  const css=read('app/globals.css');
- assert.match(css,/\.ux-gauge-score\{position:absolute;left:50%;top:82px;/);
+ assert.match(css,/\.ux-gauge-score\{position:absolute;left:50%;top:\d+px;/);
 });
 
 test('Session list prioritizes device and location, then shows muted session time',()=>{
