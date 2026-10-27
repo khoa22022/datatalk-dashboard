@@ -17,7 +17,7 @@ export default function Sessions(){
  const resource=useLiveResource<Data>('sessions-v2',query);const rows=resource.data?.sessions||[];const current=rows.find(x=>x.session_key===selected)||rows[0]||null;
  const deviceLabel=(v?:string|null)=>v==='mobile'?(vi?'Điện thoại':'Mobile'):v==='tablet'?(vi?'Máy tính bảng':'Tablet'):v==='desktop'?(vi?'Máy tính':'Desktop'):(vi?'Chưa xác định thiết bị':'Unknown device');
  const unknown=(what:string)=>vi?`Chưa xác định ${what}`:`Unknown ${what}`;
- const sessionTime=(value?:string)=>value?new Date(value).toLocaleString(vi?'vi-VN':'en-US',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):(vi?'Chưa ghi nhận thời gian':'Time unavailable');
+ const sessionTime=(value?:string)=>value?new Date(value).toLocaleString(vi?'vi-VN':'en-US',{timeZone:'Asia/Ho_Chi_Minh',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}):(vi?'Chưa ghi nhận thời gian':'Time unavailable');
  return <LiveBoundary title={t('sessions')} {...resource} subtitle={vi?'Hành trình từ thao tác đầu tiên tới thao tác cuối cùng, kèm thời gian, trang và khu vực truy cập.':'Full journey from first to last action with page, timing and coarse location context.'}>
   <AnalyticsFilters value={filter} onChange={setFilter} pages={resource.data?.pages||[]} deviceCounts={resource.data?.devices||[]}/>
   <div className="session-layout">

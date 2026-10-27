@@ -9,7 +9,11 @@ export type DeviceCount = { name: string; count: number };
 const digits=(v:string)=>v.replace(/\D/g,'').slice(0,8);
 export function formatDateInput(value:string){const d=digits(value);if(d.length<=2)return d;if(d.length<=4)return `${d.slice(0,2)}/${d.slice(2)}`;return `${d.slice(0,2)}/${d.slice(2,4)}/${d.slice(4)}`}
 export function toIsoDate(value:string){const m=value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!m)return'';const day=Number(m[1]),month=Number(m[2]),year=Number(m[3]);const dt=new Date(year,month-1,day);if(dt.getFullYear()!==year||dt.getMonth()!==month-1||dt.getDate()!==day)return'';return `${m[3]}-${m[2]}-${m[1]}`}
-export function todayText(offset=0){const d=new Date();d.setDate(d.getDate()+offset);return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`}
+export function todayText(offset=0){
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Ho_Chi_Minh',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const year=Number(parts.find(p=>p.type==='year')?.value),month=Number(parts.find(p=>p.type==='month')?.value),day=Number(parts.find(p=>p.type==='day')?.value);
+  const d=new Date(Date.UTC(year,month-1,day+offset));return `${String(d.getUTCDate()).padStart(2,'0')}/${String(d.getUTCMonth()+1).padStart(2,'0')}/${d.getUTCFullYear()}`
+}
 
 type PageOption=PageIdentityLike & {pagePath:string};
 export default function AnalyticsFilters({value,onChange,pages=[],deviceCounts}:{value:AnalyticsFilterValue;onChange:(v:AnalyticsFilterValue)=>void;pages?:PageOption[];deviceCounts?:DeviceCount[]}){
@@ -18,9 +22,9 @@ export default function AnalyticsFilters({value,onChange,pages=[],deviceCounts}:
   const selected=pages.find(p=>pagePathOf(p)===value.page);const [pageQuery,setPageQuery]=useState(selected?pageDisplayName(selected,lang):'');const [pageOpen,setPageOpen]=useState(false);
   useEffect(()=>{const row=pages.find(p=>pagePathOf(p)===value.page);setPageQuery(value.page?(row?pageDisplayName(row,lang):value.page):'')},[value.page,pages,lang]);
   const matches=useMemo(()=>{const q=pageQuery.trim().toLowerCase();if(!q)return pages.slice(0,12);return pages.filter(p=>`${pageDisplayName(p,lang)} ${p.pageTitle||''} ${p.pageUrl||''} ${pagePathOf(p)}`.toLowerCase().includes(q)).slice(0,12)},[pageQuery,pages,lang]);
-  const preset=(days:number)=>{const to=todayText(0);const d=new Date();d.setDate(d.getDate()-days+1);const from=`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;set({from,to})};
+  const preset=(days:number)=>{const to=todayText(0);const from=todayText(-(days-1));set({from,to})};
   const isToday=value.from===todayText(0)&&value.to===todayText(0);
-  const isPreset=(days:number)=>{const to=todayText(0);const d=new Date();d.setDate(d.getDate()-days+1);const from=`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;return value.from===from&&value.to===to};
+  const isPreset=(days:number)=>{const to=todayText(0);const from=todayText(-(days-1));return value.from===from&&value.to===to};
   const countFor=(name:string)=>deviceCounts?.find(d=>d.name===name)?.count;
   return <div className="analytics-filterbar">
     <div className="analytics-filter-quick"><span className="analytics-filter-title">{vi?'Lọc nhanh':'Quick filter'}</span><div className="analytics-filter-presets"><button type="button" aria-pressed={isToday} className={`btn outline analytics-preset${isToday?' active':''}`} onClick={()=>set({from:todayText(0),to:todayText(0),compare:'previous'})}>{vi?'Hôm nay':'Today'}</button><button type="button" aria-pressed={isPreset(7)} className={`btn outline analytics-preset${isPreset(7)?' active':''}`} onClick={()=>preset(7)}>{vi?'7 ngày':'7 days'}</button><button type="button" aria-pressed={isPreset(30)} className={`btn outline analytics-preset${isPreset(30)?' active':''}`} onClick={()=>preset(30)}>{vi?'30 ngày':'30 days'}</button></div></div>
