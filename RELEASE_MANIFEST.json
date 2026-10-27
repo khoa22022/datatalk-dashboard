@@ -1,10 +1,10 @@
 {
   "name": "datatalk-dashboard",
-  "application_version": "2.2.0-rc.8",
-  "phase": "V2.2 RC8 Alignment Fix",
-  "date": "2026-10-08",
+  "application_version": "2.2.0-rc.9",
+  "phase": "V2.2 RC9 Tracking Reliability UI",
+  "date": "2026-10-27",
   "distribution": "full application source, not a patch",
-  "file_count_excluding_manifest": 120,
+  "file_count_excluding_manifest": 125,
   "files": [
     {
       "path": ".gitignore",
@@ -25,6 +25,11 @@
       "path": "PACKAGING_REPORT.md",
       "size": 964,
       "sha256": "148a7f31b8c57300a192b3a658f63f763e119c8208cf0095e60e78b55ee6a5b8"
+    },
+    {
+      "path": "PACKAGING_REPORT_RC9.md",
+      "size": 427,
+      "sha256": "153504aa0eb7e625d474884f8aaf466549e652ed238c8b7d88c4ce4dedc9da0d"
     },
     {
       "path": "RC3_UX_POLISH.md",
@@ -67,6 +72,11 @@
       "sha256": "d146e92e453bc70d8da0f54be7a045f60e7bc066a39bc39e4a0587969ffd815e"
     },
     {
+      "path": "RC9_TRACKING_UI.md",
+      "size": 445,
+      "sha256": "d2b3fbcd3739b1ac06583f632e5aa93696dd61070b6cf858785ae12302f44f47"
+    },
+    {
       "path": "README.md",
       "size": 407,
       "sha256": "e4ed0b14c1fe6bf7c1f8f993d53d7da8f837b7b35d39f3d62a976c433f1161ed"
@@ -75,6 +85,11 @@
       "path": "RELEASE_NOTES.md",
       "size": 607,
       "sha256": "854253affc755a6cc4015df18500828b72ccceb303023d5e922e92d1dcd9b27b"
+    },
+    {
+      "path": "RELEASE_NOTES_RC9.md",
+      "size": 313,
+      "sha256": "7a7b58146e09cec6f4670200b97fdc201dcf0a71189b37393ab305ac9df92b30"
     },
     {
       "path": "UPLOAD_GITHUB.md",
@@ -128,8 +143,8 @@
     },
     {
       "path": "app/feedback/page.tsx",
-      "size": 11294,
-      "sha256": "c104e5deef87e79cbf955115a62f6991636e66f0f1e7bcb8f6af52d5635ab384"
+      "size": 11337,
+      "sha256": "70c81e23160a0c7d7b0509d96c7ea2956ca5c9fd871654d2887f3de16668287e"
     },
     {
       "path": "app/forgot-password/page.tsx",
@@ -143,8 +158,8 @@
     },
     {
       "path": "app/globals.css",
-      "size": 68186,
-      "sha256": "370e285f4e867cad650d1b1fb134c8d59c59578ff9af2a2e6be4aa87f7575c3b"
+      "size": 68243,
+      "sha256": "123d72034edf1171f2498dd096f84122b3216ac3014e283d743e81fb38fea968"
     },
     {
       "path": "app/heatmaps/page.tsx",
@@ -183,8 +198,8 @@
     },
     {
       "path": "app/projects/page.tsx",
-      "size": 4219,
-      "sha256": "2d563350a09954eb691049bae1dc1b4f401566adb22887ec13700546a3cb3b3d"
+      "size": 4471,
+      "sha256": "cf5c45e0317766c3816b793f3dc329e972b169fd3cb19867cf6b0a02ead50dc2"
     },
     {
       "path": "app/register/page.tsx",
@@ -198,8 +213,8 @@
     },
     {
       "path": "app/sessions/page.tsx",
-      "size": 7330,
-      "sha256": "ca45b25204bdaaf2787d7ba99e7a6ce72767cd4e271ffa5b84fd3a76a5ddeab6"
+      "size": 7371,
+      "sha256": "0aa83e7ecffa9c7484dc186a553f1b426c2eaaebc0479ec37150c256feec2d6c"
     },
     {
       "path": "app/settings/members/page.tsx",
@@ -213,8 +228,8 @@
     },
     {
       "path": "app/tasks/page.tsx",
-      "size": 3297,
-      "sha256": "5d76879b0fa9637895eafe6e592808ce3f07948533e4a2e4857ad2f804bb7967"
+      "size": 3751,
+      "sha256": "b20b3cf816177e5696dafc23bea4fabba4af3a9d4d41f051351b92fa1df3a716"
     },
     {
       "path": "app/try/ai/page.tsx",
@@ -278,8 +293,8 @@
     },
     {
       "path": "components/AnalyticsFilters.tsx",
-      "size": 6414,
-      "sha256": "ec8f10f96ad49b5bc209fca78cfced7b2fc1e40dd191dc103b67d0da15b530a5"
+      "size": 6481,
+      "sha256": "72c9c0335d147b4a335a9480425ddf8a990b90d27a4f51baf8d08170a6fa125d"
     },
     {
       "path": "components/AppShell.tsx",
@@ -323,8 +338,8 @@
     },
     {
       "path": "components/RealOverviewDashboard.tsx",
-      "size": 19176,
-      "sha256": "aa0650ece982a50a95b01d9568ba44d6d79f05483bf5936d3d699d87c1e35d22"
+      "size": 19210,
+      "sha256": "ec94ee833ef5be2711982a928387eb28f4732289d4022a6bec8d84a4ad659a81"
     },
     {
       "path": "components/Sidebar.tsx",
@@ -444,7 +459,7 @@
     {
       "path": "package.json",
       "size": 680,
-      "sha256": "331fc58cf5ea363be55f58df01e64dbf96a78ba58cca325bb2fecb63c929af95"
+      "sha256": "d91636ba5ccf926c44e744b0074e9f61b25367c943e8db10683ca372bb55d76c"
     },
     {
       "path": "reports/auth-spacing-check.json",
@@ -602,9 +617,19 @@
       "sha256": "f63ecef6326e0ffabd4c3d6feed259139df8698d8bb9aae08ee0be4cc5326a38"
     },
     {
+      "path": "test/v2.2-rc9-time-task-health-source.test.mjs",
+      "size": 1028,
+      "sha256": "f3d0e22c1d8eae9661833fe441896707cf629c706d39f8472f715a1b5982ff0c"
+    },
+    {
       "path": "tsconfig.json",
       "size": 708,
       "sha256": "1d095fff1273a462c93dcfe4e8e79e755a33111b698770fb24e390f05841d0a3"
+    },
+    {
+      "path": "tsconfig.tsbuildinfo",
+      "size": 582640,
+      "sha256": "5fe9f37fdc229d97a4869c9040d58b5fac0d06023465ab11124025e467bf152b"
     }
   ]
 }
