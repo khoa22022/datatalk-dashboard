@@ -1,7 +1,7 @@
-# DataTalk Frontend V2.2 RC8
+# DataTalk Frontend V2.2 RC10
 
 Production frontend source for branch `release/v2-gd01`.
 
-RC8 fixes two alignment issues from RC7 without changing product logic: the UX Health score/label is centered within the segmented gauge arc, and Session Journey connectors are centered exactly through their timeline markers.
+RC10 consumes the tracking-accuracy changes from Backend RC10 and adds overflow protection for long session/page/task labels so text stays inside cards and tables.
 
-See `RC8_ALIGNMENT_FIX.md` and `reports/rc8-verification.txt` for release-specific details.
+See `RC10_TRACKING_UI.md`, `DEPLOY_RC10.md`, and `PACKAGING_REPORT_RC10.md`.

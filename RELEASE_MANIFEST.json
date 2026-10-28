@@ -1,10 +1,10 @@
 {
   "name": "datatalk-dashboard",
-  "application_version": "2.2.0-rc.9",
-  "phase": "V2.2 RC9 Tracking Reliability UI",
-  "date": "2026-10-27",
+  "application_version": "2.2.0-rc.10",
+  "phase": "V2.2 RC10 Tracking Accuracy Frontend",
+  "date": "2026-10-28",
   "distribution": "full application source, not a patch",
-  "file_count_excluding_manifest": 125,
+  "file_count_excluding_manifest": 131,
   "files": [
     {
       "path": ".gitignore",
@@ -17,6 +17,11 @@
       "sha256": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56"
     },
     {
+      "path": "DEPLOY_RC10.md",
+      "size": 327,
+      "sha256": "3d325378db1869e741f00c2ee24a8a2e20a134ac3443924e4a88d9751ae4e433"
+    },
+    {
       "path": "FIX_NOTES.md",
       "size": 451,
       "sha256": "039f4b3f0cf96d48faf475e0a3315d9801685723c76310601ecfb2b98a52191c"
@@ -27,9 +32,14 @@
       "sha256": "148a7f31b8c57300a192b3a658f63f763e119c8208cf0095e60e78b55ee6a5b8"
     },
     {
-      "path": "PACKAGING_REPORT_RC9.md",
-      "size": 427,
-      "sha256": "153504aa0eb7e625d474884f8aaf466549e652ed238c8b7d88c4ce4dedc9da0d"
+      "path": "PACKAGING_REPORT_RC10.md",
+      "size": 445,
+      "sha256": "cd823d8174bcd48a7fd54cba82ebbe4e508294cdbc06bee267612f560c84a067"
+    },
+    {
+      "path": "RC10_TRACKING_UI.md",
+      "size": 490,
+      "sha256": "0ed5255b515caf7a517842759baebc5e89581938a3acac3360498e00d1987d0a"
     },
     {
       "path": "RC3_UX_POLISH.md",
@@ -78,8 +88,13 @@
     },
     {
       "path": "README.md",
-      "size": 407,
-      "sha256": "e4ed0b14c1fe6bf7c1f8f993d53d7da8f837b7b35d39f3d62a976c433f1161ed"
+      "size": 331,
+      "sha256": "378885f5d4dfb1b5b89b63544ce2b851119d07c0cefe4a7e1f02fbfae4dee2e5"
+    },
+    {
+      "path": "RELEASE_MANIFEST_RC10.json",
+      "size": 477,
+      "sha256": "84779c006b1761954a938e1e55764ba9df61274a84b842f18e46ba6ddbfeb65c"
     },
     {
       "path": "RELEASE_NOTES.md",
@@ -87,9 +102,9 @@
       "sha256": "854253affc755a6cc4015df18500828b72ccceb303023d5e922e92d1dcd9b27b"
     },
     {
-      "path": "RELEASE_NOTES_RC9.md",
-      "size": 313,
-      "sha256": "7a7b58146e09cec6f4670200b97fdc201dcf0a71189b37393ab305ac9df92b30"
+      "path": "RELEASE_NOTES_RC10.md",
+      "size": 302,
+      "sha256": "acf320b9662848cb177ccb01f820737d2ff962b3c92dde139e4fb41bb8150577"
     },
     {
       "path": "UPLOAD_GITHUB.md",
@@ -158,8 +173,8 @@
     },
     {
       "path": "app/globals.css",
-      "size": 68243,
-      "sha256": "123d72034edf1171f2498dd096f84122b3216ac3014e283d743e81fb38fea968"
+      "size": 69083,
+      "sha256": "ffd7fa2a1b9f6497bfec467d59ad4d96f95fb77fdc77dc47fe1a75a4c8afb263"
     },
     {
       "path": "app/heatmaps/page.tsx",
@@ -213,8 +228,8 @@
     },
     {
       "path": "app/sessions/page.tsx",
-      "size": 7371,
-      "sha256": "0aa83e7ecffa9c7484dc186a553f1b426c2eaaebc0479ec37150c256feec2d6c"
+      "size": 7747,
+      "sha256": "1ef35e1b6fde955b6e2a5d0ea5e9eba614b7df1ad391173358fde111a768ee2b"
     },
     {
       "path": "app/settings/members/page.tsx",
@@ -228,8 +243,8 @@
     },
     {
       "path": "app/tasks/page.tsx",
-      "size": 3751,
-      "sha256": "b20b3cf816177e5696dafc23bea4fabba4af3a9d4d41f051351b92fa1df3a716"
+      "size": 3942,
+      "sha256": "463c782ed505cbeb1580b16fdff272f44277609da070e95dfa548c465a1faea6"
     },
     {
       "path": "app/try/ai/page.tsx",
@@ -458,8 +473,8 @@
     },
     {
       "path": "package.json",
-      "size": 680,
-      "sha256": "d91636ba5ccf926c44e744b0074e9f61b25367c943e8db10683ca372bb55d76c"
+      "size": 681,
+      "sha256": "4f1d44da29094da2ba75122c5d945dfd48ba4138a2e5f5ab2722f099e537a822"
     },
     {
       "path": "reports/auth-spacing-check.json",
@@ -497,6 +512,11 @@
       "sha256": "4a17cd32c16a8414519436766ac4ba7c9c7c7aa99dfbf03b296405d6322653d1"
     },
     {
+      "path": "reports/syntax-rc10.txt",
+      "size": 216,
+      "sha256": "405409ed6fd74bb73246149179ab673e1c081423ba20da55243e27e84b686f6e"
+    },
+    {
       "path": "reports/syntax-rc3.json",
       "size": 136,
       "sha256": "0b24ca0799ad58383c9f9eb82c5976331b20717dcaa0295915bc057574392b81"
@@ -515,6 +535,11 @@
       "path": "reports/syntax.json",
       "size": 136,
       "sha256": "066cbab74fc628e7f8691a307221b3b044652a3e13ceb6158de4ef600cec6062"
+    },
+    {
+      "path": "reports/tests-rc10.txt",
+      "size": 10956,
+      "sha256": "b083d198e208c955ddd738c674a4c6045813c57437e5a14f54aa0a82b7bf6c1f"
     },
     {
       "path": "reports/tests-rc3.txt",
@@ -585,6 +610,11 @@
       "path": "test/v2.2-backlog-source.test.mjs",
       "size": 1359,
       "sha256": "183b1ffcb60782898a45b567b9c5a13d3ee01836fe40136bff8c61be795e915c"
+    },
+    {
+      "path": "test/v2.2-rc10-overflow-source.test.mjs",
+      "size": 617,
+      "sha256": "1300c69ca07a83cf2d8ba734743cd2f2da1a02946e40044cb38153f89dc176b0"
     },
     {
       "path": "test/v2.2-rc3-polish-source.test.mjs",
