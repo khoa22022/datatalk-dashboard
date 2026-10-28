@@ -4,7 +4,8 @@ import fs from 'node:fs';
 const read = (p) => fs.readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 
 test('session and filter dates are normalized to Vietnam time', () => {
-  assert.match(read('app/sessions/page.tsx'), /timeZone:'Asia\/Ho_Chi_Minh'/);
+  assert.match(read('app/sessions/page.tsx'), /formatVietnamDateTime/);
+  assert.match(read('lib/time.ts'), /Asia\/Ho_Chi_Minh/);
   assert.match(read('components/AnalyticsFilters.tsx'), /timeZone:'Asia\/Ho_Chi_Minh'/);
 });
 

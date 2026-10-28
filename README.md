@@ -1,7 +1,5 @@
-# DataTalk Frontend V2.2 RC10
+# DataTalk Frontend V2.2 RC11
 
-Production frontend source for branch `release/v2-gd01`.
+Dashboard frontend for DataTalk. RC11 fixes Session Journey Vietnam-time parsing, defaults analytics surfaces to Today, and applies the new DataTalk logo/canonical product name.
 
-RC10 consumes the tracking-accuracy changes from Backend RC10 and adds overflow protection for long session/page/task labels so text stays inside cards and tables.
-
-See `RC10_TRACKING_UI.md`, `DEPLOY_RC10.md`, and `PACKAGING_REPORT_RC10.md`.
+See `DEPLOY_RC11.md` and `RELEASE_NOTES_RC11.md`.
