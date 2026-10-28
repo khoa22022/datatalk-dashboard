@@ -2,13 +2,13 @@
 import { useMemo, useState } from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, BarChart, Bar } from 'recharts';
 import { LiveBoundary, useLiveResource, duration } from '@/components/v2/LiveData';
-import AnalyticsFilters, { toIsoDate, type AnalyticsFilterValue } from '@/components/AnalyticsFilters';
+import AnalyticsFilters, { defaultAnalyticsFilterValue, toIsoDate, type AnalyticsFilterValue } from '@/components/AnalyticsFilters';
 import { useI18n } from '@/components/i18n';
 import { pageDisplayName, pageSecondaryText } from '@/lib/page-label';
 
 type PageRow={pagePath:string;pageName?:string|null;pageTitle?:string|null;pageUrl?:string|null;views:number;users:number;activeTimeMs:number;avgAttentionMs:number|null;avgDwellMs:number|null;rageClicks:number;deadClicks:number;scrollMax:number};
 type Data={overview:{visitors:number;sessions:number;pageViews:number;activeTimeMs:number;avgAttentionMs:number|null;avgDwellMs:number|null;bounceRate:number|null};comparison:Record<string,number|null>;previousAvailable?:boolean;pages:PageRow[];pageCatalog?:PageRow[];trend:{date:string;visitors:number;pageViews:number;activeTimeMs:number}[]};
-const baseFilter:AnalyticsFilterValue={from:'',to:'',compare:'previous',page:'',device:''};
+const baseFilter:AnalyticsFilterValue=defaultAnalyticsFilterValue();
 export default function Analytics(){
  const {lang,t}=useI18n(); const vi=lang==='vi'; const [filter,setFilter]=useState(baseFilter);
  const query=useMemo(()=>{const q=new URLSearchParams();const from=toIsoDate(filter.from),to=toIsoDate(filter.to);if(from)q.set('from',from);if(to)q.set('to',to);q.set('compare',filter.compare);if(filter.page)q.set('page',filter.page);if(filter.device)q.set('device',filter.device);return q.toString()},[filter]);

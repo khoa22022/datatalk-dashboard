@@ -10,6 +10,7 @@ import { useV2Copy } from '@/components/v2/copy';
 import { NoProjects } from '@/components/v2/LiveData';
 import { mayCreate } from '@/lib/auth-utils.mjs';
 import { api } from '@/lib/api';
+import { parseApiTimestamp } from '@/lib/time';
 
 type Summary = {
   id:string; name:string; domain?:string|null; platform?:string|null; business_goal?:string|null;
@@ -21,7 +22,7 @@ export default function Projects() {
   const [summaries,setSummaries]=useState<Summary[]|null>(null); const [summaryError,setSummaryError]=useState('');
   useEffect(()=>{if(!workspace?.id)return;let alive=true;api<Summary[]>(`/api/workspaces/${workspace.id}/project-summaries`).then(x=>alive&&setSummaries(x)).catch(e=>alive&&setSummaryError(e?.code||'NETWORK_ERROR'));return()=>{alive=false}},[workspace?.id,projects.length]);
   const rows=summaries||projects.map(p=>({...p,metrics:{users:0,sessions:0,uxHealthScore:null,issueCount:0,lastEventAt:null,connected:false,trackingState:'pending',setupProgress:20}} as Summary));
-  const lastEvent=(iso:string|null)=>!iso?'--':new Intl.RelativeTimeFormat(vi?'vi':'en',{numeric:'auto'}).format(-Math.max(1,Math.round((Date.now()-new Date(iso).getTime())/60000)),'minute');
+  const lastEvent=(iso:string|null)=>{const parsed=parseApiTimestamp(iso);return !parsed?'--':new Intl.RelativeTimeFormat(vi?'vi':'en',{numeric:'auto'}).format(-Math.max(1,Math.round((Date.now()-parsed.getTime())/60000)),'minute')};
   return <>
     <div className="page-head page-head-v2"><div><div className="eyebrow">{workspace?.name}</div><h1>{c('projects')}</h1><p>{vi?'Theo dõi tình trạng cài đặt và các KPI chính của từng sản phẩm bằng dữ liệu thật.':'Track setup state and core real-data KPIs for every product.'}</p></div>{mayCreate(workspace?.role)&&<Link className="btn primary btn-lg" href="/projects/new"><Plus size={17}/>{c('addProject')}</Link>}</div>
     {(error||summaryError)?<div role="alert" className="account-alert error">{error?errorText(error):summaryError}<button className="btn outline" onClick={()=>{refresh();setSummaries(null)}}>{c('retry')}</button></div>:loading?<p role="status">{c('working')}</p>:!projects.length?<NoProjects/>:

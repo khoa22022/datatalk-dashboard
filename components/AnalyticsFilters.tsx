@@ -15,6 +15,12 @@ export function todayText(offset=0){
   const d=new Date(Date.UTC(year,month-1,day+offset));return `${String(d.getUTCDate()).padStart(2,'0')}/${String(d.getUTCMonth()+1).padStart(2,'0')}/${d.getUTCFullYear()}`
 }
 
+
+export function defaultAnalyticsFilterValue(): AnalyticsFilterValue {
+  const today=todayText(0);
+  return {from:today,to:today,compare:'previous',page:'',device:''};
+}
+
 type PageOption=PageIdentityLike & {pagePath:string};
 export default function AnalyticsFilters({value,onChange,pages=[],deviceCounts}:{value:AnalyticsFilterValue;onChange:(v:AnalyticsFilterValue)=>void;pages?:PageOption[];deviceCounts?:DeviceCount[]}){
   const {lang}=useI18n();const vi=lang==='vi';const set=(patch:Partial<AnalyticsFilterValue>)=>onChange({...value,...patch});

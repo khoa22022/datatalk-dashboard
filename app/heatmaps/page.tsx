@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowUpDown } from 'lucide-react';
 import { LiveBoundary, useLiveResource, duration } from '@/components/v2/LiveData';
-import AnalyticsFilters, { toIsoDate, type AnalyticsFilterValue, type DeviceCount } from '@/components/AnalyticsFilters';
+import AnalyticsFilters, { defaultAnalyticsFilterValue, toIsoDate, type AnalyticsFilterValue, type DeviceCount } from '@/components/AnalyticsFilters';
 import { useI18n } from '@/components/i18n';
 import { pageDisplayName, pagePathOf } from '@/lib/page-label';
 
@@ -14,7 +14,7 @@ type SectionRow={page:string;section:string;views:number;attentionMs:number;clic
 type DeviceRow=DeviceCount&{points?:number};
 type Issue={key:string;type:string;page:string;element:string;occurrences:number;severity?:string;priorityScore?:number};
 type Data={pages:PageRow[];devices:DeviceRow[];points:Point[];elements:ElementRow[];scroll:{page:string;pageName?:string|null;pageTitle?:string|null;scrollMax:number}[];sections:SectionRow[];issues:Issue[]};
-const initial:AnalyticsFilterValue={from:'',to:'',compare:'previous',page:'',device:''};
+const initial:AnalyticsFilterValue=defaultAnalyticsFilterValue();
 
 export default function Heatmaps(){
  const {lang,t}=useI18n();const vi=lang==='vi';const [filter,setFilter]=useState(initial);const [mode,setMode]=useState<'click'|'rage_click'|'dead_click'|'scroll'|'attention'>('click');const [hoverPoint,setHoverPoint]=useState<Point|null>(null);const [selectedPoint,setSelectedPoint]=useState<Point|null>(null);const [selectedIssueKey,setSelectedIssueKey]=useState('');const hideTimer=useRef<ReturnType<typeof setTimeout>|null>(null);const [sortBy,setSortBy]=useState('priority');

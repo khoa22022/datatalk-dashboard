@@ -1,23 +1,24 @@
 'use client';
 import { useMemo, useState } from 'react';
 import { LiveBoundary, useLiveResource, duration } from '@/components/v2/LiveData';
-import AnalyticsFilters, { toIsoDate, type AnalyticsFilterValue } from '@/components/AnalyticsFilters';
+import AnalyticsFilters, { defaultAnalyticsFilterValue, toIsoDate, type AnalyticsFilterValue } from '@/components/AnalyticsFilters';
 import { useI18n } from '@/components/i18n';
 import { pageDisplayName, pageSecondaryText } from '@/lib/page-label';
+import { formatVietnamDateTime } from '@/lib/time';
 
 type Step={id:string;event:string;at:string;elapsedMs:number;page:string;pageTitle?:string|null;pageName?:string|null;element?:string|null;task?:string|null;step?:string|null;durationMs:number};
 type Session={session_key:string;device?:string|null;country?:string|null;city?:string|null;region?:string|null;timezone?:string|null;startedAt?:string;endedAt?:string;durationMs:number;eventCount:number;firstPage:string;firstPageName?:string|null;lastPage:string;lastPageName?:string|null;firstAction?:Step|null;lastAction?:Step|null;pages:string[];pageCount?:number;timeline:Step[]};
 type PageRow={pagePath:string;pageName?:string|null;pageTitle?:string|null;pageUrl?:string|null};
 type DeviceRow={name:string;count:number};
 type Data={sessions:Session[];pages:PageRow[];devices:DeviceRow[]};
-const initial:AnalyticsFilterValue={from:'',to:'',compare:'previous',page:'',device:''};
+const initial:AnalyticsFilterValue=defaultAnalyticsFilterValue();
 export default function Sessions(){
  const {lang,t}=useI18n();const vi=lang==='vi';const [filter,setFilter]=useState(initial);const [selected,setSelected]=useState<string>('');
  const query=useMemo(()=>{const q=new URLSearchParams();const f=toIsoDate(filter.from),to=toIsoDate(filter.to);if(f)q.set('from',f);if(to)q.set('to',to);if(filter.page)q.set('page',filter.page);if(filter.device)q.set('device',filter.device);return q.toString()},[filter]);
  const resource=useLiveResource<Data>('sessions-v2',query);const rows=resource.data?.sessions||[];const current=rows.find(x=>x.session_key===selected)||rows[0]||null;
  const deviceLabel=(v?:string|null)=>v==='mobile'?(vi?'Điện thoại':'Mobile'):v==='tablet'?(vi?'Máy tính bảng':'Tablet'):v==='desktop'?(vi?'Máy tính':'Desktop'):(vi?'Chưa xác định thiết bị':'Unknown device');
  const unknown=(what:string)=>vi?`Chưa xác định ${what}`:`Unknown ${what}`;
- const sessionTime=(value?:string)=>value?new Date(value).toLocaleString(vi?'vi-VN':'en-US',{timeZone:'Asia/Ho_Chi_Minh',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}):(vi?'Chưa ghi nhận thời gian':'Time unavailable');
+ const sessionTime=(value?:string)=>formatVietnamDateTime(value,vi?'vi-VN':'en-US')||(vi?'Chưa ghi nhận thời gian':'Time unavailable');
  return <LiveBoundary title={t('sessions')} {...resource} subtitle={vi?'Hành trình từ thao tác đầu tiên tới thao tác cuối cùng, kèm thời gian, trang và khu vực truy cập.':'Full journey from first to last action with page, timing and coarse location context.'}>
   <AnalyticsFilters value={filter} onChange={setFilter} pages={resource.data?.pages||[]} deviceCounts={resource.data?.devices||[]}/>
   <div className="session-layout">

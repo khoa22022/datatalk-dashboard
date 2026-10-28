@@ -1,12 +1,12 @@
 'use client';
 import { useMemo, useState } from 'react';
 import { LiveBoundary, useLiveResource, duration } from '@/components/v2/LiveData';
-import AnalyticsFilters, { toIsoDate, type AnalyticsFilterValue } from '@/components/AnalyticsFilters';
+import AnalyticsFilters, { defaultAnalyticsFilterValue, toIsoDate, type AnalyticsFilterValue } from '@/components/AnalyticsFilters';
 import { useI18n } from '@/components/i18n';
 
 type Step={step:string;count:number;durationMs:number;errors:number;dropoffs:number};
 type Task={task:string;starts:number;completes:number;fails:number;abandons:number;errors:number;backtracks:number;retries:number;users:number;sessions:number;successRate:number|null;dropoffRate:number|null;avgCompletionTimeMs:number|null;medianCompletionTimeMs:number|null;sourcePage?:string|null;destinationPage?:string|null;ctaLabel?:string|null;autoTask?:boolean;steps:Step[]};
-const initial:AnalyticsFilterValue={from:'',to:'',compare:'previous',page:'',device:''};
+const initial:AnalyticsFilterValue=defaultAnalyticsFilterValue();
 export default function Tasks(){
  const {lang,t}=useI18n();const vi=lang==='vi';const [filter,setFilter]=useState(initial);
  const query=useMemo(()=>{const q=new URLSearchParams();const f=toIsoDate(filter.from),to=toIsoDate(filter.to);if(f)q.set('from',f);if(to)q.set('to',to);if(filter.page)q.set('page',filter.page);if(filter.device)q.set('device',filter.device);return q.toString()},[filter]);

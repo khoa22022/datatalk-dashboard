@@ -1,6 +1,6 @@
 {
   "name": "datatalk-dashboard",
-  "version": "2.2.0-rc.10",
+  "version": "2.2.0-rc.11",
   "private": true,
   "scripts": {
     "dev": "next dev",

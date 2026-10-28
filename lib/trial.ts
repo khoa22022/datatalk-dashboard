@@ -25,7 +25,7 @@ async function parseResponse<T>(response: Response): Promise<T> {
 export async function warmTrialBackend(onStatus?: (message: string) => void) {
   if (warmPromise) return warmPromise;
   warmPromise = (async () => {
-    onStatus?.('Connecting to Datatalk backend…');
+    onStatus?.('Connecting to DataTalk backend…');
     const response = await requestWithRetry(`${TRIAL_API}/health/ready`, {
       attempts: 5,
       delayMs: 1200,

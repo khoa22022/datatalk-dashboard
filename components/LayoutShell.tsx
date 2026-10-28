@@ -66,9 +66,9 @@ export default function LayoutShell({children}:{children:React.ReactNode}){
 
   const shell = <div className="shell app-shell-v2">
     <aside className="sidebar sidebar-v2">
-      <Link href={trialMode?"/try":"/dashboard"} className="brand brand-v2" aria-label="Datatalk home">
-        <span className="brand-symbol"><Sparkles size={16}/></span>
-        <span className="brand-word">datatalk</span>
+      <Link href={trialMode?"/try":"/dashboard"} className="brand brand-v2" aria-label="DataTalk home">
+        <span className="brand-symbol brand-logo"><img src="/datatalk-logo.png" alt="" /></span>
+        <span className="brand-word">DataTalk</span>
       </Link>
 
       <div className="workspace-card">

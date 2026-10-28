@@ -2,7 +2,7 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import { MoreHorizontal, Plus, Trash2, X } from 'lucide-react';
 import { LiveBoundary, useLiveResource } from '@/components/v2/LiveData';
-import AnalyticsFilters, { toIsoDate, type AnalyticsFilterValue } from '@/components/AnalyticsFilters';
+import AnalyticsFilters, { defaultAnalyticsFilterValue, toIsoDate, type AnalyticsFilterValue } from '@/components/AnalyticsFilters';
 import { useProjects } from '@/components/ProjectProvider';
 import { useI18n } from '@/components/i18n';
 import { api } from '@/lib/api';
@@ -10,7 +10,7 @@ import { api } from '@/lib/api';
 type Feedback={id:string;page:string;score:number|null;feedback:string;survey_type:string;created_at:string;metadata?:Record<string,unknown>};
 type Data={responses:number;summary:{type:string;responses:number;averageScore:number|null;pages:Record<string,number>}[];feedback:Feedback[]};
 type Survey={id:string;name:string;survey_type:string;question:string;page_path:string|null;status:string;delay_ms:number;scale_min:number|null;scale_max:number|null;options?:string[];placeholder?:string|null;metadata?:Record<string,unknown>};
-const initial:AnalyticsFilterValue={from:'',to:'',compare:'previous',page:'',device:''};
+const initial:AnalyticsFilterValue=defaultAnalyticsFilterValue();
 export default function FeedbackPage(){
  const {lang,t}=useI18n();const vi=lang==='vi';const {project}=useProjects();const [filter,setFilter]=useState(initial);const [surveys,setSurveys]=useState<Survey[]>([]);const [editing,setEditing]=useState<Survey|null|undefined>(undefined);const [busy,setBusy]=useState(false);const [surveyType,setSurveyType]=useState('csat');const [deleteSurvey,setDeleteSurvey]=useState<Survey|null>(null);const [deleteConfirmed,setDeleteConfirmed]=useState(false);
  const query=useMemo(()=>{const q=new URLSearchParams();const f=toIsoDate(filter.from),to=toIsoDate(filter.to);if(f)q.set('from',f);if(to)q.set('to',to);if(filter.page)q.set('page',filter.page);if(filter.device)q.set('device',filter.device);return q.toString()},[filter]);
