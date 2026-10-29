@@ -1,0 +1,5 @@
+{
+  "check": "TypeScript/TSX parsing and local-import resolution (NOT a typecheck or Next build)",
+  "files": 62,
+  "diagnostics": []
+}

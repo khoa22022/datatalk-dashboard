@@ -1,92 +1,23 @@
-export default function Tasks() {
-  const steps = [
-    ["Cart", "18s", 92],
-    ["Shipping", "42s", 81],
-    ["Payment", "1m 28s", 58],
-    ["Success", "11s", 99]
-  ];
+'use client';
+import { useMemo, useState } from 'react';
+import { LiveBoundary, useLiveResource, duration } from '@/components/v2/LiveData';
+import AnalyticsFilters, { defaultAnalyticsFilterValue, toIsoDate, type AnalyticsFilterValue } from '@/components/AnalyticsFilters';
+import { useI18n } from '@/components/i18n';
 
-  const cards = [
-    ["Task success", "68%", "↓ 6.2%"],
-    ["Median completion", "2m 18s", "↑ 24%"],
-    ["Backtracking", "18%", "↑ 7.1%"],
-    ["Error rate", "11%", "↑ 2.8%"]
-  ];
-
-  return (
-    <>
-      <div className="row">
-        <div>
-          <h1 className="title">Task efficiency</h1>
-          <p className="subtitle">
-            Measure speed, success and friction across important user flows.
-          </p>
-        </div>
-        <select className="select">
-          <option>Checkout</option>
-          <option>Signup</option>
-          <option>Contact</option>
-        </select>
-      </div>
-
-      <div style={{ height: 16 }} />
-
-      <div className="grid4">
-        {cards.map(([label, value, trend]) => (
-          <div className="card" key={label}>
-            <div className="label">{label}</div>
-            <div className="metric">{value}</div>
-            <div className="trend down">{trend}</div>
-          </div>
-        ))}
-      </div>
-
-      <div style={{ height: 16 }} />
-
-      <div className="card">
-        <h2>Checkout task timeline</h2>
-        <p className="muted">
-          Where users spend the time needed to complete the task.
-        </p>
-
-        <div className="section-list" style={{ marginTop: 18 }}>
-          {steps.map(([step, duration, efficiency]) => (
-            <div className="section-item" key={step}>
-              <b>{step}</b>
-              <div className="bar">
-                <i style={{ width: `${100 - Number(efficiency) + 35}%` }} />
-              </div>
-              <b>{duration}</b>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div style={{ height: 16 }} />
-
-      <div className="grid2">
-        <div className="card">
-          <h2>Efficiency signals</h2>
-          <div className="section-list" style={{ marginTop: 14 }}>
-            <div className="row"><span>Expected clicks</span><b>7</b></div>
-            <div className="row"><span>Actual clicks</span><b>12.4</b></div>
-            <div className="row"><span>Extra interactions</span><b className="down">+77%</b></div>
-            <div className="row"><span>Median first interaction</span><b>8.2s</b></div>
-          </div>
-        </div>
-
-        <div className="card">
-          <h2>Priority</h2>
-          <div className="priority">
-            <span className="badge high">HIGH</span>
-            <h3>Payment step is 2.8× slower</h3>
-            <p className="muted mini">
-              63% of total task time is spent on Payment. Compare replay and
-              heatmap before redesign.
-            </p>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+type Step={step:string;count:number;durationMs:number;errors:number;dropoffs:number};
+type Task={task:string;starts:number;completes:number;fails:number;abandons:number;errors:number;backtracks:number;retries:number;users:number;sessions:number;successRate:number|null;dropoffRate:number|null;avgCompletionTimeMs:number|null;medianCompletionTimeMs:number|null;avgHesitationMs?:number|null;avgIntentScore?:number|null;trustSeekingSessions?:number;sourcePage?:string|null;destinationPage?:string|null;sourceSection?:string|null;ctaLabel?:string|null;autoTask?:boolean;steps:Step[]};
+const initial:AnalyticsFilterValue=defaultAnalyticsFilterValue();
+export default function Tasks(){
+ const {lang,t}=useI18n();const vi=lang==='vi';const [filter,setFilter]=useState(initial);
+ const query=useMemo(()=>{const q=new URLSearchParams();const f=toIsoDate(filter.from),to=toIsoDate(filter.to);if(f)q.set('from',f);if(to)q.set('to',to);if(filter.page)q.set('page',filter.page);if(filter.device)q.set('device',filter.device);return q.toString()},[filter]);
+ const resource=useLiveResource<Task[]>('tasks-v2',query);const rows=resource.data||[];const totals=rows.reduce((a,r)=>({starts:a.starts+r.starts,completes:a.completes+r.completes,abandons:a.abandons+r.abandons,fails:a.fails+r.fails}),{starts:0,completes:0,abandons:0,fails:0});const overallRate=totals.starts?Math.round(totals.completes/totals.starts*1000)/10:null;
+ return <LiveBoundary title={t('tasks')} {...resource} subtitle={vi?'Đo tốc độ, tỷ lệ hoàn thành, rớt bước, retry và friction của từng tác vụ thật.':'Measure real task speed, completion, drop-off, retries and friction.'}>
+  <AnalyticsFilters value={filter} onChange={setFilter}/>
+  {rows.length&&<section className="task-summary-strip card"><div><span>{vi?'Tỷ lệ hoàn thành':'Completion rate'}</span><b>{overallRate==null?'--':`${overallRate}%`}</b></div><div><span>{vi?'Tác vụ bắt đầu':'Started tasks'}</span><b>{totals.starts}</b></div><div><span>{vi?'Hoàn thành':'Completed'}</span><b>{totals.completes}</b></div><div><span>{vi?'Chưa hoàn thành':'Not completed'}</span><b>{totals.abandons+totals.fails}</b></div></section>}
+  {rows.length?<div className="task-grid">{rows.map(task=><section className="card task-card-v22" key={task.task}><div className="card-header"><div className="task-title-wrap"><h2 className="dt-clamp-2" title={task.task}>{task.task}</h2><p>{task.users} {vi?'người dùng':'users'} · {task.sessions} {vi?'phiên':'sessions'}</p></div><span className={`pill ${(task.successRate||0)>=80?'good':(task.successRate||0)>=60?'medium':'high'}`}>{task.successRate==null?'--':`${task.successRate}%`}</span></div>
+   {task.autoTask&&<p className="muted dt-truncate-1" title={`${vi?'CTA tự động':'Auto CTA'} · ${task.sourcePage||'--'} → ${task.destinationPage||'--'}`}>{vi?'CTA tự động':'Auto CTA'} · {task.sourcePage||'--'} → {task.destinationPage||'--'}</p>}
+   <div className="task-metrics"><div><span>{vi?'Bắt đầu':'Started'}</span><b>{task.starts}</b></div><div><span>{vi?'Hoàn thành':'Completed'}</span><b>{task.completes}</b></div><div><span>{vi?'Tỷ lệ hoàn thành':'Completion rate'}</span><b>{task.successRate==null?'--':`${task.successRate}%`}</b></div><div><span>{vi?'Thời gian TB':'Average time'}</span><b>{task.avgCompletionTimeMs==null?'--':duration(task.avgCompletionTimeMs)}</b></div><div><span>{vi?'Cân nhắc trước CTA':'Pre-CTA hesitation'}</span><b>{task.avgHesitationMs==null?'--':duration(task.avgHesitationMs)}</b></div><div><span>{vi?'Điểm ý định':'Intent score'}</span><b>{task.avgIntentScore==null?'--':`${task.avgIntentScore}/100`}</b></div></div><div className="task-intent-meta"><span>{vi?'Section bắt đầu':'Source section'}: <b>{task.sourceSection||'--'}</b></span><span>{vi?'Phiên tìm tín hiệu tin cậy':'Trust-seeking sessions'}: <b>{task.trustSeekingSessions||0}</b></span><span>{vi?'Retry':'Retries'}: <b>{task.retries}</b></span></div>
+   <div className="account-table-wrap"><table className="account-table"><thead><tr><th>{vi?'Bước':'Step'}</th><th>{vi?'Lượt':'Count'}</th><th>{vi?'Thời gian':'Time'}</th><th>{vi?'Lỗi':'Errors'}</th><th>{vi?'Rớt':'Drop-offs'}</th></tr></thead><tbody>{task.steps.map(s=><tr key={s.step}><td>{s.step}</td><td>{s.count}</td><td>{s.durationMs?duration(s.durationMs):'--'}</td><td>{s.errors}</td><td>{s.dropoffs}</td></tr>)}</tbody></table></div>
+  </section>)}</div>:<section className="card dashboard-empty-chart"><strong>--</strong><span>{vi?'Chưa có task tracking. DataTalk sẽ tự nhận CTA dẫn sang trang khác; luồng phức tạp vẫn hỗ trợ taskStart/taskComplete.':'No navigation tasks yet. DataTalk automatically detects CTAs that reach another page; complex flows still support taskStart/taskComplete.'}</span></section>}
+ </LiveBoundary>;
 }

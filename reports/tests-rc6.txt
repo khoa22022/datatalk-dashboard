@@ -1,0 +1,287 @@
+
+> datatalk-dashboard@2.2.0-rc.6 test
+> node --test
+
+TAP version 13
+# PASS: trial requests only send JSON content-type when a body is present.
+# Subtest: test/trial-request-headers.test.mjs
+ok 1 - test/trial-request-headers.test.mjs
+  ---
+  duration_ms: 29.956689
+  type: 'test'
+  ...
+# GREEN TEST: sandbox warms the backend and uses one server-side scenario seed request.
+# Subtest: test/trial-scenario-source.test.mjs
+ok 2 - test/trial-scenario-source.test.mjs
+  ---
+  duration_ms: 29.643506
+  type: 'test'
+  ...
+# RED TEST BASELINE: scenario contract expectations are defined.
+# Subtest: test/trial-scenario.test.mjs
+ok 3 - test/trial-scenario.test.mjs
+  ---
+  duration_ms: 32.903172
+  type: 'test'
+  ...
+# Subtest: trial layout no longer renders a nested sidebar shell
+ok 4 - trial layout no longer renders a nested sidebar shell
+  ---
+  duration_ms: 1.433161
+  type: 'test'
+  ...
+# Subtest: global layout uses pathname-aware active navigation
+ok 5 - global layout uses pathname-aware active navigation
+  ---
+  duration_ms: 0.213752
+  type: 'test'
+  ...
+# Subtest: add project is a guided platform-first flow
+ok 6 - add project is a guided platform-first flow
+  ---
+  duration_ms: 0.975632
+  type: 'test'
+  ...
+# Subtest: i18n contains project and shell translations in English and Vietnamese
+ok 7 - i18n contains project and shell translations in English and Vietnamese
+  ---
+  duration_ms: 0.522418
+  type: 'test'
+  ...
+# Subtest: styles include active indicator and motion classes
+ok 8 - styles include active indicator and motion classes
+  ---
+  duration_ms: 0.243267
+  type: 'test'
+  ...
+# Subtest: auth redirect allowlist rejects external, encoded and protocol-relative destinations
+ok 9 - auth redirect allowlist rejects external, encoded and protocol-relative destinations
+  ---
+  duration_ms: 1.489547
+  type: 'test'
+  ...
+# Subtest: workspace and project preferences are namespaced by user and workspace
+ok 10 - workspace and project preferences are namespaced by user and workspace
+  ---
+  duration_ms: 0.235145
+  type: 'test'
+  ...
+# Subtest: UI roles mirror the server hierarchy
+ok 11 - UI roles mirror the server hierarchy
+  ---
+  duration_ms: 0.575848
+  type: 'test'
+  ...
+# Subtest: browser auth uses PKCE and callback exchanges in the browser rather than a stateless server client
+ok 12 - browser auth uses PKCE and callback exchanges in the browser rather than a stateless server client
+  ---
+  duration_ms: 0.695259
+  type: 'test'
+  ...
+# Subtest: live app is wrapped in the account gate and reset pages remain reachable
+ok 13 - live app is wrapped in the account gate and reset pages remain reachable
+  ---
+  duration_ms: 0.163577
+  type: 'test'
+  ...
+# Subtest: auth forms include real email sign-in, signup, Google and password reset handlers
+ok 14 - auth forms include real email sign-in, signup, Google and password reset handlers
+  ---
+  duration_ms: 0.700446
+  type: 'test'
+  ...
+# Subtest: API helper always attaches session bearer tokens to protected calls
+ok 15 - API helper always attaches session bearer tokens to protected calls
+  ---
+  duration_ms: 0.266442
+  type: 'test'
+  ...
+# Subtest: account pages do not use demo-data or nested AppShell
+ok 16 - account pages do not use demo-data or nested AppShell
+  ---
+  duration_ms: 0.737743
+  type: 'test'
+  ...
+# Subtest: permissions mutations have a confirmation step
+ok 17 - permissions mutations have a confirmation step
+  ---
+  duration_ms: 0.307684
+  type: 'test'
+  ...
+# Subtest: no API client exposes a service role environment variable
+ok 18 - no API client exposes a service role environment variable
+  ---
+  duration_ms: 0.409177
+  type: 'test'
+  ...
+# Subtest: connect flow narrows project before async handlers and uses stable projectId
+ok 19 - connect flow narrows project before async handlers and uses stable projectId
+  ---
+  duration_ms: 0.858796
+  type: 'test'
+  ...
+# Subtest: account controls live in topbar and password fields have visibility toggles
+ok 20 - account controls live in topbar and password fields have visibility toggles
+  ---
+  duration_ms: 0.827228
+  type: 'test'
+  ...
+# Subtest: language switcher is consolidated into the account menu
+ok 21 - language switcher is consolidated into the account menu
+  ---
+  duration_ms: 0.366172
+  type: 'test'
+  ...
+# Subtest: project connection onboarding follows global EN/VI language state
+ok 22 - project connection onboarding follows global EN/VI language state
+  ---
+  duration_ms: 0.927478
+  type: 'test'
+  ...
+# Subtest: all three onboarding install paths have localized copy
+ok 23 - all three onboarding install paths have localized copy
+  ---
+  duration_ms: 0.230077
+  type: 'test'
+  ...
+# Subtest: real dashboard uses live dashboard resource and not demo data
+ok 24 - real dashboard uses live dashboard resource and not demo data
+  ---
+  duration_ms: 0.979467
+  type: 'test'
+  ...
+# Subtest: unsupported metrics render as double dash instead of fabricated values
+ok 25 - unsupported metrics render as double dash instead of fabricated values
+  ---
+  duration_ms: 0.174383
+  type: 'test'
+  ...
+# Subtest: analytics filter supports dd/mm/yyyy, comparison, page search and device filtering
+ok 26 - analytics filter supports dd/mm/yyyy, comparison, page search and device filtering
+  ---
+  duration_ms: 0.821939
+  type: 'test'
+  ...
+# Subtest: priority analytics screens use live resources
+ok 27 - priority analytics screens use live resources
+  ---
+  duration_ms: 1.524179
+  type: 'test'
+  ...
+# Subtest: feedback builder exposes real survey types and funnel is no-code first
+ok 28 - feedback builder exposes real survey types and funnel is no-code first
+  ---
+  duration_ms: 0.207743
+  type: 'test'
+  ...
+# Subtest: quick filter typography and today active state are implemented
+ok 29 - quick filter typography and today active state are implemented
+  ---
+  duration_ms: 2.102902
+  type: 'test'
+  ...
+# Subtest: UX health uses real score and compact segmented gauge
+ok 30 - UX health uses real score and compact segmented gauge
+  ---
+  duration_ms: 0.199471
+  type: 'test'
+  ...
+# Subtest: analytics uses readable page identity and complete Vietnamese labels
+ok 31 - analytics uses readable page identity and complete Vietnamese labels
+  ---
+  duration_ms: 0.292791
+  type: 'test'
+  ...
+# Subtest: heatmap defaults to a usable page/device and exposes point inspection
+ok 32 - heatmap defaults to a usable page/device and exposes point inspection
+  ---
+  duration_ms: 0.267994
+  type: 'test'
+  ...
+# Subtest: sessions prioritize time and readable page identity
+ok 33 - sessions prioritize time and readable page identity
+  ---
+  duration_ms: 0.236667
+  type: 'test'
+  ...
+# Subtest: UX health gauge is compact and task completion is surfaced in Task Efficiency
+ok 34 - UX health gauge is compact and task completion is surfaced in Task Efficiency
+  ---
+  duration_ms: 1.788788
+  type: 'test'
+  ...
+# Subtest: heatmap uses a single top-level device filter and defaults to desktop when available
+ok 35 - heatmap uses a single top-level device filter and defaults to desktop when available
+  ---
+  duration_ms: 0.226672
+  type: 'test'
+  ...
+# Subtest: session cards show session time instead of browser and os
+ok 36 - session cards show session time instead of browser and os
+  ---
+  duration_ms: 0.284309
+  type: 'test'
+  ...
+# Subtest: analytics KPI cards expose previous-period comparison copy
+ok 37 - analytics KPI cards expose previous-period comparison copy
+  ---
+  duration_ms: 0.210668
+  type: 'test'
+  ...
+# Subtest: feedback surveys can be edited toggled and deleted with confirmation
+ok 38 - feedback surveys can be edited toggled and deleted with confirmation
+  ---
+  duration_ms: 0.174092
+  type: 'test'
+  ...
+# Subtest: UX health follows compact reference structure with arc score and supporting metrics
+ok 39 - UX health follows compact reference structure with arc score and supporting metrics
+  ---
+  duration_ms: 1.735067
+  type: 'test'
+  ...
+# Subtest: UX priority dashboard is a compact scrollable top-five issue list with exact drill-down links
+ok 40 - UX priority dashboard is a compact scrollable top-five issue list with exact drill-down links
+  ---
+  duration_ms: 0.393323
+  type: 'test'
+  ...
+# Subtest: analytics period comparison uses semantic up/down classes
+ok 41 - analytics period comparison uses semantic up/down classes
+  ---
+  duration_ms: 0.396589
+  type: 'test'
+  ...
+# Subtest: heatmap hover inspector is anchored beside the hovered point and dashboard issue links resolve exactly
+ok 42 - heatmap hover inspector is anchored beside the hovered point and dashboard issue links resolve exactly
+  ---
+  duration_ms: 0.293823
+  type: 'test'
+  ...
+# Subtest: UX Health V3 keeps only two supporting metrics and removes task completion from the card
+ok 43 - UX Health V3 keeps only two supporting metrics and removes task completion from the card
+  ---
+  duration_ms: 0.829921
+  type: 'test'
+  ...
+# Subtest: UX Health V3 uses semantic gauge colors for each status band
+ok 44 - UX Health V3 uses semantic gauge colors for each status band
+  ---
+  duration_ms: 1.031385
+  type: 'test'
+  ...
+# Subtest: Task efficiency explicitly shows completion rate
+ok 45 - Task efficiency explicitly shows completion rate
+  ---
+  duration_ms: 0.213152
+  type: 'test'
+  ...
+1..45
+# tests 45
+# suites 0
+# pass 45
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 239.090619

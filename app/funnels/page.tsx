@@ -1,51 +1,28 @@
-export default function Funnels() {
-  const data = [
-    ["Landing", "10,000", 100],
-    ["Product", "6,200", 62],
-    ["Contact", "1,116", 18],
-    ["Submit", "268", 24]
-  ];
+'use client';
+import { FormEvent, useEffect, useState } from 'react';
+import { ExternalLink, Play, Plus, Save } from 'lucide-react';
+import { LiveBoundary } from '@/components/v2/LiveData';
+import { useProjects } from '@/components/ProjectProvider';
+import { useI18n } from '@/components/i18n';
+import { api } from '@/lib/api';
 
-  return (
-    <>
-      <div className="row">
-        <div>
-          <h1 className="title">Funnels</h1>
-          <p className="subtitle">Find where important journeys slow down or break.</p>
-        </div>
-        <button className="btn primary">+ Create funnel</button>
-      </div>
-
-      <div style={{ height: 16 }} />
-
-      <div className="card">
-        <h2>Checkout conversion funnel</h2>
-        <p className="muted">Last 30 days · 10,000 users entered</p>
-
-        <div style={{ marginTop: 22 }}>
-          {data.map(([step, users, width], index) => (
-            <div key={step} style={{ marginBottom: 18 }}>
-              <div className="row">
-                <span>
-                  <b>{step}</b> <span className="muted">· {users} users</span>
-                </span>
-                <b>{index === 0 ? "100%" : index === 1 ? "62%" : index === 2 ? "18%" : "24%"}</b>
-              </div>
-              <div className={"bar " + (index === 2 ? "danger" : "")} style={{ marginTop: 8 }}>
-                <i style={{ width: `${width}%` }} />
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="priority" style={{ marginTop: 12 }}>
-          <span className="badge high">BOTTLENECK</span>
-          <h3>Product → Contact</h3>
-          <p className="muted mini">
-            82% of users disappear before Contact. Compare with pricing attention and session replays.
-          </p>
-        </div>
-      </div>
-    </>
-  );
+type Step={id?:string;position:number;name:string;step_type:string;condition:Record<string,unknown>;users?:number;conversionRate?:number|null;dropoffRate?:number|null;avgTimeFromPreviousMs?:number|null};
+type Funnel={id:string;name:string;status:string;recording_token:string;steps:Step[];launch_url?:string|null};
+type FunnelAnalytics={id:string;name:string;status:string;steps:Step[]};
+const duration=(ms:number|null|undefined)=>ms==null?'--':ms<60000?`${Math.round(ms/1000)}s`:`${Math.floor(ms/60000)}m ${Math.round(ms%60000/1000)}s`;
+export default function Funnels(){
+ const {project,projects}=useProjects();const {lang,t}=useI18n();const vi=lang==='vi';const [funnels,setFunnels]=useState<Funnel[]>([]);const [selected,setSelected]=useState<string>('');const [analytics,setAnalytics]=useState<FunnelAnalytics|null>(null);const [creating,setCreating]=useState(false);const [busy,setBusy]=useState(false);const [launch,setLaunch]=useState<string|null>(null);
+ const load=async()=>{if(!project)return;const rows=await api<Funnel[]>(`/api/projects/${project.id}/funnels`);setFunnels(rows);setSelected(s=>s||rows[0]?.id||'')};useEffect(()=>{load().catch(()=>{})},[project?.id]);
+ useEffect(()=>{if(!project||!selected){setAnalytics(null);return}api<FunnelAnalytics>(`/api/projects/${project.id}/funnels/${selected}/analytics`).then(setAnalytics).catch(()=>setAnalytics(null))},[project?.id,selected,funnels]);
+ const create=async(e:FormEvent<HTMLFormElement>)=>{e.preventDefault();if(!project)return;const fd=new FormData(e.currentTarget);setBusy(true);try{const row=await api<Funnel>(`/api/projects/${project.id}/funnels`,{method:'POST',body:JSON.stringify({name:fd.get('name'),mode:'record'})});setLaunch(row.launch_url||null);setSelected(row.id);setCreating(false);await load();if(row.launch_url)window.open(row.launch_url,'_blank','noopener,noreferrer')}finally{setBusy(false)}};
+ const finalize=async()=>{if(!project||!selected)return;setBusy(true);try{await api(`/api/projects/${project.id}/funnels/${selected}/finalize-recording`,{method:'POST'});await load();const a=await api<FunnelAnalytics>(`/api/projects/${project.id}/funnels/${selected}/analytics`);setAnalytics(a)}finally{setBusy(false)}};
+ const current=funnels.find(f=>f.id===selected);
+ return <LiveBoundary title={t('funnels')} loading={false} error={null} subtitle={vi?'Tạo phễu bằng cách thao tác trực tiếp trên website, không cần biết event hay selector.':'Create funnels by using the website directly—no event names or selectors required.'} actions={<button className="btn primary" onClick={()=>setCreating(true)}><Plus size={16}/>{vi?'Tạo phễu mới':'Create funnel'}</button>}>
+  {funnels.length?<div className="funnel-layout"><section className="card funnel-list"><h2>{vi?'Phễu của bạn':'Your funnels'}</h2>{funnels.map(f=><button className={`funnel-list-item ${selected===f.id?'active':''}`} key={f.id} onClick={()=>setSelected(f.id)}><div><b>{f.name}</b><small>{f.status} · {f.steps?.length||0} {vi?'bước':'steps'}</small></div><span>›</span></button>)}</section>
+   <section className="card funnel-detail">{current?<><div className="card-header"><div><h2>{current.name}</h2><p>{vi?'Luồng chuyển đổi được ghi lại từ thao tác thật trên website.':'Conversion flow recorded from real website actions.'}</p></div><span className={`pill ${current.status==='ACTIVE'?'good':'medium'}`}>{current.status}</span></div>
+    {current.status==='DRAFT'&&<div className="funnel-recorder-card"><div className="recorder-steps"><span>1</span><div><b>{vi?'Mở website ở chế độ ghi':'Open website in recording mode'}</b><p>{vi?'Thao tác giống một khách hàng bình thường: mở trang, nhấn nút, đi tới bước thành công.':'Use the site like a normal customer: navigate, click, finish the journey.'}</p></div></div><div className="account-actions">{launch&&<a className="btn outline" target="_blank" rel="noreferrer" href={launch}><ExternalLink size={16}/>{vi?'Mở lại website':'Open website'}</a>}<button className="btn primary" onClick={finalize} disabled={busy}><Save size={16}/>{busy?(vi?'Đang xử lý…':'Working…'):(vi?'Kết thúc ghi & tạo phễu':'Finish recording & build funnel')}</button></div></div>}
+    <div className="funnel-steps-real">{(analytics?.steps||current.steps||[]).length?(analytics?.steps||current.steps).map((s,i)=><div className="funnel-step-real" key={s.id||`${s.position}-${i}`}><div className="funnel-step-number">{i+1}</div><div className="funnel-step-copy"><b>{s.name}</b><small>{s.step_type==='page'?String((s.condition as any).path||''):s.step_type}</small></div><div className="funnel-step-stat"><span>{vi?'Người dùng':'Users'}</span><b>{s.users??'--'}</b></div><div className="funnel-step-stat"><span>{vi?'Chuyển đổi':'Conversion'}</span><b>{s.conversionRate==null?'--':`${s.conversionRate}%`}</b></div><div className="funnel-step-stat"><span>{vi?'Rớt':'Drop-off'}</span><b>{s.dropoffRate==null?'--':`${s.dropoffRate}%`}</b></div><div className="funnel-step-stat"><span>{vi?'Thời gian':'Time'}</span><b>{duration(s.avgTimeFromPreviousMs)}</b></div></div>):<div className="dashboard-empty-chart"><strong>--</strong><span>{vi?'Chưa có bước. Hãy ghi lại luồng website rồi kết thúc ghi.':'No steps yet. Record the website flow, then finish recording.'}</span></div>}</div>
+   </>:null}</section></div>:<section className="card funnel-empty"><div className="funnel-empty-icon"><Play size={24}/></div><h2>{vi?'Tạo phễu đầu tiên mà không cần code':'Create your first funnel without code'}</h2><p>{vi?'DataTalk sẽ mở website. Bạn chỉ cần thao tác luồng cần đo, hệ thống tự nhận trang và nút nhấn.':'DataTalk opens your website. Perform the journey and it captures pages and button clicks automatically.'}</p><button className="btn primary" onClick={()=>setCreating(true)}>{vi?'Bắt đầu ghi luồng':'Start recording a flow'}</button></section>}
+  {creating&&<div className="modal-backdrop"><form className="card survey-modal" onSubmit={create}><h2>{vi?'Tạo phễu bằng thao tác website':'Create funnel by using your website'}</h2><p>{vi?'Không cần nhập event name, selector hay code.':'No event names, selectors or code required.'}</p><label>{vi?'Tên phễu':'Funnel name'}<input name="name" required placeholder={vi?'Ví dụ: Đăng ký gói Pro':'e.g. Pro plan signup'}/></label><div className="recording-option selected"><Play size={18}/><div><b>{vi?'Ghi lại luồng trên website':'Record flow on website'}</b><span>{vi?'Khuyến nghị cho người dùng không chuyên kỹ thuật':'Recommended for non-technical users'}</span></div></div><div className="account-actions"><button type="button" className="btn outline" onClick={()=>setCreating(false)}>{vi?'Hủy':'Cancel'}</button><button className="btn primary" disabled={busy}>{vi?'Mở website & bắt đầu ghi':'Open website & start recording'}</button></div></form></div>}
+ </LiveBoundary>;
 }

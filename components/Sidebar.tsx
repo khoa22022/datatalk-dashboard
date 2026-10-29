@@ -28,7 +28,7 @@ const sections: NavSection[] = [
 export function Sidebar(){
   const pathname = usePathname();
   return <aside className="sidebar">
-    <div className="brand"><div className="brand-mark"><Sparkles size={16}/></div><span>datatalk</span></div>
+    <div className="brand"><div className="brand-mark brand-logo"><img src="/datatalk-logo.png" alt="" /></div><span>DataTalk</span></div>
     <div className="workspace-switch"><div><span className="eyebrow">WORKSPACE</span><strong>Tan Khoa Workspace</strong></div><ChevronDown size={16}/></div>
     <nav>
       {sections.map(section => <div className="nav-section" key={section.label}>
@@ -40,4 +40,4 @@ export function Sidebar(){
   </aside>
 }
 
-export function MobileHeader(){ return <div className="mobile-header"><div className="brand"><div className="brand-mark"><Sparkles size={16}/></div><span>datatalk</span></div></div> }
+export function MobileHeader(){ return <div className="mobile-header"><div className="brand"><div className="brand-mark brand-logo"><img src="/datatalk-logo.png" alt="" /></div><span>DataTalk</span></div></div> }

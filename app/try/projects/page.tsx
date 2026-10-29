@@ -6,7 +6,7 @@ import {useI18n} from '@/components/i18n';
 const items=[
   {name:'Sweet Pea Website',platform:'Next.js',visitors:'12,421',score:'86',progress:100,Icon:Globe2},
   {name:'Tan Khoa Portfolio',platform:'Figma Site',visitors:'3,842',score:'91',progress:100,Icon:PenTool},
-  {name:'Datatalk Marketing',platform:'React',visitors:'1,284',score:'78',progress:82,Icon:LayoutGrid},
+  {name:'DataTalk Marketing',platform:'React',visitors:'1,284',score:'78',progress:82,Icon:LayoutGrid},
 ];
 
 export default function TrialProjects(){const {t}=useI18n();return <>

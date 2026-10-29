@@ -2,6 +2,10 @@
 import {useMemo,useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {api} from '@/lib/api';
+import {useAuth} from '@/components/AuthProvider';
+import {useProjects} from '@/components/ProjectProvider';
+import {useV2Copy} from '@/components/v2/copy';
+import {mayCreate} from '@/lib/auth-utils.mjs';
 import {useI18n} from '@/components/i18n';
 import {Globe2,LayoutGrid,Smartphone,PenTool,ArrowLeft,ArrowRight,Check,Target,MousePointerClick,Search,Repeat2} from 'lucide-react';
 
@@ -19,17 +23,18 @@ const goalOptions=[
 ] as const;
 
 export default function NewProject(){
-  const r=useRouter(); const {t}=useI18n();
+  const r=useRouter(); const {t}=useI18n(); const {workspace}=useAuth(); const projects=useProjects(); const {c,errorText}=useV2Copy();
   const[step,setStep]=useState(1); const[name,setName]=useState(''); const[domain,setDomain]=useState('');
   const[platform,setPlatform]=useState('Website'); const[goal,setGoal]=useState('UX Improvement');
   const[busy,setBusy]=useState(false); const[err,setErr]=useState('');
   const selected=useMemo(()=>platformOptions.find(x=>x.id===platform)!,[platform]);
 
-  async function submit(e:React.FormEvent){e.preventDefault();setBusy(true);setErr('');try{
-    const p:any=await api('/api/projects',{method:'POST',body:JSON.stringify({name,domain,platform,business_goal:goal})});
-    r.push(`/projects/${p.id}/connect`);
-  }catch(e:any){setErr(e.message||t('couldNotCreateProject'))}finally{setBusy(false)}}
+  async function submit(e:React.FormEvent){e.preventDefault();if(busy || !workspace || !mayCreate(workspace.role))return;setBusy(true);setErr('');try{
+    const p:any=await api('/api/projects',{method:'POST',body:JSON.stringify({workspace_id:workspace?.id,name,domain,platform,business_goal:goal})});
+    projects.refresh();r.push(`/projects/${p.id}/connect`);
+  }catch(e:any){setErr(errorText(e))}finally{setBusy(false)}}
 
+  if(!mayCreate(workspace?.role))return <div className="account-panel">{c("readOnly")}</div>;
   return <div className="project-wizard">
     <div className="wizard-header">
       <div><div className="eyebrow">{t('projectSetup')}</div><h1>{t('createNewProject')}</h1><p>{t('createProjectSubtitle')}</p></div>
@@ -42,8 +47,8 @@ export default function NewProject(){
       <aside className="wizard-guide">
         <div className="wizard-guide-icon"><selected.Icon size={22}/></div>
         <h2>{t('easySetup')}</h2><p>{t('easySetupText')}</p>
-        <ul><li><Check size={15}/>{t('noCodeRequired')}</li><li><Check size={15}/>{t('guidedInstallation')}</li><li><Check size={15}/>{t('verifyBeforeFinish')}</li></ul>
-        <div className="wizard-help">{t('needHelp')} <strong>{t('setupAssistant')}</strong></div>
+        <ul><li><Check size={15}/>{t('guidedInstallation')}</li><li><Check size={15}/>{t('guidedInstallation')}</li><li><Check size={15}/>{t('verifyBeforeFinish')}</li></ul>
+        
       </aside>
 
       <section className="wizard-card">
@@ -54,8 +59,8 @@ export default function NewProject(){
 
         {step===2 && <form onSubmit={submit} className="wizard-panel"><div className="wizard-panel-head"><span>02</span><div><h2>{t('projectDetails')}</h2><p>{t('projectDetailsSubtitle')}</p></div></div>
           <div className="form-grid">
-            <div className="field"><label>{t('projectName')}</label><input required value={name} onChange={e=>setName(e.target.value)} placeholder="Sweet Pea Website"/><small>{t('projectNameHint')}</small></div>
-            <div className="field"><label>{t('websiteUrl')}</label><input required value={domain} onChange={e=>setDomain(e.target.value)} placeholder="https://example.com"/><small>{t('websiteUrlHint')}</small></div>
+            <div className="field"><label>{t('projectName')}</label><input required maxLength={120} value={name} onChange={e=>setName(e.target.value)} placeholder="Sweet Pea Website"/><small>{t('projectNameHint')}</small></div>
+            <div className="field"><label>{t('websiteUrl')}</label><input required maxLength={2048} value={domain} onChange={e=>setDomain(e.target.value)} placeholder="https://example.com"/><small>{t('websiteUrlHint')}</small></div>
           </div>
           <div className="field"><label>{t('businessGoal')}</label><div className="goal-grid">{goalOptions.map(({id,key,Icon})=><button type="button" key={id} onClick={()=>setGoal(id)} className={`goal-card ${goal===id?'selected':''}`}><Icon size={17}/><span>{t(key)}</span>{goal===id&&<Check size={14}/>}</button>)}</div></div>
           <div className="selection-summary"><div><small>{t('platform')}</small><strong>{t(selected.key)}</strong></div><div><small>{t('businessGoal')}</small><strong>{t(goalOptions.find(x=>x.id===goal)?.key||'goalUx')}</strong></div></div>

@@ -1,84 +1,33 @@
-export default function Feedback() {
-  const cards = [
-    ["CSAT", "4.2 / 5", "↑ 0.3"],
-    ["NPS", "+42", "↑ 8"],
-    ["CES", "5.8 / 7", "↓ 0.4"],
-    ["Responses", "1,284", "31% rate"]
-  ];
+'use client';
+import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { MoreHorizontal, Plus, Trash2, X } from 'lucide-react';
+import { LiveBoundary, useLiveResource } from '@/components/v2/LiveData';
+import AnalyticsFilters, { defaultAnalyticsFilterValue, toIsoDate, type AnalyticsFilterValue } from '@/components/AnalyticsFilters';
+import { useProjects } from '@/components/ProjectProvider';
+import { useI18n } from '@/components/i18n';
+import { api } from '@/lib/api';
 
-  const feedback = [
-    ["Pricing", "I couldn't tell which plan was right for me.", "Negative"],
-    ["Checkout", "Payment took too long.", "Negative"],
-    ["Homepage", "The navigation is really easy.", "Positive"],
-    ["Product", "I wanted more detail before buying.", "Neutral"]
-  ];
-
-  const concentration = [
-    ["Pricing", 72],
-    ["Checkout", 61],
-    ["Product", 34],
-    ["Homepage", 12]
-  ];
-
-  return (
-    <>
-      <div className="row">
-        <div>
-          <h1 className="title">Feedback</h1>
-          <p className="subtitle">Connect what users say with where and how they behave.</p>
-        </div>
-        <button className="btn primary">Create survey</button>
-      </div>
-
-      <div style={{ height: 16 }} />
-
-      <div className="grid4">
-        {cards.map(([label, value, trend]) => (
-          <div className="card" key={label}>
-            <div className="label">{label}</div>
-            <div className="metric">{value}</div>
-            <div className="trend up">{trend}</div>
-          </div>
-        ))}
-      </div>
-
-      <div style={{ height: 16 }} />
-
-      <div className="grid2">
-        <div className="card">
-          <h2>Recent feedback</h2>
-          <div className="section-list" style={{ marginTop: 14 }}>
-            {feedback.map(([page, text, sentiment]) => (
-              <div key={page} style={{ padding: "12px 0", borderBottom: "1px solid #eef0f3" }}>
-                <div className="row">
-                  <b>{page}</b>
-                  <span className={"badge " + (sentiment === "Negative" ? "high" : "good")}>
-                    {sentiment}
-                  </span>
-                </div>
-                <p className="muted mini">{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="card">
-          <h2>Feedback concentration</h2>
-          <p className="muted">Pages with the most negative feedback.</p>
-
-          {concentration.map(([page, value]) => (
-            <div key={page} style={{ marginTop: 16 }}>
-              <div className="row mini">
-                <b>{page}</b>
-                <b>{value}%</b>
-              </div>
-              <div className="bar danger">
-                <i style={{ width: `${value}%` }} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </>
-  );
+type Feedback={id:string;page:string;score:number|null;feedback:string;survey_type:string;created_at:string;metadata?:Record<string,unknown>};
+type Data={responses:number;summary:{type:string;responses:number;averageScore:number|null;pages:Record<string,number>}[];feedback:Feedback[]};
+type Survey={id:string;name:string;survey_type:string;question:string;page_path:string|null;status:string;delay_ms:number;scale_min:number|null;scale_max:number|null;options?:string[];placeholder?:string|null;metadata?:Record<string,unknown>};
+const initial:AnalyticsFilterValue=defaultAnalyticsFilterValue();
+export default function FeedbackPage(){
+ const {lang,t}=useI18n();const vi=lang==='vi';const {project}=useProjects();const [filter,setFilter]=useState(initial);const [surveys,setSurveys]=useState<Survey[]>([]);const [editing,setEditing]=useState<Survey|null|undefined>(undefined);const [busy,setBusy]=useState(false);const [surveyType,setSurveyType]=useState('csat');const [deleteSurvey,setDeleteSurvey]=useState<Survey|null>(null);const [deleteConfirmed,setDeleteConfirmed]=useState(false);
+ const query=useMemo(()=>{const q=new URLSearchParams();const f=toIsoDate(filter.from),to=toIsoDate(filter.to);if(f)q.set('from',f);if(to)q.set('to',to);if(filter.page)q.set('page',filter.page);if(filter.device)q.set('device',filter.device);return q.toString()},[filter]);
+ const resource=useLiveResource<Data>('feedback-v2',query);
+ const load=()=>project&&api<Survey[]>(`/api/projects/${project.id}/surveys`).then(setSurveys).catch(()=>{});useEffect(()=>{load()},[project?.id]);
+ const openCreate=()=>{setSurveyType('csat');setEditing(null)};const openEdit=(s:Survey)=>{setSurveyType(s.survey_type);setEditing(s)};
+ const submit=async(e:FormEvent<HTMLFormElement>)=>{e.preventDefault();if(!project)return;const fd=new FormData(e.currentTarget);const type=String(fd.get('type')||'csat');const options=String(fd.get('options')||'').split('\n').map(x=>x.trim()).filter(Boolean);const payload={name:fd.get('name'),survey_type:type,question:fd.get('question'),page_path:fd.get('page')||null,delay_ms:Number(fd.get('delay')||0)*1000,scale_min:type==='nps'?0:1,scale_max:type==='nps'?10:type==='ces'?7:5,options,placeholder:fd.get('placeholder')||null,status:editing?.status||'ACTIVE',metadata:{frequency_days:Number(fd.get('frequency')||7),device:String(fd.get('device')||'all')}};setBusy(true);try{if(editing)await api(`/api/projects/${project.id}/surveys/${editing.id}`,{method:'PATCH',body:JSON.stringify(payload)});else await api(`/api/projects/${project.id}/surveys`,{method:'POST',body:JSON.stringify(payload)});setEditing(undefined);await load()}finally{setBusy(false)}};
+ const toggle=async(s:Survey)=>{if(!project)return;const next=s.status==='ACTIVE'?'PAUSED':'ACTIVE';setSurveys(rows=>rows.map(x=>x.id===s.id?{...x,status:next}:x));try{await api(`/api/projects/${project.id}/surveys/${s.id}`,{method:'PATCH',body:JSON.stringify({status:next})})}catch{setSurveys(rows=>rows.map(x=>x.id===s.id?{...x,status:s.status}:x))}};
+ const confirmDelete=async()=>{if(!project||!deleteSurvey||!deleteConfirmed)return;setBusy(true);try{await api(`/api/projects/${project.id}/surveys/${deleteSurvey.id}`,{method:'DELETE'});setDeleteSurvey(null);setDeleteConfirmed(false);await load()}finally{setBusy(false)}};
+ const label=(type:string)=>type==='csat'?(vi?'Mức độ hài lòng khách hàng (CSAT)':'Customer satisfaction (CSAT)'):type==='nps'?(vi?'Khả năng giới thiệu sản phẩm (NPS)':'Net promoter score (NPS)'):type==='ces'?(vi?'Mức độ dễ dàng khi hoàn thành tác vụ (CES)':'Customer effort score (CES)'):type==='yes_no'?(vi?'Câu hỏi Có / Không':'Yes / No'):type==='multiple_choice'?(vi?'Lựa chọn nhiều phương án':'Multiple choice'):type==='text'?(vi?'Phản hồi văn bản':'Open text'):(vi?'Đánh giá 1–5':'Rating 1–5');
+ const pageOptions=[...new Map((resource.data?.feedback||[]).map(f=>[f.page,{pagePath:f.page,pageName:f.page}])).values()];
+ return <LiveBoundary title={t('feedback')} {...resource} subtitle={vi?'Khảo sát thật trên website và dữ liệu phản hồi gắn với trang/session.':'Real on-site surveys with page and session context.'} actions={<button className="btn primary" onClick={openCreate}><Plus size={16}/>{vi?'Tạo khảo sát':'Create survey'}</button>}>
+  <AnalyticsFilters value={filter} onChange={setFilter} pages={pageOptions}/>
+  <div className="feedback-stat-grid">{['csat','nps','ces'].map(type=>{const row=resource.data?.summary.find(x=>x.type===type);return <div className="card feedback-stat" key={type}><span>{label(type)}</span><strong>{row?.averageScore==null?'--':row.averageScore}</strong><small>{row?.responses||0} {vi?'lượt đánh giá':'responses'}</small></div>})}<div className="card feedback-stat"><span>{vi?'Tổng phản hồi':'Total responses'}</span><strong>{resource.data?.responses??'--'}</strong></div></div>
+  <section className="card account-panel"><div className="card-header"><div><h2>{vi?'Khảo sát đang cài trên website':'Website surveys'}</h2><p>{vi?'Khảo sát tự động xuất hiện theo điều kiện bạn đã thiết lập.':'Surveys appear automatically using your configured rules.'}</p></div></div><div className="account-table-wrap"><table className="account-table"><thead><tr><th>{vi?'Tên':'Name'}</th><th>{vi?'Loại đánh giá':'Feedback type'}</th><th>{vi?'Điều kiện hiển thị':'Display rule'}</th><th>{vi?'Trạng thái':'Status'}</th><th></th></tr></thead><tbody>{surveys.map(s=><tr key={s.id}><td><b>{s.name}</b><small className="page-path-inline">{s.question}</small></td><td>{label(s.survey_type)}</td><td>{s.page_path||(vi?'Tất cả trang':'All pages')} · {Math.round((s.delay_ms||0)/1000)}s</td><td><label className="survey-toggle"><input type="checkbox" checked={s.status==='ACTIVE'} onChange={()=>toggle(s)} disabled={s.status==='DRAFT'||s.status==='ENDED'}/><span/><em>{s.status==='ACTIVE'?(vi?'Bật':'On'):(vi?'Tắt':'Off')}</em></label></td><td><div className="survey-row-actions"><button type="button" className="icon-btn" onClick={()=>openEdit(s)} title={vi?'Chỉnh sửa':'Edit'}><MoreHorizontal size={17}/></button><button type="button" className="icon-btn danger" onClick={()=>{setDeleteConfirmed(false);setDeleteSurvey(s)}} title={vi?'Xóa khảo sát':'Delete survey'}><Trash2 size={16}/></button></div></td></tr>)}</tbody></table></div></section>
+  <section className="card account-panel"><h2>{vi?'Phản hồi gần đây':'Recent feedback'}</h2><div className="account-table-wrap"><table className="account-table"><thead><tr><th>{vi?'Đánh giá về':'Feedback about'}</th><th>{vi?'Trang':'Page'}</th><th>{vi?'Điểm':'Score'}</th><th>{vi?'Nội dung':'Feedback'}</th><th>{vi?'Thời gian':'Time'}</th></tr></thead><tbody>{(resource.data?.feedback||[]).map(f=><tr key={f.id}><td>{label(f.survey_type)}</td><td>{f.page||'--'}</td><td>{f.score??'--'}</td><td>{f.feedback}</td><td>{new Date(f.created_at).toLocaleString(vi?'vi-VN':'en-US',{timeZone:'Asia/Ho_Chi_Minh',hour12:false})}</td></tr>)}</tbody></table></div></section>
+  {editing!==undefined&&<div className="modal-backdrop"><form className="card survey-modal" onSubmit={submit}><div className="survey-modal-head"><h2>{editing?(vi?'Chỉnh sửa khảo sát':'Edit survey'):(vi?'Tạo khảo sát website':'Create website survey')}</h2><button type="button" className="icon-btn" onClick={()=>setEditing(undefined)}><X size={18}/></button></div><label>{vi?'Tên khảo sát':'Survey name'}<input name="name" required defaultValue={editing?.name||''}/></label><label>{vi?'Loại đánh giá':'Survey type'}<select name="type" value={surveyType} onChange={e=>setSurveyType(e.target.value)}><option value="csat">{label('csat')}</option><option value="nps">{label('nps')}</option><option value="ces">{label('ces')}</option><option value="rating">{label('rating')}</option><option value="yes_no">{label('yes_no')}</option><option value="multiple_choice">{label('multiple_choice')}</option><option value="text">{label('text')}</option></select></label><label>{vi?'Câu hỏi':'Question'}<textarea name="question" required defaultValue={editing?.question||''}/></label>{surveyType==='multiple_choice'&&<label>{vi?'Các lựa chọn (mỗi dòng một lựa chọn)':'Options (one per line)'}<textarea name="options" defaultValue={(editing?.options||[]).join('\n')}/></label>}{surveyType==='text'&&<label>{vi?'Placeholder ô phản hồi':'Feedback placeholder'}<input name="placeholder" defaultValue={editing?.placeholder||''}/></label>}<div className="survey-grid"><label>{vi?'Trang/path hiển thị':'Page/path'}<input name="page" defaultValue={editing?.page_path||''} placeholder="/checkout"/></label><label>{vi?'Hiển thị sau (giây)':'Show after (seconds)'}<input name="delay" inputMode="numeric" defaultValue={Math.round((editing?.delay_ms||3000)/1000)}/></label><label>{vi?'Thiết bị':'Device'}<select name="device" defaultValue={String(editing?.metadata?.device||'all')}><option value="all">{vi?'Tất cả thiết bị':'All devices'}</option><option value="desktop">{vi?'Máy tính':'Desktop'}</option><option value="mobile">{vi?'Điện thoại':'Mobile'}</option><option value="tablet">{vi?'Máy tính bảng':'Tablet'}</option></select></label><label>{vi?'Tần suất lặp lại (ngày)':'Frequency cap (days)'}<input name="frequency" inputMode="numeric" defaultValue={Number(editing?.metadata?.frequency_days||7)}/></label></div><div className="account-actions"><button type="button" className="btn outline" onClick={()=>setEditing(undefined)}>{vi?'Hủy':'Cancel'}</button><button className="btn primary" disabled={busy}>{busy?(vi?'Đang lưu…':'Saving…'):(vi?'Lưu khảo sát':'Save survey')}</button></div></form></div>}
+  {deleteSurvey&&<div className="modal-backdrop"><div className="card survey-modal destructive-modal"><h2>{vi?`Xóa khảo sát “${deleteSurvey.name}”?`:`Delete “${deleteSurvey.name}”?`}</h2><p>{vi?'Toàn bộ cấu hình khảo sát và dữ liệu phản hồi liên quan sẽ bị xóa vĩnh viễn và không thể khôi phục.':'Survey configuration and related response data will be permanently deleted and cannot be restored.'}</p><label className="danger-confirm"><input type="checkbox" checked={deleteConfirmed} onChange={e=>setDeleteConfirmed(e.target.checked)}/> {vi?'Tôi hiểu dữ liệu khảo sát sẽ bị xóa vĩnh viễn.':'I understand survey data will be permanently deleted.'}</label><div className="account-actions"><button className="btn outline" onClick={()=>{setDeleteSurvey(null);setDeleteConfirmed(false)}}>{vi?'Hủy':'Cancel'}</button><button className="btn danger" onClick={confirmDelete} disabled={busy||!deleteConfirmed}>{vi?'Xóa khảo sát và dữ liệu':'Delete survey and data'}</button></div></div></div>}
+ </LiveBoundary>;
 }

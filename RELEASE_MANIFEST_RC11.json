@@ -1,0 +1,29 @@
+{
+  "release": "DataTalk V2.2 RC11 Canonical Time & Branding",
+  "version": "2.2.0-rc.11",
+  "package_name": "datatalk-dashboard",
+  "release_date": "2026-10-28",
+  "changed_files": [
+    "lib/time.ts",
+    "components/AnalyticsFilters.tsx",
+    "components/LayoutShell.tsx",
+    "components/Sidebar.tsx",
+    "components/v2/AuthFrame.tsx",
+    "app/layout.tsx",
+    "app/globals.css",
+    "app/sessions/page.tsx",
+    "app/dashboard/page.tsx",
+    "app/analytics/page.tsx",
+    "app/heatmaps/page.tsx",
+    "app/tasks/page.tsx",
+    "app/feedback/page.tsx",
+    "public/datatalk-logo.png",
+    "test/v2.2-rc11-brand-filter-time-source.test.mjs",
+    "DEPLOY_RC11.md",
+    "RELEASE_NOTES_RC11.md"
+  ],
+  "tests": {
+    "frontend": "56 pass, 0 fail",
+    "syntax": "63 files, 0 diagnostics"
+  }
+}

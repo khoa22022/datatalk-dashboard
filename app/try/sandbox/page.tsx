@@ -21,7 +21,7 @@ export default function TrackingSandbox(){
   const [log,setLog]=useState<string[]>([]);
   const [busy,setBusy]=useState(false);
   const [backendReady,setBackendReady]=useState(false);
-  const [backendStatus,setBackendStatus]=useState("Connecting to Datatalk backend…");
+  const [backendStatus,setBackendStatus]=useState("Connecting to DataTalk backend…");
   const [sessionId,setSessionId]=useState(() => `trial_session_${Math.random().toString(36).slice(2,10)}`);
   const [visitorId]=useState(() => `trial_visitor_${Math.random().toString(36).slice(2,10)}`);
 

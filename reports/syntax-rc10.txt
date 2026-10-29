@@ -1,0 +1,9 @@
+
+> datatalk-dashboard@2.2.0-rc.10 check:syntax
+> node scripts/check-syntax.cjs
+
+{
+  "check": "TypeScript/TSX parsing and local-import resolution (NOT a typecheck or Next build)",
+  "files": 62,
+  "diagnostics": []
+}
